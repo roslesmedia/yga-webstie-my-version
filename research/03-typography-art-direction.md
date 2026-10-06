@@ -913,3 +913,283 @@ input:focus-visible,textarea:focus-visible,select:focus-visible{
 .inv .link:hover{color:var(--gold)}                        /* 8.78:1 */
 ```
 
+---
+
+## 4. FONT RECOMMENDATION
+
+### 4.0 Banned faces (client hard rule: "no AI fonts, no AI look")
+
+Do not use, anywhere, for any role: **Inter, Space Grotesk, Poppins, Montserrat, DM Sans, Manrope, Outfit, Plus Jakarta Sans, Sora, Syne, Clash Display, Satoshi, Playfair Display**, and the **Bricolage Grotesque + Instrument Serif** pairing from `reference/yga_website_v4.html`. Also avoid, by the same logic even though unlisted: Bebas Neue (template-poster default), Lato, Nunito, Raleway, Work Sans, Figtree, and `system-ui`/`-apple-system` as a *primary* (fine as a last fallback only).
+
+**Fontshare is not recommended.** `api.fontshare.com` is unreachable from this environment (CONNECT tunnel 403), so I cannot verify its CSS endpoints or measure its binaries. Its two best candidates for this brief (Tanker, Zodiak) are also unverifiable. Shipping an unverified third-party font CDN into a zero-build single file is an avoidable single point of failure. Both recommendations below are Google Fonts, and every URL in them returned **HTTP 200** and was byte-measured.
+
+### 4.1 The substitution problem, quantified
+
+Measured with fontTools from the real binaries. `density` = cap height ÷ average uppercase advance — how much cap height each face buys per unit of horizontal space. This is the number that decides whether a headline still looks like the reference.
+
+| Face (uppercase, display weight) | cap/em | avg CAP advance | **density** | latin woff2 |
+|---|---|---|---|---|
+| **YGA Signal (the reference)** | **0.900** | **0.405** | **2.22** | 12.1 KB (woff) |
+| Big Shoulders 300 | 0.800 | 0.3894 | **2.05** | 36.5 KB (var 300–900) |
+| Anton 400 | 0.859 | 0.4736 | 1.81 | 18.6 KB |
+| Big Shoulders 600 | 0.800 | 0.4630 | **1.73** | — |
+| Bricolage Grotesque 96/75/800 | 0.660 | 0.4182 | 1.58 | 131.5 KB — *banned* |
+| **Big Shoulders 900** | **0.800** | **0.5143** | **1.56** | — |
+| Oswald 700 | 0.810 | 0.5323 | 1.52 | 28.5 KB |
+| Archivo wdth62 / wght900 | 0.686 | 0.5029 | 1.36 | 90.1 KB (var) |
+| Archivo Narrow 700 | 0.686 | 0.5642 | 1.22 | 18.7 KB |
+| Public Sans 400 | 0.723 | 0.6678 | 1.08 | 26.8 KB |
+| Libre Caslon Display | 0.690 | 0.6461 | 1.07 | 24.2 KB |
+| Fraunces 144/900/WONK | 0.700 | 0.6799 | 1.03 | 121.0 KB |
+| Bodoni Moda 96/900 | 0.750 | 0.7693 | 0.97 | 46.3 KB (+54.6 KB w/ italic) |
+| Spectral 400 | 0.660 | 0.7075 | 0.93 | 67.3 KB (3 cuts) |
+| Newsreader 72/800 | 0.670 | 0.8024 | 0.84 | 122–279 KB |
+
+**Nothing on Google Fonts reaches 2.22.** The closest is Big Shoulders, and only because its weight axis lets you trade weight for width: at wght 300 it is 2.05 (within 8% of the reference), at 900 it is 1.56.
+
+### 4.2 Verdict on inlining a custom .woff — not worth it
+
+The size argument *favours* inlining and I still recommend against it:
+
+- `yga-signal.woff` is 12,080 bytes raw → **16,108 bytes base64** (+33%). That is cheaper than every Google option here. Size is genuinely not the objection.
+- The objections that do bite:
+  1. **It is the wrong voice.** `make-font.py` builds a monoline geometric with `stroke(...,width=148)`, bounded round joins (`arc(x,y,width/2,width/2,...)`), and a flat `×0.72` squeeze. Uniform stroke weight and round joins are the signature of acid/techno display type. Heritage wants modulated stroke, flat-cut terminals, or at minimum a drawn (not constructed) skeleton. Re-colouring it pine-on-beige produces a cream-coloured brutalist site, which is the failure mode this project exists to avoid.
+  2. **Caps only, 58 glyphs.** No lowercase (`cmap[ord(c)]=cmap[ord(c.upper())]`), no `é`, no `&` beyond the one drawn, no real quotes beyond `U+2018/2019` aliased to a single mark. Any copy change risks a tofu or a wrong character. On a one-file static page with no build step there is no subsetting safety net.
+  3. **Monospaced at 405/1000.** Fine for the reference's slogan-shaped copy; hostile to real sentences.
+  4. **Base64 is render-blocking in practice.** Inlined into `<style>` in the one HTML file, those 16 KB sit ahead of first paint in the critical path and are re-downloaded on every HTML change, with no separate cache entry. Google's woff2 is served from a shared, long-cached origin behind `font-display:swap`.
+- **If the client ever commissions a real custom face:** base64-inline it, budget **≤ 28 KB base64** for a caps display subset (`A–Z 0–9 . , : ! ? ' - / & % + —`), ship it as `woff2` (not `woff` — the reference's `.woff` is ~35% larger than the equivalent woff2), and keep `font-display:swap` with the Google display face as the metric-matched fallback.
+
+### 4.3 PRIMARY RECOMMENDATION — "Estate"
+
+**Big Shoulders (display + labels) + Spectral (all reading copy).** Two families, **103.9 KB** of latin woff2, three HTTP requests.
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@300..900&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@300..900&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+```
+
+Single-line form, exactly as it should appear in `index.html`:
+```
+https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@300..900&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap
+```
+
+| Role | Declaration |
+|---|---|
+| Display | `font-family:'Big Shoulders'; font-variation-settings:"wght" 800; text-transform:uppercase; letter-spacing:-.025em` |
+| Display, hairline variant (eyebrow headlines, chapter numbers) | `"wght" 300` — density 2.05, nearly the reference's economy |
+| Micro-labels | `'Big Shoulders'; "wght" 600; uppercase; letter-spacing:.12–.20em` |
+| Body / lede / all reading copy | `'Spectral'; weight 400; line-height 1.6; font-feature-settings:"onum" 1` |
+| Emphasis inside copy | `Spectral 600` (never italic + bold together) |
+| Editorial accent word in a headline | `Spectral italic 400`, see §4.5 |
+
+**Why this, against the heritage / editorial / expensive brief:**
+
+- **Big Shoulders** is a drawn condensed gothic in the American wayfinding / club-board / distillery-label tradition — flat-sided bowls, square terminals, a slightly engineered skeleton. Set in Pine caps on Beige with gold rules under it, that lineage reads *estate and institution*, not *startup*. It is not in the AI rotation (which is Inter/DM Sans/Poppins-shaped), and it is not the poster default (Bebas/Anton).
+- **It survives 12–20vw.** Cap height 0.800 em, closed apertures, zero hairlines at wght ≥ 600, flat terminals, no spurs or ball ends to break up. There is no stroke in it thin enough to disappear or to shimmer under a 3D transform at 158px. Verified across wght 300/600/900.
+- **Its weight axis is the width axis you don't get.** Need a longer headline to fit? Drop to wght 500–600 and density rises from 1.56 to 1.73. The reference solved that with a 0.72 squeeze; here you solve it with weight, which is the honest typographic move and reads as art direction rather than distortion.
+- **Spectral** (Production Type, commissioned for screen reading) is a transitional serif with wedge serifs and a low 0.450 x-height. At 18–19px on cream it reads like a printed page, which is where "expensive" actually lives — in the body copy, not the headline. Pairing a condensed gothic headline against a transitional serif text face is the oldest editorial pairing there is (newspaper masthead over body column) and it is exactly the heritage register the moodboard asks for.
+- **The hierarchy is unmistakable at a glance.** Condensed caps gothic vs. wide lowercase serif differ on case, width, contrast and axis. The reference achieved that with condensed-vs-Helvetica; this achieves it harder.
+- **Payload:** 36.5 KB + 67.3 KB = **103.9 KB** latin. Under the reference's own JS budget and well inside a single-file page's headroom.
+
+### 4.4 Required metric corrections (do not skip these)
+
+These are the practical consequences of the measured numbers. Dropping the reference's values in unchanged will look wrong.
+
+1. **Display font-size × 1.125.** YGA Signal cap 0.900 em → Big Shoulders cap 0.800 em. Same font-size renders caps 11% shorter. All display clamps in §3 already have this applied (`h1: 7.4vw/140px → 8.3vw/158px`).
+2. **Display line-height must come DOWN, not stay.** The reference's `line-height:.9` presumed a 0.900 em cap, i.e. leading ÷ cap = 1.00. With a 0.800 em cap, `.9` leaves 0.10 em of dead air per line and the headline falls apart. Equivalent values: ref `.9 → .80`, `.92 → .82`, `.96 → .85`, `1.0 → .89`. §3 uses `.84 / .86 / .88 / .92 / .96` — the reference's ratios plus ~6% air, which is the warmth the brief wants.
+3. **Line length grows ×1.381.** 1.125 (size) × 1.2277 (advance 0.5143 vs 0.405) = **1.381**. A reference headline of 10 characters per line becomes 13.8. **Headline copy must lose roughly one word in four**, or gain an extra `<br>`. Budget **≤ 11 characters per line at `--fs-d1`**. Write headlines to the break; do not let them wrap by accident.
+4. **Body base 16px → 18px.** Spectral x-height is 0.450 em vs a grotesque's ~0.510 em. An 18px Spectral has an 8.1px x-height, matching a 16px sans (8.2px). Shipping Spectral at 16px makes the page look small and timid.
+5. **Body leading 1.5 → 1.6.** Low x-height plus serif texture plus a 62ch measure.
+6. **Lede tracking −0.035em → −0.015em.** The reference's `-.035em` on `.large-copy` was correcting a loose system sans. Spectral is already tightly fitted; −0.035em will collide the serifs.
+7. **Micro-label tracking up.** The reference used `+.04em` on an 11px grotesque eyebrow. Condensed caps at 11–13px need more: **`.12em` at 13px, `.16em` at 12px, `.20em` at 11px.** Condensed caps without generous tracking are the single most common way a condensed face looks cheap.
+8. **Turn on old-style figures in body, lining figures in display.** `font-feature-settings:"onum" 1` on `body`, `"lnum" 1` on the display rule. Spectral has both. Old-style figures in running text is a heritage tell that costs nothing.
+9. **Metric-matched fallback.** `--ff-display` falls back to Oswald → `Arial Narrow` → `Liberation Sans Narrow` (the reference's own chain). `--ff-text` falls back to Georgia (x-height 0.481 — close enough that `swap` does not jolt).
+
+### 4.5 The editorial accent word — replacing `.yellow-word` and `.outline-word`
+
+The reference gives each hero headline two special words:
+```html
+<h1>Your influence.<br>Your expertise.<br>
+  <span class="outline-word">Your next</span><br>
+  <span class="yellow-word">big thing.</span></h1>
+```
+Three treatments are available here, and you should use **exactly one per headline**, never two:
+
+```css
+/* A. the gold highlighter — gold as SURFACE, pine as ink: 8.78:1. Always safe. */
+.mark-word{background:var(--gold);color:var(--ink);padding:0 .05em .04em;
+  margin-top:.04em;box-decoration-break:clone;display:inline-block}
+
+/* B. the outline word — ref -webkit-text-stroke:1.5px */
+.outline-word{-webkit-text-stroke:1.5px var(--ink);color:transparent}
+/* at >=100px raise the stroke to 2.5px or it reads as a rendering artefact */
+@media(min-width:1100px){.outline-word{-webkit-text-stroke-width:2.5px}}
+
+/* C. the serif italic swap — THE heritage move. Use on ONE word, max once per page. */
+.serif-word{
+  font-family:var(--ff-text);
+  font-style:italic;
+  font-weight:400;
+  text-transform:none;         /* mixed case — that is the point */
+  letter-spacing:-.01em;
+  font-size:1.16em;            /* Spectral cap 0.660 vs Big Shoulders 0.800 */
+  line-height:1;
+  padding-right:.04em;         /* italic overhang */
+}
+```
+Treatment C is where "expensive" arrives. One italic serif word, lowercase, inside a wall of condensed pine caps, is a hundred-year-old editorial gesture and it is worth more than any gradient. The `1.16em` correction is required: 0.800 ÷ 0.660 = 1.212, trimmed to 1.16 because italic looks larger than it measures. **Verify optically at `--fs-d1` before shipping.**
+
+### 4.6 ALTERNATE RECOMMENDATION — "Masthead"
+
+**Bodoni Moda (display) + Archivo (copy, UI, labels).** Two families, **117.2 KB** latin, three requests.
+
+```
+https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,96,600..900;1,96,500..700&family=Archivo:wdth,wght@62..100,400..700&display=swap
+```
+
+| Role | Declaration |
+|---|---|
+| Display | `'Bodoni Moda'; font-variation-settings:"opsz" 96,"wght" 800; uppercase; letter-spacing:.01em` |
+| Display accent | `'Bodoni Moda'` italic `"wght" 600`, mixed case |
+| Body / lede | `'Archivo'; "wdth" 100,"wght" 400`; base **17px**, leading 1.55 |
+| Micro-labels | `'Archivo'; "wdth" 78,"wght" 600`; uppercase, `letter-spacing:.14em` |
+
+**When to pick it:** if the client reacts to Big Shoulders as too American-signage and wants the fashion-masthead register instead. Bodoni Moda is a properly cut Didone with a real `opsz` axis — pinned at `opsz 96` it is drawn *for* display sizes, so the hairlines are deliberate rather than a scaled-up text cut, and `opsz` pinning collapses that axis and keeps the file to 54.6 KB for roman + italic.
+
+**The trade-offs, stated plainly:**
+- **Density 0.97 vs the reference's 2.22.** Lines run **2.3× longer per character**. Headlines must be rewritten to roughly 40% of the reference's word count. `--fs-d1` must drop to about `clamp(60px,6.4vw,118px)` or a three-word headline will wrap to four lines.
+- **Tracking flips positive.** Didone caps need `+0.01em` to `+0.02em`, not negative. Keep the display `letter-spacing` token separate from Option A's.
+- **Leading goes up, not down.** Cap 0.750 em, so ref `.9 → .84`; and Didone caps need a little more air than a gothic to avoid looking crowded: use `.88 / .92 / .96`.
+- **Hairlines and 3D do not mix.** Bodoni's thins are ~0.012 em. Under `rotateY(-20deg)` plus a 12-step extrude they will alias and shimmer. **If you pick Option B, the sculptural type (§7, `--fs-d0/--fs-d0c`) must switch to a solid-weight face or become a drawn SVG object instead.** That is a real constraint on the "everything is 3D" requirement.
+- **Archivo earns its place** by having a true `wdth` axis (62–125, verified), so one 62.6 KB file gives you normal-width body copy *and* condensed tracked micro-labels — which is how the reference's labels fit.
+
+### 4.7 Rejected, with reasons
+
+| Face | Why not |
+|---|---|
+| Anton | Density 1.81 is excellent, 18.6 KB is cheap. But single weight (no 300 for hairline variants, no 500 for long headlines), and it is the single most over-used free poster face on the internet. Fails "no AI look" in spirit. |
+| Oswald | Density 1.52, 28.5 KB. Reads newsprint-economy, not heritage-expensive. Its narrow aperture at 150px feels cramped rather than tall. |
+| Archivo Narrow | Density 1.22, static, no variable axes. Strictly worse than Archivo variable at the same job. |
+| Fraunces | Genuinely heritage (opsz + SOFT + WONK). But 121 KB, density 1.03, and its wonk reads craft-bakery rather than estate. Viable if the client wants *warm* over *institutional*. |
+| Libre Caslon Display | 24.2 KB and lovely. Single weight, density 1.07, and its hairlines have the same 3D problem as Bodoni. Good candidate for a pull-quote face only. |
+| Newsreader | Beautiful, but 122 KB with `opsz` pinned and 279 KB with the axis live. Not worth 2× Spectral's bytes for a similar job. |
+| Instrument Serif / Bricolage Grotesque | Banned by the client. |
+
+---
+
+## 5. GOLD — THE CONTRAST RULES
+
+### 5.1 The full measured matrix
+
+WCAG 2.x relative luminance, computed. **Bold = passes AA for normal text (≥4.5:1).**
+
+| Foreground | on Beige `#FFF7E6` | on Almond `#F9E9DA` | on Bone `#E3DAC9` | on Pine `#00311F` | on Forest `#183630` |
+|---|---|---|---|---|---|
+| Pine `#00311F` | **13.50** | **12.13** | **10.37** | — | — |
+| Forest `#183630` | **12.24** | **11.00** | **9.41** | — | — |
+| Sage `#4A6B57` | **5.58** | **5.01** | 4.29 | 2.42 | 2.19 |
+| **Gold `#E5C690`** | **1.54** | **1.38** | **1.18** | **8.78** | **7.96** |
+| Gold-edge `#A88D47` | 3.00 | 2.70 | 2.31 | **4.50** | 4.08 |
+| Gold-ink `#7A5A1C` | **5.96** | **5.35** | **4.58** | 2.27 | 2.05 |
+| Gold-deep `#6B5118` | **7.00** | **6.29** | **5.38** | 1.93 | 1.75 |
+| Beige `#FFF7E6` | — | — | — | **13.50** | **12.24** |
+| Bone `#E3DAC9` | — | — | — | **10.37** | **9.41** |
+| Gold-hover `#F0D9AE` | 1.29 | 1.16 | 1.01 | **10.45** | **9.47** |
+
+### 5.2 The one insight that unlocks gold
+
+**Gold fails as INK on light. Gold succeeds as a SURFACE under Pine ink, and as INK on Pine.** Both directions are **8.78:1**, because contrast is symmetric.
+
+So the restriction is narrower than it first looks. You are not banned from using gold on a light page — you are banned from *making gold the foreground on a light background*. A gold panel, a gold band, a gold 3D object face, or a gold highlighter behind Pine text is all fully accessible and should be used freely. That is how the warmth gets into a Beige page without breaking it.
+
+### 5.3 PERMITTED — gold as surface, on light
+
+Pine ink on Gold is 8.78:1 (AAA for everything).
+
+- Gold filled panel / card / inset with Pine headline and Pine body. Keep the panel's own area ≤ roughly a third of the viewport so the page stays Beige-dominant.
+- The **gold highlighter** behind a display word (`.mark-word` in §3.1) — the direct re-voicing of the reference's `.yellow-word`. This is the house gesture; use it once in the hero and once in the closing statement.
+- **Gold faces on 3D objects** (book covers, cube faces, extruded letterforms, panel edges). Any text that sits on a gold face is Pine.
+- A gold **band** with Pine type, as the re-voicing of `.mid-cta`.
+- `::selection{background:var(--gold);color:var(--pine)}`.
+- Gold as the fill of a solid shape with no text in it at all — rules, blocks, keylines, the blurred contact-shadow ellipse, the printer's-mark glyph *if* it is `aria-hidden` **and** duplicated as text elsewhere. (For the `✳` marks in `.section-top`, §3.2 uses `--gold-ink` instead, so they are legible without needing that exemption.)
+
+### 5.4 PERMITTED — gold as ink, on Pine or Forest only
+
+8.78:1 on Pine, 7.96:1 on Forest. Inside any `.inv` block, gold is a first-class text colour.
+
+- Gold display headlines on Pine.
+- Gold body copy on Pine (8.78 passes AA and AAA at 18px).
+- Gold links and underlines on Pine.
+- **Gold as the primary CTA fill with Pine label**, which is the reference's own move: `.blue-end .button{background:var(--yellow);color:#111}`.
+- Gold focus ring on Pine: `outline:3px solid var(--gold)` — 8.78:1 against the 3:1 non-text minimum.
+- Gold 1px rules and dividers on Pine (6.37:1 for `--gold-line`, 8.78 for gold itself).
+- Gold extruded display type on Pine, using `--tsh-gold`.
+
+### 5.5 FORBIDDEN — no exceptions
+
+Everything in this list fails. There is no size at which a 1.5:1 ratio becomes acceptable, because WCAG's large-text allowance floors at 3:1.
+
+| Forbidden | Ratio | Instead |
+|---|---|---|
+| Gold body text on Beige / Almond / Bone | 1.54 / 1.38 / 1.18 | `--ink` Pine, or `--gold-ink` `#7A5A1C` (5.96) |
+| Gold headline on any light surface | 1.54 max | Pine headline; put the gold *behind* one word as `.mark-word` |
+| Gold eyebrow, label, kicker, caption on light | 1.18–1.54 | `--gold-ink` for a gold-family label; `--ink-muted` Sage (5.58) otherwise |
+| Gold link or link underline on light | 1.54 | Pine link with a Pine 1px underline; gold only on hover *as a background wash* |
+| Gold numerals (`01`, `02`) on light | 1.54 | `--gold-ink`, or Pine at wght 300 |
+| Gold icon, arrow, chevron, `+`/`−` glyph on light | 1.54 | Pine. Non-text UI needs 3:1 (WCAG 1.4.11); gold gives 1.54 |
+| Gold focus ring on light | 1.54 | `outline:3px solid var(--pine)` |
+| Gold form-field border, checkbox, radio, toggle track on light | 1.54 | `--gold-edge` `#A88D47` is exactly 3.00 — the legal floor for a *decorative* boundary. For any border that conveys state (focus, error, selected), use Pine. |
+| Gold-on-gold anything | 1.00 | — |
+| Gold text on Almond or Bone "because the panel is darker" | 1.38 / 1.18 — *worse* | Darker light surfaces make gold worse, not better |
+| Gold 1px hairline used as the only separator on light | 1.54 | `--line` Bone for decorative rules; `--line-strong` `#C8BCA6` where the rule is structural |
+| Gold thin-stroke display outline on light (`-webkit-text-stroke:1.5px gold`) | 1.54 | Pine stroke; or invert the section and stroke in gold |
+
+### 5.6 Three failure modes to watch for specifically
+
+1. **The hover trap.** A Pine link that turns gold on hover drops from 13.50 to 1.54 and vanishes. On light, hover gold must arrive as a *background* (`background:var(--gold); color:var(--ink)`), never as a text colour.
+2. **The gradient trap.** `linear-gradient(var(--gold),var(--beige))` behind text produces a continuum where the ratio is unknowable and somewhere always below 4.5. No text over a gold gradient on light, ever. (Also see §5.8 — gradients are banned for aesthetic reasons too.)
+3. **The 3D-object trap.** A gold extruded letterform on Beige is 1.54:1 — it will read as a faint ghost, not a sculpture. Gold sculptural type belongs **only** in inverted sections. On light, sculptural type is **Pine with a `--tsh-bone` Bone extrude** (Bone on Beige is 1.32, which is fine *because the extrude is a shadow, not the letter* — the letter itself is Pine at 13.50).
+
+### 5.7 Enforcement
+
+Write these two rules into the stylesheet as a standing guard, and treat any need to override one as a design bug:
+
+```css
+/* Gold is never a foreground on a light surface. */
+:root:not(.inv) :is(h1,h2,h3,p,a,span,li,strong,em,button,label,summary){
+  /* do not set color:var(--gold) here — this comment is the contract */
+}
+/* Gold as a surface always carries pine ink. */
+.on-gold,[data-surface="gold"]{background:var(--gold);color:var(--pine)}
+.on-gold :is(a,button){color:var(--pine);border-color:var(--pine)}
+```
+Audit checklist before shipping: grep the file for `var(--gold)`. Every hit must be a `background`, a `box-shadow`, a `text-shadow`, a `border-color` on a decorative rule, a `fill` on a shape with no text, or inside a `.inv` scope. Any `color:var(--gold)` outside `.inv` is a defect.
+
+### 5.8 Banned AI-look visual tells, and what replaces them
+
+The client's "no AI look" rule is a visual rule as much as a type rule. Each ban below has a replacement drawn from the reference, so nothing is merely removed.
+
+| Banned tell | Replacement, from the reference |
+|---|---|
+| Gradient mesh / blurred colour blobs behind the hero | A hard-edged full-bleed colour block. `.scroll-story{background:var(--blue)}` with a sliver margin (`margin:40px 0 80px`). Flat, honest, edged. |
+| Purple→blue or any two-hue gradient | Flat Pine. The palette has exactly six values and no interpolation between any two of them. |
+| Glassmorphism cards (`backdrop-filter`, translucent panels) | Opaque Almond / Bone / Gold / Pine panels with a 1px Bone border and a **hard offset shadow** (`--sh-hard-s: 6px 6px 0`). `backdrop-filter` appears in the reference exactly once, on `dialog::backdrop`. Keep it there and nowhere else. |
+| Soft diffused drop shadows (`0 10px 30px rgba(0,0,0,.1)`) on everything | Hard offset ink: the shadow is a solid darker sibling of the object's own colour (§2.7). One soft shadow is permitted, on the floating scene label: `--sh-float`. |
+| Rounded cards (`border-radius:12px`/`16px`/`2rem`) | `--r-0: 0`. The reference's entire stylesheet contains three radius declarations: `50%` for dots, `0` as a reset, `14px` on one dialog. Square everything. |
+| Pill buttons (`border-radius:999px`) | Square buttons, `padding:19px 24px`, `min-height:58px`, `gap:38px` between label and arrow (ref `.button`). |
+| Centred-everything hero | Asymmetric split: `.hero-stage{grid-template-columns:48% 52%}`, copy left and pinned low, object right and bleeding out of frame. Nothing on the page is centred except the sculptural objects inside their own `place-items:center` stages. |
+| Three equal feature cards with icons above titles | Either the accordion list (`.service-list`: `grid-template-columns:65px 1fr 50px`, 1px rules, `01`–`05` numerals) or the four-up label grid (`.fit-grid`: `repeat(4,1fr)`, each child with `border-top` + `padding-top:28px`). Both are editorial lists, not card decks. |
+| Emoji icons | Typographic marks only, as the reference does: `✳` `↗` `↓` `↔` `+` `−` `Ⅱ`. Set in the display face, `aria-hidden="true"`, with real text alongside. Zero icon libraries. |
+| Lucide / Feather / Heroicons line icons | Same as above. If a true glyph is needed, hand-draw one inline SVG at 1.5px stroke in `currentColor`. |
+| Stock photography / 3D-render hero images / abstract AI art | Procedural CSS-3D objects (§7). The reference ships **zero raster images** — `public/` has only `logo.svg` and `favicon.svg`. Match that. |
+| Section-centred `max-width:1200px` with equal columns | `max-width:1800px` with per-section asymmetric grids (`1.45fr 1fr`, `1fr 1.35fr`, `1.1fr 1fr`, `48% 52%`) — §2.2. |
+| Dark mode toggle / `prefers-color-scheme` dark variant | The light Beige background is a hard requirement. Ship one colourway. Inverted *sections* supply the dark, under the page's control (§6). |
+| Animated gradient borders, glowing edges, neon | Hard offset extrudes and `-webkit-text-stroke` outline words. |
+| Infinite looping micro-animations on decorative elements | One-shot viewport entrances only (`pop-reveals.js` unobserves on play: `observer.unobserve(entry.target)`). The one permitted loop is the `.kinetic-strip` marquee, and it pauses under `prefers-reduced-motion`. |
+| Floating-label inputs, soft-shadow form fields | `border:1px solid var(--line); border-radius:0; min-height:49px; padding:14px 12px`, label above the field (ref `.application-form`). |
+| "Trusted by" logo wall of grey SVGs | A tracked caps `.nano` line of named deliverables, as `.hero-bottom` does. |
+| Big centred stat counters that tick up | Sculptural numerals as 3D objects (`.zero-art`, `--fs-d0`), static, extruded, rotated. |
+| `system-ui` / Inter as the display face | §4. |
+
