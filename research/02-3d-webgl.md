@@ -1841,3 +1841,94 @@ export function createStage(canvas){
   };
 }
 ```
+
+---
+
+## 8. Build checklist and tunables
+
+### 8.1 Anchor map for the build
+
+Put these in order down the page. Each is one `<div>`; nothing else is needed.
+
+| # | section | anchor | variant | slot CSS |
+|---|---|---|---|---|
+| 1 | Hero | `data-3d="hero" data-3d-hold data-3d-drag` | — | `.stage-hero` — `height:min(78svh,860px)` |
+| 2 | "You create. We build." | `data-3d="mark"` | — | `.stage-mark` 140 × 140, centred |
+| 3 | Content → product | `data-3d="transform"` | — | `.stage-slot` 16/11 |
+| 4 | What's inside a product | `data-3d="kit"` | — | `.stage-slot` 16/11 |
+| 5 | Product cards ×3 | `data-3d="card"` | `0`, `1`, `2` | `.card-3d` 4/5 |
+| 6 | Partnership / pricing | `data-3d="tiers"` | `1` (highlight the middle) | `.stage-slot` 16/11 |
+| 7 | Founding spots | `data-3d="digit"` | `5` | `.stage-slot` 16/11 |
+| 8 | Divider before the CTA | `data-3d="mark"` | — | `.stage-mark` |
+| 9 | Final CTA | `data-3d="launch"` | — | `.stage-slot` 16/11 |
+
+Twelve anchors, eight builders, one context. `stage.scan()` picks up anything added
+later (e.g. after a route change) — call it again and it registers only new nodes.
+
+### 8.2 Tunables, with the reason for each default
+
+| knob | default | raise it to… | lower it to… |
+|---|---|---|---|
+| `perspective(fov)` | `0.50 – 0.58` | get a wider, more dramatic shot (and lose the product-table feel) | flatten further toward orthographic |
+| key direction | `normalize(-0.42, 0.86, 0.52)` | move gold onto different faces — but keep the key on the **opposite** side from the camera (§4.4) | |
+| sky weight | `0.26` | lift the whole object off the page; more Bone on top faces | make it heavier and more graphic |
+| ambient floor | `0.17` | open up the shadows (risk: flat) | deepen cavities (risk: blob) |
+| `MAT.bone.rk` | `0.46` | Bone silhouette reads harder (3.3:1 at 0.50) | softer, risks disappearing below 0.34 |
+| `MAT.pine.rk` | `0.26` | warmer halo, silhouette drops to 5.9:1 at 0.38 | crisper cut-out look |
+| fog strength | `0.62` | more aerial recession, softer | more graphic, flatter |
+| fog range | per-object, e.g. `[14,36]` hero, `[8,22]` card | | |
+| entrance push | `(1-enter)*16` | longer dissolve | snappier arrival |
+| progress window | `vh*0.86`, `+ vh*0.42` | start later / take longer | start earlier / resolve sooner |
+| smoothing rate | `1 - exp(-dt*7)` | `*10` snappier | `*4` more languid |
+| DPR cap | 1.65 / 1.35 | 2.0 only if you have measured headroom | 1.2 is the adaptive floor |
+| `bob` amplitude | `0.055` | more life, risks "floaty AI" | stiller, more architectural |
+
+### 8.3 Sign-off checklist
+
+Visual
+- [ ] On a 1440 px screen, the hero shows at least **six distinct tones** on the Pine arch. If it looks like one black mass, the ramp uniforms are not being uploaded per draw.
+- [ ] The Bone plinth has a visible edge against the page. If not, `MAT.bone.rk` is too low or the fresnel `mix()` target is wrong.
+- [ ] Gold never forms a long outer silhouette edge against Beige — it is always framed by Pine or Forest.
+- [ ] No surface in the scene looks like chrome or a mirror.
+- [ ] The ground shadow is a warm grey-green (`#CDCEBC` at its darkest), never neutral grey and never dark.
+- [ ] Anti-aliased silhouette edges have no cool fringe — confirm `gl.clearColor(1,.969,.902,0)`.
+- [ ] Every object sits on a plinth, deck or disc. Nothing floats in a void.
+
+Behaviour
+- [ ] Scroll from top to bottom: each anchor's object arrives out of the paper, tells its story, and recedes. No pop-in, no hard cut.
+- [ ] Objects never overlap each other's DOM boxes (check the card grid at 1024 px, where the slots are closest).
+- [ ] Hero drag works; vertical touch scroll still works over the hero on a phone.
+- [ ] The `Audience / Product / Launch` buttons change the hero and update the caption.
+- [ ] The pause toggle freezes everything, including the idle bob.
+
+Performance
+- [ ] `stage.stats()` reports `uniqueTris: 738`.
+- [ ] Scroll past a section with no 3D: Chrome's Performance panel shows **no RAF frames at all**.
+- [ ] Leave the page idle on the hero without touching it: frames stop within ~1 s (settle detection).
+- [ ] Switch tabs: frames stop immediately.
+- [ ] Throttle CPU 4× and reload: the adaptive DPR step-down fires once within 90 frames and never oscillates.
+- [ ] Mobile Safari on a real device: no `webglcontextlost`, no fan noise, no scroll jank.
+
+Accessibility
+- [ ] `prefers-reduced-motion: reduce` — nothing moves on its own; scroll still repositions; the hero buttons still work.
+- [ ] The canvas is `aria-hidden="true"` and `pointer-events:none`; all keyboard affordances live on the DOM buttons, not the canvas.
+- [ ] Every section's meaning survives with WebGL disabled entirely (`chrome://flags` → disable WebGL) — the CSS fallbacks carry it.
+- [ ] Pine body copy over the canvas still measures 13.5:1. The fog term keeps geometry from ever reaching full strength behind text.
+
+---
+
+## 9. Sources
+
+- [unpkg — three 0.186.1](https://app.unpkg.com/three@0.186.1/files/README.md)
+- [jsDelivr — three](https://jsdelivr.com/package/npm/three)
+- [Three.js in 2026: what changed](https://www.utsubo.com/fr/blog/threejs-2026-quoi-de-neuf)
+
+Local references read in full:
+`/home/user/refs/yga-agency-site-/yga-website-2/public/scene.js` ·
+`…/public/app.js` · `…/public/experience.js` · `…/public/index.html` ·
+`…/public/styles.css` · `…/DESIGN.md` · `…/yga-preview.html` ·
+`/home/user/refs/site-example-3d-camera-shop-ir-/src/Scenes.tsx` ·
+`/home/user/refs/security-cams-iran-site-2/package.json` ·
+skills `threejs-fundamentals`, `threejs-geometry`, `threejs-materials`,
+`threejs-lighting`, `threejs-shaders`, `threejs-postprocessing`,
+`lightweight-3d-effects`, `web3d-integration-patterns`, `blender-web-pipeline`.
