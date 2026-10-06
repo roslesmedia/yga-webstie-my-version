@@ -1146,11 +1146,13 @@ Everything in this list fails. There is no size at which a 1.5:1 ratio becomes a
 | Gold 1px hairline used as the only separator on light | 1.54 | `--line` Bone for decorative rules; `--line-strong` `#C8BCA6` where the rule is structural |
 | Gold thin-stroke display outline on light (`-webkit-text-stroke:1.5px gold`) | 1.54 | Pine stroke; or invert the section and stroke in gold |
 
+**One more measured caveat on rules.** The decorative 1px rules are deliberately quiet and they are *below* the 3:1 WCAG 1.4.11 threshold: Bone `#E3DAC9` on Beige is **1.30:1**, `--line-strong` `#C8BCA6` on Beige is **1.76:1**, Almond on Beige is **1.11:1**. That is correct for an editorial hairline, but it means **a 1px rule can never be the only thing communicating a boundary that matters** — a selected tab, a focused field, an error, a required group. Those always get a Pine 2–3px edge or a Pine text change in addition. The reference has the same property (`--line:#dedfe3` on white is 1.23:1) and solves it the same way: active states get `background:var(--blue);color:#fff` or `border-bottom:3px solid`, never a change of hairline colour alone.
+
 ### 5.6 Three failure modes to watch for specifically
 
 1. **The hover trap.** A Pine link that turns gold on hover drops from 13.50 to 1.54 and vanishes. On light, hover gold must arrive as a *background* (`background:var(--gold); color:var(--ink)`), never as a text colour.
 2. **The gradient trap.** `linear-gradient(var(--gold),var(--beige))` behind text produces a continuum where the ratio is unknowable and somewhere always below 4.5. No text over a gold gradient on light, ever. (Also see §5.8 — gradients are banned for aesthetic reasons too.)
-3. **The 3D-object trap.** A gold extruded letterform on Beige is 1.54:1 — it will read as a faint ghost, not a sculpture. Gold sculptural type belongs **only** in inverted sections. On light, sculptural type is **Pine with a `--tsh-bone` Bone extrude** (Bone on Beige is 1.32, which is fine *because the extrude is a shadow, not the letter* — the letter itself is Pine at 13.50).
+3. **The 3D-object trap.** A gold extruded letterform on Beige is 1.54:1 — it will read as a faint ghost, not a sculpture. Gold sculptural type belongs **only** in inverted sections. On light, sculptural type is **Pine with a `--tsh-bone` Bone extrude** (Bone on Beige is 1.30, which is fine *because the extrude is a shadow, not the letter* — the letter itself is Pine at 13.50).
 
 ### 5.7 Enforcement
 
@@ -1193,3 +1195,252 @@ The client's "no AI look" rule is a visual rule as much as a type rule. Each ban
 | Big centred stat counters that tick up | Sculptural numerals as 3D objects (`.zero-art`, `--fs-d0`), static, extruded, rotated. |
 | `system-ui` / Inter as the display face | §4. |
 
+---
+
+## 6. THE INVERTED-SECTION STRATEGY
+
+### 6.1 Cadence
+
+The reference flips twice on the home page out of fifteen sections, plus one band. Keep that ratio exactly — it is what makes each flip land.
+
+**Rule: one full-bleed Pine section every 4–5 light sections. Never two adjacent. Never more than five light sections in a row without at least a band.**
+
+Target rhythm for the new home page (full map in §7):
+
+```
+light  light  light  │ PINE-DEEP (long) │  light  light  │ GOLD band │  light
+light  │ PINE (short) │  light  light  light  │ PINE (closing) │  light  footer
+```
+
+Three dark blocks and one gold band across sixteen sections. Three, not two, because the client wants the whole page to feel dimensional and the dark blocks are where depth reads strongest — but the third is short (a statement band, not a chapter) so the page still reads as predominantly Beige.
+
+### 6.2 Two distinct darks, used for two distinct jobs
+
+The reference uses cobalt for the *long immersive* flip and yellow for the *short terminal* flip. Translate that as two greens, not one:
+
+| | `--pine-deep` `#002416` | `--pine` `#00311F` |
+|---|---|---|
+| Role | the long immersion | the statement / terminal block |
+| Reference equivalent | `.scroll-story` (cobalt, 250svh) | `.final-cta` (yellow, 640px) |
+| Height | `250svh`, `min-height:1600px` | `min-height:640px`, `padding:var(--pad-bleed) var(--gutter)` |
+| Margin | `margin:40px 0 80px` — floats off the Beige | flush, no margin |
+| Ink | Beige `#FFF7E6` — 14.85:1 | Beige — 13.50:1 |
+| Accent | Gold as rules, numerals, progress | **Gold as the CTA fill** |
+| Count per page | 1 | 2 |
+
+The 1.74× luminance gap between them (L 0.0132 vs 0.0230) is small enough to read as the same brand colour and large enough that the two dark blocks are not mistaken for each other when you scroll past them a minute apart.
+
+### 6.3 What flips, mechanically
+
+One class, scoped token overrides, zero duplicated component CSS. `.inv` in §3.2 redefines `--ink`, `--bg`, `--line`, `--accent-mark` so every primitive inside it re-themes with no extra rules:
+
+```css
+.inv{
+  background:var(--inv-bg); color:var(--inv-ink);
+  --ink:var(--inv-ink); --ink-2:var(--inv-ink-2); --ink-muted:var(--inv-ink-2);
+  --bg:var(--inv-bg); --bg-2:var(--inv-bg-2); --line:var(--inv-line);
+  --accent-mark:var(--gold); --accent-deco:var(--gold);
+}
+```
+
+What changes on entering an inverted block:
+
+| Element | Light | Inverted |
+|---|---|---|
+| Headline | Pine 13.50 | Beige 13.50 |
+| Body | Pine | Beige, or Bone 10.37 for secondary |
+| Secondary text | Sage 5.58 | Bone 10.37 |
+| 1px rules | Bone | `rgba(255,247,230,.22)` |
+| `.section-mark ✳` | `--gold-ink` 5.96 | **Gold 8.78** |
+| Primary CTA | Pine fill, Beige label | **Gold fill, Pine label — 8.78** |
+| CTA hover | Forest fill | `#F0D9AE` fill, 10.45 |
+| Secondary link | Pine, Pine underline | Beige, Beige underline → **Gold on hover, 8.78** |
+| Focus ring | `3px solid var(--pine)` | `3px solid var(--gold)` |
+| Panel inside the block | Almond / Bone | `--pine-deep`, or **Gold with Pine ink** |
+| Object hard shadow | `--bone` | `--pine-shade` |
+| Sculptural type | Pine letter + `--tsh-bone` extrude | **Gold letter + `--tsh-gold` extrude** |
+| Highlighter word | Gold bg, Pine ink | Gold bg, Pine ink (unchanged — it is already the inverted treatment) |
+
+### 6.4 How gold goes live
+
+This is the whole payoff of the colourway, and it is the reference's own mechanic:
+
+```css
+/* ref experience.css */
+.blue-end{background:var(--blue);color:white}
+.blue-end .button{background:var(--yellow);color:#111}
+```
+
+On light, gold cannot be a button (a Gold button with Pine text would technically pass at 8.78, but a 1.54:1 gold *shape* on Beige has no visible edge — the button would float with no boundary, and `--gold-edge` at 3.00 is the floor you'd have to outline it with). On Pine, gold is the most luminous thing available: **L 0.59 against L 0.023 — a 26× luminance jump.** A gold button on Pine is the single loudest element on the page.
+
+Therefore:
+- **The primary conversion CTA lives in an inverted section.** Put the application form's lead-in, the mid-page "build with YGA", and the closing CTA on Pine, and let the gold button carry all three.
+- **On light, the primary CTA is Pine-filled with Beige text** (13.50). It is authoritative but quiet. The contrast between the quiet light CTA and the loud gold inverted CTA is the funnel.
+- **Gold never appears as a button on light.** Not even outlined. That asymmetry is deliberate and should be visible: gold means "this is the moment".
+
+### 6.5 Transition craft at the seam
+
+Four devices, all present in the reference:
+
+1. **The sliver margin.** `margin:40px 0 80px` on the long dark block — asymmetric (40 above, 80 below), so the block reads as having landed on the page rather than being slotted into it.
+2. **A sacrificial label above the seam.** `.route-end>.section-label` and `.final-cta .section-label` put a tracked caps line at the very top of the inverted block, immediately under the edge. It gives the eye something small to land on before the headline, which stops the hard edge reading as a glitch.
+3. **The curtain, for the hardest transitions.** `.route-curtain{background:var(--yellow);transform:translateY(101%)}` with a `clamp(130px,30vw,400px)` monogram in it. Re-voiced: `background:var(--pine)` with a Gold monogram at `--fs-d0b`. Drive it with `document.startViewTransition` where available (`::view-transition-old(page){animation:page-away 380ms}`, `::view-transition-new(page){animation:page-arrive 580ms}`) and the curtain as the fallback — exactly the reference's feature-detection.
+4. **Overlap the seam with an object.** Let one 3D element from the light section cross the boundary into the dark one (negative margin + `z-index:var(--z-object)`, with the dark block's `overflow` kept visible at that edge). The reference does this with `.fallback-portal{top:-60px}` and `.arrow-sculpture{top:-40px;left:-50px}`. One crossing per seam, maximum.
+
+### 6.6 Accessibility guards for inverted blocks
+
+- Never put `color-scheme` or `prefers-color-scheme` logic on these. They are content, not theme.
+- Inverted blocks must declare their own `background` on the block element, not inherit it, so forced-colours and print do not lose them.
+- Every focus style inside `.inv` must be overridden. A Pine focus ring on Pine is invisible — that is the single most likely accessibility regression in this build.
+- Beige text on Pine at 18px/1.6 is 13.50:1. Do not be tempted to drop body copy to Bone (10.37) everywhere for "softness"; reserve Bone for genuinely secondary lines.
+- `prefers-reduced-motion` must still reveal all content inside the long 250svh scroll-driven block. The reference does this with `records.forEach(finish)` and `.pop-pending:focus-within{opacity:1!important}`. Keep both.
+
+---
+
+## 7. SECTION-BY-SECTION ART DIRECTION
+
+Every section below names: its surface, its type assignments, its **named 3D/depth element**, and its **transition into the next section**. The reference's object inventory is reused and re-coloured rather than reinvented, because those objects are the page's vocabulary.
+
+Shared depth grammar — apply to every object, in every section:
+- House rotations: `rotateY(var(--tilt-y))` = −20deg, `rotateZ(var(--tilt-z))` = −7deg, `rotateX(var(--tilt-x))` = 8deg. Vary the sign per section so adjacent objects lean opposite ways.
+- Every object gets a hard offset shadow in a darker sibling of its own colour (`--sh-gold-m`, `--sh-pine-m`, `--sh-hard-s`) plus at most one soft ambient term.
+- Every object stage declares `perspective` (`--persp-mid` 1000px for type, `--persp-obj` 1400px for devices/books) and `overflow:hidden` on the stage, never on the object.
+- Three parallax depths per section: background keyline layer `--parallax-1` (.06), mid panel `--parallax-2` (.14), hero object `--parallax-3` (.24). Drive with a single `IntersectionObserver` + `requestAnimationFrame` writing one CSS custom property per layer; never a `scroll` listener (ref `pop-reveals.js` uses IO for exactly this reason).
+
+---
+
+### 01 — Header
+**Surface:** Beige, `position:sticky; top:0; height:var(--header-h)` 92px, `border-bottom:1px solid transparent` that becomes `var(--line)` once scrolled.
+**Type:** wordmark + `.nano` lockup (11px, `letter-spacing:.20em`, caps, wght 700 — ref `.brand>span` at 9px/.14em, raised because the condensed face is narrower). Nav links 14px Spectral 400, with the reference's underline-wipe: `a:after{height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform 180ms var(--ease)}`.
+**Depth element:** **floating reading-progress rail** — `position:fixed;inset:0 0 auto;height:3px;z-index:var(--z-progress)`, fill `var(--gold)` on a `rgba(0,49,31,.08)` track. Gold here is a non-text 3px bar; decorative, so permitted. On scroll the header gains `--sh-float` and nothing else — the header must not lift more than 1 layer.
+**Into next:** no transition; the header is persistent and sits above the curtain's z-index floor.
+
+### 02 — Hero
+**Surface:** Beige. `.hero-stage{grid-template-columns:48% 52%}`, sticky inside a `calc(100svh + 240px)` tall parent (ref exactly), `min-height:750px`, `max-height:1020px`.
+**Type:** `h1` at `--fs-d1` / `--lh-d1` / `--tr-d-xl`, Pine caps, four lines hard-broken with `<br>`. **≤ 11 characters per line** (§4.4). Line 3 uses `.outline-word` (2.5px Pine stroke); line 4 uses `.mark-word` (Gold ground, Pine ink, 8.78:1). Above it, `.eyebrow` 12px caps `.16em` with a Pine status dot. Below, `.hero-description` at `--fs-intro`, `max-width:var(--measure-col)`. At the base, `.hero-bottom`: `border-top:1px solid var(--line)`, a `.nano` line left and a scroll cue right, `justify-content:space-between`.
+**Depth element:** **the Pine stage portal.** A Pine rectangle with a `55px solid var(--gold)` border, `transform:rotateY(-25deg) rotateX(8deg)`, `box-shadow:var(--sh-gold-l)` (35px 20px 0 in `--gold-shade`) — the direct re-colour of `.fallback-portal`. Inside it, a Gold "book" object with Pine type on its cover, `transform:rotate(-10deg)`, `box-shadow:var(--sh-hard-s)`, breaking the portal's frame at the lower left. Two absolutely positioned `.scene-label` chips (Beige fill, `--sh-float`, 11px) pin to the object at `right:25%` and `left:23%;bottom:30%` (ref positions). The whole group parallaxes at `--parallax-3`; the portal's border at `--parallax-2`.
+**Into next:** the hero's sticky stage scrolls *under* section 03, which slides up over it. That is the reference's mechanism (`.hero{height:calc(100svh + 240px)}` + `.hero-stage{position:sticky;top:0}`) and it is the cheapest convincing depth cue on the page.
+
+### 03 — Manifesto / what we do
+**Surface:** Beige. `.section` padding.
+**Type:** `.section-top` pair — "What we do" left, `✳` right at 30px in `--gold-ink` (5.96:1). Then `.manifesto-grid{1fr 1fr;gap:12%;align-items:center}`: `h2` at `--fs-d4` Pine caps with one `.serif-word` (Spectral italic, `1.16em`) on the second line, against a `.lede` at `--fs-lede`/`--lh-lede` with `<br>`-controlled ragging (ref `.large-copy` is hand-broken, not wrapped).
+**Then the accordion**, replacing any card deck: `.service-list{border-bottom:var(--border)}`, items `grid-template-columns:65px 1fr 50px; gap:18px; padding:25px 0; border-top:var(--border)`. Numerals `01`–`05` at 12px in Big Shoulders wght 300 (`--gold-ink` — gold-family and legible), name at `--fs-d10` display caps, `+`/`−` at the right. Open row: name shifts to `--ink-2`, description reveals at `--fs-sm`.
+**Depth element:** **the tilting row.** On hover/open, the active row lifts: `transform:perspective(900px) rotateX(-2deg) translateZ(14px)` and gains `--sh-hard-xs` in Bone, while the rule above it fades to `--line-strong`. Each row reveals with the `slide` kind — `direction = index%2===0 ? -1 : 1`, `translate3d(dir*82px,32px,0) rotate(dir*1.4deg) scale(.94)` — so the five rows zip in from alternating sides.
+**Into next:** the last row's bottom rule runs full-bleed to the gutter edge and the Pine block begins 40px below it (`margin-top:40px` on the next section, ref's sliver).
+
+### 04 — The transformation (LONG INVERTED BLOCK)
+**Surface:** `--pine-deep` `#002416`, full-bleed, `height:250svh; min-height:1600px; margin:40px 0 80px` (ref exact). Class `.inv .inv-deep`.
+**Type:** `.story-header` at the top: a `.nano` caps line left, a skip link right, both Bone. `h2` at `--fs-d4-sm`-scale per act in Beige caps (`clamp(58px,6.8vw,113px)`, ref `.story-copy h2`), `line-height:1.02`-equivalent → `--lh-d4`. Act body in Beige at `--fs-base`. Act numerals in **Gold** (8.78) at `--fs-d7`.
+**Depth element:** **the three-act device sequence** — a sticky 3D stage pinned for the block's full 250svh, carrying a phone/laptop/product-sheet group. Acts cross-fade by `opacity` + `translateY(40px)` per the reference's `.device-product,.device-launch{position:absolute;inset:0;opacity:0;transform:translateY(40px)}`. Surfaces: device chrome in Bone, screens in `--pine`, the product sheet in **Gold with Pine type**. Behind it, three stacked rotated sheets (ref `.sheet-middle{transform:translate(-40%,-52%) rotate(12deg) rotateY(-15deg)}`, `.sheet-front{translate(-50%,-36%) rotate(-5deg) rotateY(-15deg)}`) in Pine / Gold / Bone. Two small chips (`.chip-b{bottom:0;left:-15px;transform:rotate(-5deg)}`) in Gold with Pine labels. A Gold scrub track at the base: `.story-track>span{transform:scaleX(0);transform-origin:left;background:var(--gold)}`.
+**Into next:** the block ends 80px above section 05. The sticky stage un-pins and the last act's object continues upward out of frame as the Beige returns — a single crossing object (§6.5 device 4).
+
+### 05 — Process
+**Surface:** Beige, `.section`, `padding-top:var(--s7)`.
+**Type:** `.section-top` pair. `.section-heading{1.45fr 1fr;align-items:end}` with `h2` at `--fs-d4`. Then a 6-cell tab strip: `grid-template-columns:repeat(6,1fr)`, each `button{padding:25px 24px;min-height:105px;border-right:var(--border);text-align:left}`, phase label 12px caps above a 16px name. Active cell: `background:var(--pine);color:var(--beige)`. Below, `.process-content{1fr 1fr;min-height:420px}` — text pane `padding:65px 65px 55px 25px` (asymmetric, ref exact) with `h3` at `--fs-d8` display caps.
+**Depth element:** **the phase cube.** A 135px Gold cube with Pine numerals on its face, `transform:rotate(-10deg) rotateY(-20deg)`, `box-shadow:var(--sh-gold-m)` (15px 8px 0 `--gold-shade` + 25px 28px 50px ambient), inside a `perspective:1000px` stage. Six phases, each a distinct transform, transitioning over `--d-phase` 500ms with `--ease` (ref values: `rotate(15deg) rotateY(25deg)`, `rotate(-4deg) rotateY(-35deg)`, `rotate(8deg) rotateY(20deg)`, `rotate(-20deg) rotateY(-10deg) translateY(-15px)`, `rotate(0) rotateY(0) scale(1.1)`). The cube is the only element on the page the user can directly re-orient — keep that.
+**Into next:** flows straight into 06; both live inside one Beige run.
+
+### 06 — Demand / listen first
+**Surface:** Beige, `.demand{1fr 1fr;gap:10%;padding-top:45px}`.
+**Type:** `.section-label` single line (no rule) — "Listen first. Build second." Copy at `--fs-base`, `max-width:var(--measure-col)`. A result block below: label 11px `--ink-muted`, `h3` at `--fs-lg`, body 14px.
+**Depth element:** **the sculptural numeral.** A single `0` at `--fs-d0` (`clamp(340px,46vw,780px)`) in **Pine** with `--tsh-bone` (12 hard Bone steps + one soft ambient), `transform:rotateY(-20deg) rotateZ(-6deg)`, inside `place-items:center; min-height:550px; perspective:1000px` (ref `.zero-art`, with its stepped `min-height` 550 → 460 → 300 and stepped `font-size` 550 → 420 → 340px — do not clamp a sculpture, art-direct it per breakpoint). Caption absolutely positioned at `bottom:10px`, 12px. Reveals with the `sculpture` kind: 920ms, `perspective(1100px) translate3d(0,82px,0) rotateX(18deg) rotateY(-13deg) scale(.9)` → overshoot `rotateX(-2deg) rotateY(2deg) scale(1.045)` → rest.
+**Into next:** hard edge into the Gold band.
+
+### 07 — Mid CTA (GOLD BAND)
+**Surface:** **Gold** `#E5C690`, full-bleed, `padding:var(--pad-band) var(--gutter)`, `display:flex;justify-content:space-between;align-items:center;gap:40px;overflow:hidden`. Pine ink throughout — 8.78:1. This is the one place gold is a large surface on the light half of the page, and it works precisely because nothing on it is gold.
+**Type:** a promoted paragraph as display — `--fs-d9` (`clamp(39px,4.5vw,73px)`), `--lh-d4`, Pine caps. Button: **Pine fill, Beige label** (not gold — gold-on-gold is 1.00).
+**Depth element:** **the extruded band glyph.** A `✳` or `+` at ~220px in `--gold-shade` sitting behind the type at `z-index:0`, `transform:rotate(12deg) rotateY(-18deg)`, clipped by the band's `overflow:hidden` so it bleeds off the right edge. Low-contrast-on-purpose: it is a texture, not information (`aria-hidden="true"`).
+**Into next:** hard edge back to Beige. No margin — the band should feel like an inlaid strip.
+
+### 08 — Products
+**Surface:** Beige, `.section`, `padding-top:45px`. `.product-showcase{1fr 1fr;gap:8%;align-items:center}`.
+**Type:** `.section-top` pair, `.section-heading`. Format tabs: `display:flex;border-bottom:var(--border)`, 12px caps, active gains `border-bottom:3px solid var(--ink)` and `color:var(--ink)`. Detail pane: 11px kicker in `--ink-muted`, `h3` at `--fs-d7` display caps, body 15px `max-width:var(--measure-card)`.
+**Depth element:** **the 3D product model.** A real CSS-3D book: `.product-art{perspective:1400px;place-items:center;min-height:550px;background:var(--bg-2);overflow:hidden}` (Almond stage, so the object separates from the page), `.book-model{transform-style:preserve-3d}`, `.book-cover{transform:translateZ(18px);box-shadow:inset 2px 0 2px rgba(255,255,255,.5),inset -1px 0 2px rgba(0,49,31,.06)}`, plus a spine face and a blurred contact ellipse (`width:270px;height:30px;border-radius:50%;background:rgba(0,49,31,.09);filter:blur(12px);bottom:55px;transform:rotate(-6deg)`). Three format states re-skin and re-rotate it: format 0 = **Gold cover, Pine type**; format 1 = **Pine cover, Beige type, Gold cover-art glyph**; format 2 = **Bone cover, Pine type**, `height:300px;width:300px`, `rotateY(-12deg) rotateZ(-3deg)`. Hover nudges it (`rotateX(4deg) rotateY(-10deg) rotateZ(-3deg)`) over `--d-obj`.
+**Into next:** flows into 09 inside the same Beige run.
+
+### 09 — Explore / page links
+**Surface:** Beige, `.section`.
+**Type:** `.section-top` pair. Three link cards, coloured by `nth-child` (ref's trick, §2.5): card 1 Beige with `var(--border)`, card 2 **Almond**, card 3 **Pine with Beige ink and a Gold arrow** (8.78). Card titles at `--fs-d10` display caps, body 15px.
+**Depth element:** **the lifting card stack.** Each card sits in a `perspective:1100px` parent and reveals with the `panel` kind (`translate3d(0,82px,0) rotateX(13deg) scale(.91)` → `rotateX(-1deg) scale(1.025)` → rest, 780ms). On hover a card gains `translateZ(16px) rotateX(-1.5deg)` and `--sh-hard-s`; the round arrow inside inverts to Pine fill. Cards are offset vertically by `0 / 18px / 36px` so the row is never level.
+**Into next:** hard edge into the short inverted block.
+
+### 10 — Partnership (SHORT INVERTED BLOCK)
+**Surface:** `--pine` `#00311F`, full-bleed, `padding:var(--pad-bleed) var(--gutter)`, class `.inv`.
+**Type:** `.section-top` pair with the `✳` in **Gold**. `.partnership-grid{1fr 1fr;gap:10%;align-items:center}`: `h2` at `--fs-d5` (`clamp(54px,6.4vw,104px)`) Beige caps, lede at 21px, then three `.partnership-point` rows (`display:flex;gap:20px;margin-top:25px`) each with a 27px **Gold** numeral in a 25px column, a 17px `h3` in Beige, and 13px body in Bone.
+**Depth element:** **the orbital composition.** A 180px **Gold** core cube with a Pine glyph at 160px inside it, `transform:translate(-50%,-50%) rotate(-8deg) rotateY(-15deg)`, `box-shadow:19px 11px 0 var(--gold-shade), 35px 45px 50px rgba(0,30,19,.3)` (ref `.orbit-core` values), with three satellite chips orbiting on `rotate` + `translateX` at `--parallax-2`/`--parallax-3`. A rotated **Gold** stamp pins top-right: `transform:rotate(10deg); font-family:var(--ff-display); font-size:42px; padding:17px; background:var(--gold); color:var(--pine)`.
+**Into next:** hard edge back to Beige.
+
+### 11 — Roles / who does what
+**Surface:** Beige, `.section`. `.roles-grid{1fr 1fr;gap:30px}` — pixel gap, because these are objects.
+**Type:** `.section-heading`. Two panels, `padding:var(--pad-panel)`: panel A **Almond**, panel B **Pine with Beige ink**. Each `h3` at `--fs-d7` display caps; each `ul` is borderless with `li{border-top:1px solid rgba(0,49,31,.2); padding:14px 0}` on the Almond panel and `rgba(255,247,230,.22)` on the Pine panel, 14px list text.
+**Depth element:** **the paired tilt.** The two panels lean opposite ways: A `rotate(-1.2deg) rotateY(4deg)`, B `rotate(1.2deg) rotateY(-4deg)`, both with `transform-origin:bottom center`, A with `--sh-hard-s` in Bone and B with `--sh-pine-s`. They overlap by `-18px` horizontally at desktop so one edge sits over the other, and the overlap resolves to `0` with no rotation below 760px (rotated overlapping panels break touch targets).
+**Into next:** flows into 12.
+
+### 12 — Fit / is this for you
+**Surface:** Beige, `.section`, `padding-top:40px`.
+**Type:** `.section-top` pair, `.section-heading`. `.fit-grid{repeat(4,1fr);gap:40px;margin:40px 0}`, each child `border-top:var(--border); padding-top:28px`, with a 55px glyph in `--gold-ink` at wght 300, an `h3` at `--fs-lg`, and 14px body in `--ink-muted` at `max-width:var(--measure-card)`. Stays two-up at 760px, never one-up.
+**Depth element:** **the keyline grid in depth.** The four `border-top` rules are the shallowest layer; each column's glyph sits on a `translateZ(10px)` plane and parallaxes at `--parallax-3` while the rules hold at `--parallax-1`. A single Bone rectangle sits behind the whole grid at `--parallax-1`, inset `-40px`, `rotate(-0.6deg)` — a barely-perceptible backing plate. This is the quietest section on the page on purpose; after eleven sections of objects, one section of pure keylines is what makes the next flip land.
+**Into next:** flows into 13.
+
+### 13 — FAQ
+**Surface:** Beige, `.section`. `.faq{1fr 1.35fr;gap:9%;padding-top:55px}` — the only section where the *right* column is wider.
+**Type:** `.section-label` single line. `h2` at `--fs-d6` (`clamp(51px,5.1vw,88px)`) Pine caps, hand-broken. `.faq-list{border-top:var(--border)}`, `summary` at 16px Spectral 600 `padding:23px 0; gap:15px` with a `+`/`−` at the right, answer at 15px in `--ink-muted`.
+**Depth element:** **the opening fold.** `details[open]>p{animation:fold-in 180ms var(--ease)}` with the panel rotating down from `rotateX(-8deg); transform-origin:top; opacity:0` to flat — a paper-fold, not a slide. The `+` rotates 45° to become `×` over `--d-tap`. Rows reveal with the `slide` kind, alternating sides.
+**Into next:** hard edge into the closing Pine block.
+
+### 14 — Closing CTA (INVERTED, TERMINAL)
+**Surface:** `--pine` `#00311F`, full-bleed, `display:grid;grid-template-columns:1.1fr 1fr;min-height:640px;padding:var(--pad-bleed) var(--gutter);overflow:hidden`, class `.inv`.
+**Type:** `.section-label` tracked caps in Bone at the top edge. `h2` at `--fs-d2` (`clamp(68px,8.4vw,146px)`) / `--lh-d2`, Beige caps, one word in `.mark-word` (Gold ground, Pine ink). **The button is Gold with a Pine label** — the loudest element on the page (§6.4). Below it, the demoted paragraph: `font:12px/1.5 var(--ff-text); text-transform:none; letter-spacing:0; margin-top:20px` (ref's explicit opt-out, §1.3), in Bone.
+**Depth element:** **the arrow sculpture.** A `↗` or `→` at `--fs-d0` (`clamp(340px,46vw,780px)`), `line-height:.95`, in **Gold** with `--tsh-gold` (12 hard `--gold-shade` steps + soft ambient), `transform:rotateY(-25deg) rotate(-10deg)`, absolutely positioned `top:-40px;left:-50px` so it overflows its box on three sides and is clipped by the section. Under it, the arrow base: `position:absolute;left:0;right:0;height:85px;bottom:25px;background:var(--bone);transform:rotateY(-20deg) rotateX(45deg);box-shadow:var(--sh-base)` (0 25px 0 `--pine-shade`) — a floor plane that makes the arrow read as standing on something. A `.sculpture-label` at `bottom:35px;right:20px` in 11px Gold.
+**Into next:** hard edge back to Beige for the form. This is the ejection seat: dark, loud, then immediately a quiet light form.
+
+### 15 — Application form
+**Surface:** Beige, `.section`. `.application{1fr 1.2fr;gap:9%}`.
+**Type:** `.section-label` single line. `h2` at `--fs-d6` Pine caps. `.form-grid{1fr 1fr;gap:24px 20px}`. Fields: `width:100%; margin-top:9px; padding:14px 12px; border:1px solid var(--line-strong); border-radius:0; background:#FFFDF7; color:var(--ink); font-size:16px; min-height:49px` (16px minimum to stop iOS zoom). Labels above fields, 13px caps `.label`. Placeholder in `--ink-muted`. Focus: `outline:2px solid var(--pine); outline-offset:2px`. Error state: Pine border at 2px plus a Pine text message — **never a gold border**, since gold at 1.54 cannot convey state.
+**Depth element:** **the inset panel.** The form sits inside a Bone inset: `background:var(--bg-3); padding:var(--pad-panel); box-shadow:inset 0 1px 0 rgba(0,49,31,.07)`, with the panel itself at `--parallax-2` against a `--parallax-1` Almond plate offset `18px / 14px` behind it — a two-plane stack, no rotation (a rotated form is hostile). Fields lift `translateZ(4px)` on focus. The panel reveals with the `panel` kind, 780ms.
+**Into next:** `border-top:var(--border)` into the footer.
+
+### 16 — Footer
+**Surface:** Beige, `padding:var(--s7) var(--gutter) var(--s5)`, `border-top:var(--border)`.
+**Type:** wordmark + `.nano` lockup, then a `.nano` column set. Legal line 11px in `--ink-muted`. One `✳` in `--gold-ink` as the sign-off mark.
+**Depth element:** **the settling monogram.** A Y/G/A letter group at `--fs-d0c` (`clamp(203px,22.5vw,360px)`), each letter in Pine with `--tsh-bone`, `rotateY(-20deg) rotate(-9deg)` / `translateY(35px) rotateY(-20deg) rotate(9deg)` / `translateY(-15px) rotateY(-20deg) rotate(-7deg)` (ref `.studio-letter` nth-child values). Half-cropped by the page's bottom edge, so it reads as the page's foundation rather than as content. Stepped per breakpoint: 360px → 240px → 205px.
+**Into next:** end of page.
+
+---
+
+### 7.1 Depth budget — do not exceed
+
+The client wants the whole page dimensional. The failure mode is a page where nothing reads as foreground because everything is lifted. Enforce:
+
+- **One hero object per section**, with at most two supporting chips. Sixteen sections, sixteen primary objects.
+- **Three parallax planes maximum per section** (`--parallax-1/2/3`). A fourth plane is imperceptible and costs a composite layer.
+- **Maximum two rotated elements visible at once.** Section 11's paired panels and section 14's arrow + base are each one group, not two.
+- **One section in four is deliberately flat** (sections 06's numeral aside: 12 is keylines only, 16 is a cropped monogram). Flatness is what makes depth legible.
+- `will-change` only while an animation is running. The reference adds it on `.pop-is-running` and removes it on `animation.finished` — copy that pattern exactly:
+  ```css
+  .pop-is-running.pop-headline .pop-word{will-change:transform,opacity}
+  .pop-is-running:not(.pop-headline){will-change:transform,opacity}
+  ```
+- All reveals are **one-shot** (`observer.unobserve(entry.target)` on play). No section re-animates on scroll back up.
+- Every transform animation uses `transform` + `opacity` only. Nothing animates `top`, `height`, `margin` or `box-shadow`.
+- Under `prefers-reduced-motion`, all parallax factors go to `0` and all reveal durations to `1ms` (§3 token block already does this), but **every object keeps its static rotation and extrude**. The page should still look three-dimensional when it does not move.
+
+### 7.2 Build-order checklist
+
+1. Tokens (§3) first, in `:root`, before a single component.
+2. Font `<link>` with `preconnect` + `preload` (§4.3).
+3. Base element bindings (§3.1), then section primitives (§3.2).
+4. `.inv` scope (§3.2) — get the inverted theme working before building any inverted section.
+5. Grid skeletons for all 16 sections (§2.2 proportions), unstyled, and check the rhythm at 1920 / 1440 / 1100 / 760 / 360.
+6. Type pass: display clamps, then the three metric corrections (§4.4 items 1–3) verified optically at every breakpoint.
+7. Gold audit: grep `var(--gold)`, apply §5.7.
+8. Objects and depth last. They are the easiest thing to add and the easiest thing to over-add.
+
+### 7.3 Final guardrails
+
+- Beige is the page. If a screenshot at any scroll position does not read as a warm light page, there is too much Pine.
+- Exactly six colours. No tints, no gradients, no interpolation, no opacity-derived greys other than the declared `--inv-line` and the ambient shadow alphas.
+- `border-radius` is `0`. The only exceptions are `50%` on dots, seals, and the blurred contact ellipse.
+- Two typefaces. Three roles. No mono, no third family, no icon font.
+- Every headline is hand-broken with `<br>` to a character budget, never left to wrap.
+- Four breakpoints: 360 / 760 / 1100 / 1700(min). Adding a fifth means the grid proportions are wrong.
