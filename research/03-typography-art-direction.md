@@ -540,3 +540,376 @@ Micro-interaction vocabulary:
 .product-art:hover .book-model{transform:rotateX(4deg) rotateY(-10deg) rotateZ(-3deg)}
 ```
 
+---
+
+## 3. DESIGN TOKENS — PRODUCTION-READY
+
+Copy-paste block. Faces are chosen and justified in §4; this block assumes **Option A (Big Shoulders + Spectral)**. Swap the two `--ff-*` declarations for Option B and nothing else changes.
+
+```css
+/* ============================================================
+   YGA — ESTATE COLOURWAY. Design tokens.
+   Light background is a hard requirement. Gold is contrast-gated.
+   ============================================================ */
+:root{
+  /* ---- 1. PALETTE: raw ------------------------------------ */
+  --beige:        #FFF7E6;   /* L 0.9349 */
+  --almond:       #F9E9DA;   /* L 0.8348 */
+  --bone:         #E3DAC9;   /* L 0.7069 */
+  --pine:         #00311F;   /* L 0.0230 */
+  --pine-deep:    #002416;   /* second dark, for the long immersion block */
+  --pine-shade:   #001E13;   /* hard-shadow sibling of pine objects */
+  --forest:       #183630;   /* L 0.0305 */
+  --gold:         #E5C690;   /* L 0.5906 — DECORATIVE on light, LIVE on pine */
+  --gold-shade:   #C2A063;   /* hard-shadow sibling of gold objects */
+  --gold-edge:    #A88D47;   /* 3.00:1 on beige — lowest legal non-text UI boundary */
+  --gold-ink:     #7A5A1C;   /* 5.96:1 on beige — the ONLY gold-family text on light */
+  --gold-deep:    #6B5118;   /* 7.00:1 on beige — gold-family text on bone */
+  --sage:         #4A6B57;   /* 5.58:1 on beige — secondary/muted text */
+
+  /* ---- 2. PALETTE: semantic (light surfaces) --------------- */
+  --bg:           var(--beige);
+  --bg-2:         var(--almond);
+  --bg-3:         var(--bone);
+  --ink:          var(--pine);      /* 13.50:1 on beige */
+  --ink-2:        var(--forest);    /* 12.24:1 on beige */
+  --ink-muted:    var(--sage);      /*  5.58:1 on beige */
+  --line:         var(--bone);      /* the ONE border colour, 1px, like ref --line */
+  --line-strong:  #C8BCA6;         /* 1px rule that must read as structural */
+  --accent-mark:  var(--gold-ink);  /* the ✳ printer's mark — must be legible */
+  --accent-deco:  var(--gold);      /* gold where nothing must be read */
+
+  /* ---- 3. PALETTE: semantic (inverted surfaces) ------------ */
+  --inv-bg:       var(--pine);
+  --inv-bg-2:     var(--pine-deep);
+  --inv-ink:      var(--beige);     /* 13.50:1 on pine */
+  --inv-ink-2:    var(--bone);      /* 10.37:1 on pine */
+  --inv-accent:   var(--gold);      /*  8.78:1 on pine — LIVE: text, CTA, links */
+  --inv-line:     rgba(255,247,230,.22);
+  --inv-line-2:   rgba(229,198,144,.38);
+
+  /* ---- 4. FOCUS + SELECTION ------------------------------- */
+  --focus:        var(--pine);      /* on light */
+  --focus-inv:    var(--gold);      /* on pine, 8.78:1 */
+  --select-bg:    var(--gold);
+  --select-ink:   var(--pine);      /* 8.78:1 — gold as SURFACE is always safe */
+
+  /* ---- 5. TYPE FAMILIES ----------------------------------- */
+  --ff-display: 'Big Shoulders','Big Shoulders Display',
+                'Oswald','Arial Narrow','Liberation Sans Narrow',sans-serif;
+  --ff-text:    'Spectral',Georgia,'Times New Roman',serif;
+  --ff-label:   var(--ff-display);  /* condensed caps double as micro-labels */
+
+  /* ---- 6. TYPE SCALE — DISPLAY (uppercase, Big Shoulders 800) ----
+     Derived from the reference clamps x1.125 (cap-height parity:
+     YGA Signal cap 0.900em -> Big Shoulders cap 0.800em).            */
+  --fs-d0:  clamp(340px, 46vw, 780px);   /* sculptural numeral/arrow  */
+  --fs-d0b: clamp(146px, 33vw, 450px);   /* page-transition curtain   */
+  --fs-d0c: clamp(203px, 22.5vw, 360px); /* standalone letterforms    */
+  --fs-d1:  clamp(72px,  8.3vw, 158px);  /* hero h1        (ref 7.4vw/140) */
+  --fs-d2:  clamp(68px,  8.4vw, 146px);  /* closing cta h2 (ref 7.5vw/130) */
+  --fs-d3:  clamp(65px,  9.0vw, 146px);  /* kinetic marquee (ref 8vw/130)  */
+  --fs-d4:  clamp(58px,  6.5vw, 121px);  /* section h2     (ref 5.8vw/108) */
+  --fs-d5:  clamp(54px,  6.4vw, 104px);  /* feature h2     (ref 5.7vw/92)  */
+  --fs-d6:  clamp(51px,  5.1vw,  88px);  /* form/faq h2    (ref 4.5vw/78)  */
+  --fs-d7:  clamp(47px,  5.3vw,  81px);  /* panel h3       (ref 4.7vw/72)  */
+  --fs-d8:  clamp(43px,  4.5vw,  68px);  /* process h3     (ref 4vw/60)    */
+  --fs-d9:  clamp(39px,  4.5vw,  73px);  /* band statement (ref 4vw/65)    */
+  --fs-d10: clamp(28px,  3.8vw,  61px);  /* accordion name (ref 3.4vw/54)  */
+
+  /* ---- 7. TYPE SCALE — DISPLAY, phone regime (<=760px) ----
+     Larger vw coefficient, lower ceiling. Apply inside the query. */
+  --fs-d1-sm: clamp(64px, 14.0vw, 104px);
+  --fs-d2-sm: clamp(52px, 13.0vw,  84px);
+  --fs-d4-sm: clamp(50px, 12.0vw,  84px);
+  --fs-d6-sm: 58px;
+  --fs-d7-sm: 50px;
+  --fs-d9-sm: 42px;
+  --fs-d10-sm: 30px;
+
+  /* ---- 8. TYPE SCALE — TEXT (Spectral; x-height 0.450em, so
+     base is 18px not 16px — see §4.4) ------------------------ */
+  --fs-lede:   clamp(21px, 2.3vw, 36px);  /* ref .large-copy 2.2vw/34 */
+  --fs-intro:  clamp(17px, 1.5vw, 23px);  /* ref .hero-description    */
+  --fs-lg:     19px;
+  --fs-base:   18px;                      /* ref was 16px sans        */
+  --fs-sm:     16px;
+  --fs-xs:     15px;
+  --fs-2xs:    14px;
+
+  /* ---- 9. TYPE SCALE — LABELS (Big Shoulders caps, tracked) --
+     Big Shoulders cap is 0.800em vs a grotesque's ~0.72em, so
+     these read ~11% larger than the same px in a normal sans. */
+  --fs-label:  13px;   /* .section-top, .section-label */
+  --fs-micro:  12px;   /* eyebrow, captions            */
+  --fs-nano:   11px;   /* brand lockup, legal           */
+
+  /* ---- 10. LEADING -------------------------------------------
+     Converted from the reference by cap-height ratio
+     (ref leading/cap x Big Shoulders cap 0.800), +6% for warmth. */
+  --lh-d1: .84;   /* ref .9  on cap 0.900 */
+  --lh-d2: .86;   /* ref .92              */
+  --lh-d3: .88;   /* ref .96              */
+  --lh-d4: .92;   /* ref 1.0              */
+  --lh-d5: .96;   /* ref 1.05-1.08        */
+  --lh-lede: 1.3;
+  --lh-text: 1.6;    /* ref 1.5 — serif with a 0.450 x-height wants more */
+  --lh-tight: 1.45;
+  --lh-label: 1.25;
+
+  /* ---- 11. TRACKING ------------------------------------------ */
+  --tr-d-xl: -.03em;   /* >=100px display */
+  --tr-d:    -.025em;  /* 48-100px  (ref exact) */
+  --tr-d-sm: -.015em;  /* 28-48px   */
+  --tr-lede: -.015em;  /* ref -.035em was for a sans; a serif needs less */
+  --tr-text: 0;
+  --tr-label: .12em;   /* 13px caps (ref .04em on 11px, raised for condensed) */
+  --tr-micro: .16em;   /* 12px caps */
+  --tr-nano:  .20em;   /* 11px caps (ref .14em) */
+
+  /* ---- 12. MEASURE ------------------------------------------- */
+  --measure:      62ch;   /* ref p{max-width:65ch}; serif runs wider per ch */
+  --measure-lede: 22ch;
+  --measure-col:  38ch;   /* ref 370-420px side columns */
+  --measure-card: 32ch;
+
+  /* ---- 13. SPACE — the reference's 1.4x ladder -------------- */
+  --s1:  7px;   --s2: 10px;  --s3: 14px;  --s4: 20px;  --s5: 26px;
+  --s6: 38px;   --s7: 52px;  --s8: 72px;  --s9: 100px; --s10: 140px;
+  --gutter:  clamp(22px, 4.5vw, 84px);          /* ref exact */
+  --shell:   1800px;                            /* ref exact */
+  --pad-section:  clamp(76px, 9vw, 140px);      /* ref 110/80/70 */
+  --pad-band:     clamp(38px, 4vw, 62px);       /* ref .mid-cta 45px */
+  --pad-bleed:    clamp(56px, 6.5vw, 104px);    /* ref .final-cta 75px */
+  --pad-panel:    clamp(30px, 3.4vw, 56px);     /* ref .role-panel 50/35 */
+  --pad-card:     clamp(28px, 2.6vw, 44px);     /* ref .chapter-card 38/30 */
+  --gap-editorial: 9%;     /* ref 8-12% */
+  --gap-object:    30px;   /* ref 30-40px */
+  --head-gap:      clamp(38px, 4.4vw, 68px);  /* ref .section-heading mb 65px */
+  --rule-gap:      clamp(28px, 2.8vw, 44px);  /* ref .section-top mb 42px */
+  --header-h:      92px;
+  --scroll-pad:    100px;  /* ref html{scroll-padding-top} */
+
+  /* ---- 14. RADII — the reference is square. Stay square. ---- */
+  --r-0:    0;
+  --r-dot:  50%;    /* status dots, seals, the blurred contact-shadow ellipse */
+  --r-seal: 50%;
+  /* NO other radius exists in this design. No rounded cards, no pills. */
+
+  /* ---- 15. BORDERS ------------------------------------------ */
+  --bw:          1px;
+  --border:      1px solid var(--line);
+  --border-strong: 1px solid var(--line-strong);
+  --border-inv:  1px solid var(--inv-line);
+  --border-gold: 1px solid var(--gold-edge);   /* 3.00:1 — legal UI boundary */
+  --stroke-out:  1.5px;                        /* -webkit-text-stroke on outline words */
+
+  /* ---- 16. SHADOWS — hard-offset ink, not blur -------------- */
+  --sh-hard-xs: 4px 4px 0 var(--bone);
+  --sh-hard-s:  6px 6px 0 var(--bone);
+  --sh-hard-m:  12px 10px 2px var(--bone);
+  --sh-gold-s:  6px 3px 0 var(--gold-shade), 14px 20px 28px rgba(0,49,31,.14);
+  --sh-gold-m:  15px 8px 0 var(--gold-shade), 25px 28px 50px rgba(0,49,31,.12);
+  --sh-gold-l:  35px 20px 0 var(--gold-shade);
+  --sh-pine-s:  6px 3px 0 var(--pine-shade), 14px 20px 28px rgba(0,49,31,.18);
+  --sh-pine-m:  15px 8px 0 var(--pine-shade), 25px 28px 50px rgba(0,49,31,.16);
+  --sh-base:    0 25px 0 var(--pine-shade);    /* ref .arrow-base */
+  --sh-float:   0 4px 30px rgba(0,49,31,.08);  /* the only soft-only shadow */
+  --sh-deep:    0 25px 100px rgba(0,49,31,.26);
+  --sh-contact: 0 0 0 rgba(0,0,0,0);           /* use the blurred ellipse instead */
+
+  /* Extruded display type. Gold extrude for gold letters on pine. */
+  --tsh-gold: 1px 1px var(--gold-shade), 2px 2px var(--gold-shade),
+              3px 3px var(--gold-shade), 4px 4px var(--gold-shade),
+              5px 5px var(--gold-shade), 6px 6px var(--gold-shade),
+              7px 7px var(--gold-shade), 8px 8px var(--gold-shade),
+              9px 9px var(--gold-shade), 10px 10px var(--gold-shade),
+              11px 11px var(--gold-shade), 12px 12px var(--gold-shade),
+              20px 26px 40px rgba(0,30,19,.28);
+  --tsh-pine: 1px 1px var(--pine-shade), 3px 3px var(--pine-shade),
+              5px 5px var(--pine-shade), 7px 7px var(--pine-shade),
+              9px 9px var(--pine-shade), 14px 15px var(--pine-shade),
+              20px 20px 30px rgba(0,49,31,.18);
+  --tsh-bone: 1px 1px var(--bone), 2px 2px var(--bone), 3px 3px var(--bone),
+              4px 4px var(--bone), 5px 5px var(--bone), 6px 6px var(--bone),
+              7px 7px var(--bone), 8px 8px var(--bone), 9px 9px var(--bone),
+              10px 10px var(--bone), 11px 11px var(--bone), 12px 12px var(--bone),
+              20px 26px 40px rgba(0,49,31,.13);
+
+  /* ---- 17. DEPTH / 3D --------------------------------------- */
+  --persp-near:  850px;    /* headline word reveal (ref exact) */
+  --persp-mid:   1000px;   /* .pop-headline / .zero-art (ref exact) */
+  --persp-far:   1100px;   /* panel + sculpture reveals (ref exact) */
+  --persp-obj:   1400px;   /* .product-art book model (ref exact) */
+  --tilt-y:      -20deg;   /* house rotateY for objects */
+  --tilt-y-hard: -25deg;
+  --tilt-z:      -7deg;    /* house rotateZ */
+  --tilt-z-alt:   9deg;
+  --tilt-x:       8deg;
+  --lift-z:      18px;     /* ref .book-cover translateZ */
+  --parallax-1:  .06;      /* background layer scroll factor */
+  --parallax-2:  .14;      /* mid layer */
+  --parallax-3:  .24;      /* foreground object */
+
+  /* ---- 18. MOTION ------------------------------------------- */
+  --ease:        cubic-bezier(.2,.75,.2,1);      /* ref house ease */
+  --ease-in-out: cubic-bezier(.77,0,.175,1);     /* ref page transitions */
+  --ease-drawer: cubic-bezier(.32,.72,0,1);      /* ref dialogs */
+  --d-tap:   180ms;   /* hover/colour — ref's most-used */
+  --d-ui:    200ms;
+  --d-pop:   250ms;
+  --d-obj:   350ms;
+  --d-phase: 500ms;   /* 3D object phase change */
+  --d-page:  580ms;   /* page/section arrive */
+  --d-away:  380ms;   /* page/section leave */
+  --rv-copy:      650ms;
+  --rv-head:      780ms;
+  --rv-panel:     780ms;
+  --rv-sculpture: 920ms;
+  --rv-word-step: 48ms;   --rv-word-cap: 480ms;
+  --rv-group-step: 55ms;  --rv-group-cap: 220ms;
+
+  /* ---- 19. Z-INDEX ------------------------------------------ */
+  --z-bg:0; --z-object:2; --z-copy:3; --z-band:10; --z-header:20;
+  --z-dock:25; --z-progress:80; --z-curtain:90; --z-skip:100;
+}
+
+@media(prefers-reduced-motion:reduce){
+  :root{
+    --d-tap:1ms; --d-ui:1ms; --d-pop:1ms; --d-obj:1ms; --d-phase:1ms;
+    --d-page:1ms; --d-away:1ms;
+    --rv-copy:1ms; --rv-head:1ms; --rv-panel:1ms; --rv-sculpture:1ms;
+    --rv-word-step:0ms; --rv-word-cap:0ms; --rv-group-step:0ms; --rv-group-cap:0ms;
+    --parallax-1:0; --parallax-2:0; --parallax-3:0;
+  }
+  html{scroll-behavior:auto}
+}
+```
+
+### 3.1 Base element bindings
+
+```css
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:var(--scroll-pad)}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:var(--fs-base)/var(--lh-text) var(--ff-text);
+  font-feature-settings:"kern" 1,"liga" 1,"onum" 1;  /* old-style figures: heritage */
+  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,p{margin:0}
+p{max-width:var(--measure)}
+img{max-width:100%}
+a{color:inherit;text-decoration:none}
+button{border:0;color:inherit;cursor:pointer;font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+
+/* the single display rule, mirroring the reference's one-rule approach */
+h1,h2,.display,.band-statement,.accordion-name{
+  font-family:var(--ff-display);
+  font-weight:800;
+  font-variation-settings:"wght" 800;
+  text-transform:uppercase;
+  letter-spacing:var(--tr-d);
+  font-feature-settings:"kern" 1,"lnum" 1;  /* lining figures in caps */
+  text-wrap:balance;
+}
+h1{font-size:var(--fs-d1);line-height:var(--lh-d1);letter-spacing:var(--tr-d-xl)}
+h2{font-size:var(--fs-d4);line-height:var(--lh-d3)}
+h3{font-family:var(--ff-text);font-size:var(--fs-lg);line-height:1.3;
+   font-weight:600;letter-spacing:-.01em;text-transform:none}
+
+::selection{background:var(--select-bg);color:var(--select-ink)}
+:where(a,button,summary,canvas,[tabindex]):focus-visible{
+  outline:3px solid var(--focus);outline-offset:6px}
+input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--focus);outline-offset:2px}
+.inv :where(a,button,summary,[tabindex]):focus-visible{outline-color:var(--focus-inv)}
+
+/* label primitives */
+.label{font-family:var(--ff-label);font-size:var(--fs-label);font-weight:600;
+  text-transform:uppercase;letter-spacing:var(--tr-label);line-height:var(--lh-label)}
+.eyebrow{display:block;font-family:var(--ff-label);font-size:var(--fs-micro);
+  font-weight:600;text-transform:uppercase;letter-spacing:var(--tr-micro);
+  margin-bottom:var(--s5)}
+.nano{font-family:var(--ff-label);font-size:var(--fs-nano);font-weight:700;
+  text-transform:uppercase;letter-spacing:var(--tr-nano);line-height:1.1}
+
+/* the gold highlighter — the direct re-voicing of ref .yellow-word */
+.mark-word{
+  position:relative;display:inline-block;
+  background:var(--gold);color:var(--ink);           /* 8.78:1 */
+  padding:0 .05em .04em;margin-top:.04em;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+}
+.outline-word{-webkit-text-stroke:var(--stroke-out) var(--ink);color:transparent}
+.inv .outline-word{-webkit-text-stroke-color:var(--inv-ink)}
+```
+
+### 3.2 Section primitives
+
+```css
+.shell{max-width:var(--shell);margin-inline:auto}
+.section{padding:var(--pad-section) var(--gutter);max-width:var(--shell);margin-inline:auto}
+
+/* left/right label pair — ref .section-top */
+.section-top{
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:var(--border);
+  padding-top:18px;padding-bottom:26px;margin-bottom:var(--rule-gap);
+}
+.section-top>span:first-child{font:600 var(--fs-label)/1.2 var(--ff-label);
+  text-transform:uppercase;letter-spacing:var(--tr-label)}
+.section-mark{font-size:30px;line-height:1;color:var(--accent-mark)}  /* gold-ink, 5.96:1 */
+.inv .section-top{border-top-color:var(--inv-line)}
+.inv .section-mark{color:var(--gold)}                                  /* 8.78:1 — live */
+
+/* asymmetric heading — ref .section-heading, align-items:end */
+.section-heading{
+  display:grid;grid-template-columns:1.45fr 1fr;gap:var(--gap-editorial);
+  align-items:end;margin-bottom:var(--head-gap);
+}
+.section-heading>p{font-size:var(--fs-lg);line-height:var(--lh-text);
+  max-width:var(--measure-col)}
+
+/* inverted block */
+.inv{
+  background:var(--inv-bg);color:var(--inv-ink);
+  --ink:var(--inv-ink); --ink-2:var(--inv-ink-2); --ink-muted:var(--inv-ink-2);
+  --bg:var(--inv-bg); --bg-2:var(--inv-bg-2); --line:var(--inv-line);
+  --accent-mark:var(--gold); --accent-deco:var(--gold);
+}
+.inv-deep{background:var(--inv-bg-2)}
+
+/* buttons — ref .button geometry exactly */
+.btn{
+  display:inline-flex;align-items:center;justify-content:space-between;gap:38px;
+  padding:19px 24px;min-height:58px;border-radius:var(--r-0);
+  background:var(--ink);color:var(--bg);
+  font:600 15px/1.2 var(--ff-label);text-transform:uppercase;
+  letter-spacing:var(--tr-label);
+  transition:transform var(--d-tap) var(--ease),background-color var(--d-tap) var(--ease),
+             color var(--d-tap) var(--ease);
+}
+.btn:hover{background:var(--forest)}
+.btn:hover>span{transform:translate(3px,-3px)}
+.btn:active{transform:scale(.98)}
+.btn>span{transition:transform var(--d-tap) var(--ease)}
+
+/* on pine, the CTA becomes gold with pine ink — ref .blue-end .button */
+.inv .btn{background:var(--gold);color:var(--pine)}        /* 8.78:1 */
+.inv .btn:hover{background:#F0D9AE}                        /* 10.45:1 */
+
+.link{
+  display:inline-flex;align-items:center;gap:18px;padding:7px 0;
+  border-bottom:1px solid currentColor;line-height:1.45;font-weight:500;
+  transition:color var(--d-tap) var(--ease),border-color var(--d-tap) var(--ease);
+}
+.link:hover{color:var(--ink-2)}
+.inv .link:hover{color:var(--gold)}                        /* 8.78:1 */
+```
+
