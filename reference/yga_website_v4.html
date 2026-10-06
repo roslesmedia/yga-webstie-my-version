@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>YGA - Your Growth Agency | Turn your content into your first digital product</title>
+<meta name="description" content="Your audience is already telling you what to sell. YGA turns the content you already post into your first digital product - start to finish, no guesswork." />
+<meta name="theme-color" content="#023047" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23FFB703'/%3E%3Cstop offset='1' stop-color='%23FB8500'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%23023047'/%3E%3Cpath d='M8 46a24 24 0 0 1 48 0z' fill='url(%23g)'/%3E%3Cg fill='%23023047'%3E%3Crect y='33' width='64' height='2.5'/%3E%3Crect y='39' width='64' height='2.5'/%3E%3C/g%3E%3Crect x='14' y='50' width='36' height='2.5' rx='1.25' fill='%238ECAE6' fill-opacity='.55'/%3E%3C/svg%3E" />
+
+<!-- social preview: once the site is live, change og:url and og:image to absolute URLs (e.g. https://yourdomain.com/og-image.png) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="YGA - Your Growth Agency" />
+<meta property="og:title" content="Your audience is already telling you what to sell." />
+<meta property="og:description" content="We turn the content you already post into your first digital product - start to finish, no guesswork." />
+<meta property="og:image" content="og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://yourdomain.com/" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Your audience is already telling you what to sell." />
+<meta name="twitter:description" content="We turn the content you already post into your first digital product - start to finish, no guesswork." />
+<meta name="twitter:image" content="og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          ink: '#023047',
+          inkdeep: '#011f2d',
+          inksoft: '#0a4563',
+          teal: '#219EBC',
+          tealdeep: '#14708a',
+          sky: '#8ECAE6',
+          skylight: '#DCEFF7',
+          gold: '#FFB703',
+          flame: '#FB8500',
+          flamedeep: '#B35500',
+          paper: '#FFFAF0',
+          mist: '#F1F7FA'
+        },
+        fontFamily: {
+          display: ['"Bricolage Grotesque"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          sans: ['"Bricolage Grotesque"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          serif: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-optical-sizing: auto; }
+
+  /* serif italic accent - replaces the old gradient text */
+  .accent { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+
+  /* vertical "sunset" gradient text, used sparingly */
+  .text-sunset {
+    background-image: linear-gradient(180deg, #FFB703 10%, #FB8500 90%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+
+  /* film grain overlay (greyscale noise, no extra hues) */
+  .grain { position: relative; isolation: isolate; }
+  .grain::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+    border-radius: inherit;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: .22; mix-blend-mode: overlay;
+  }
+
+  /* mesh gradients */
+  .mesh-ink {
+    background:
+      radial-gradient(55% 45% at 90% 0%, rgba(33,158,188,.42) 0%, transparent 70%),
+      radial-gradient(45% 55% at 0% 100%, rgba(142,202,230,.16) 0%, transparent 70%),
+      radial-gradient(40% 40% at 60% 110%, rgba(251,133,0,.18) 0%, transparent 70%),
+      #023047;
+  }
+  .mesh-sun {
+    background:
+      radial-gradient(70% 90% at 0% 110%, #FB8500 0%, transparent 62%),
+      radial-gradient(55% 75% at 105% -5%, #8ECAE6 0%, transparent 60%),
+      radial-gradient(60% 60% at 65% 75%, #FFB703 0%, transparent 75%),
+      #FFB703;
+  }
+  .mesh-sky {
+    background:
+      radial-gradient(80% 70% at 100% 0%, #FFFFFF 0%, transparent 55%),
+      radial-gradient(70% 80% at 0% 100%, #219EBC 0%, transparent 65%),
+      #8ECAE6;
+  }
+
+  /* the signature object: a striped sun on the horizon */
+  .sun {
+    aspect-ratio: 2 / 1;
+    border-radius: 9999px 9999px 0 0;
+    background: linear-gradient(180deg, #FFB703 0%, #FB8500 100%);
+    -webkit-mask: linear-gradient(180deg, #000 0 52%, transparent 52% 56%, #000 56% 67%, transparent 67% 72%, #000 72% 80%, transparent 80% 86%, #000 86% 91%, transparent 91% 97%, #000 97%);
+            mask: linear-gradient(180deg, #000 0 52%, transparent 52% 56%, #000 56% 67%, transparent 67% 72%, #000 72% 80%, transparent 80% 86%, #000 86% 91%, transparent 91% 97%, #000 97%);
+  }
+  .sun-rise { transform: translateY(38%); transition: transform 1.6s cubic-bezier(.22,.61,.36,1) .2s; }
+  .is-visible .sun-rise, .sun-rise.is-visible { transform: none; }
+
+  /* rotating text badge */
+  .spin-slow { animation: spin 20s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* animated conic border for the featured package */
+  @property --a { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  .ring { position: relative; }
+  .ring::before {
+    content: ""; position: absolute; inset: 0; padding: 1.5px; border-radius: inherit; pointer-events: none; z-index: 2;
+    background: conic-gradient(from var(--a), #FFB703, #FB8500 18%, transparent 32%, transparent 55%, #219EBC 70%, #8ECAE6 85%, #FFB703);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    animation: ringSpin 7s linear infinite;
+  }
+  @keyframes ringSpin { to { --a: 360deg; } }
+
+  /* buttons: solid pills with a sliding fill + arrow dot */
+  .btn {
+    position: relative; isolation: isolate; overflow: hidden;
+    display: inline-flex; align-items: center; gap: .9rem;
+    border-radius: 9999px; padding: .45rem .45rem .45rem 1.5rem;
+    font-weight: 600; letter-spacing: -0.01em;
+    transition: color .4s ease;
+  }
+  .btn::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+    background: var(--fill); transform: translateY(101%);
+    transition: transform .5s cubic-bezier(.22,.61,.36,1);
+  }
+  .btn:hover::before { transform: none; }
+  .btn:active { transform: scale(.97); }
+  .btn-dot { display: grid; place-items: center; height: 2.6rem; width: 2.6rem; border-radius: 9999px; transition: transform .5s cubic-bezier(.22,.61,.36,1), background-color .4s; }
+  .btn:hover .btn-dot { transform: rotate(-45deg); }
+  .btn-ink  { background: #023047; color: #FFFAF0; --fill: #FB8500; }
+  .btn-ink:hover { color: #023047; }
+  .btn-ink .btn-dot { background: #FFB703; color: #023047; }
+  .btn-ink:hover .btn-dot { background: #023047; color: #FFB703; }
+  .btn-gold { background: #FFB703; color: #023047; --fill: #FFFAF0; }
+  .btn-gold .btn-dot { background: #023047; color: #FFB703; }
+
+  /* underline link */
+  .ulink { background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .45s cubic-bezier(.22,.61,.36,1); }
+  .ulink:hover { background-size: 100% 1px; }
+  header nav a.is-active { color: #023047; }
+  header nav a.is-active .ulink { background-size: 100% 1px; }
+  #mobileMenu a.is-active { color: #FFB703; }
+
+  /* process rows: warm wipe on hover */
+  .row { position: relative; isolation: isolate; }
+  .row::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, rgba(255,183,3,.16) 0%, rgba(251,133,0,.06) 45%, transparent 80%);
+    transform: scaleX(0); transform-origin: left; transition: transform .7s cubic-bezier(.22,.61,.36,1);
+  }
+  .row:hover::before { transform: scaleX(1); }
+  .row .row-num { transition: color .4s, transform .5s cubic-bezier(.22,.61,.36,1); }
+  .row:hover .row-num { color: #FFB703; transform: translateX(6px); }
+  .row .row-arrow { transition: transform .5s cubic-bezier(.22,.61,.36,1), background-color .4s, color .4s; }
+  .row:hover .row-arrow { transform: rotate(-45deg); background: #FFB703; color: #023047; border-color: #FFB703; }
+
+  /* "what's inside" cells: soft corner glow on hover */
+  .cell { position: relative; isolation: isolate; }
+  .cell::before {
+    content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .6s ease;
+    background: radial-gradient(110% 90% at 0% 100%, rgba(142,202,230,.45) 0%, transparent 60%);
+  }
+  .cell.warm::before { background: radial-gradient(110% 90% at 0% 100%, rgba(255,183,3,.35) 0%, transparent 60%); }
+  .cell:hover::before { opacity: 1; }
+
+  /* headline: words rise out of a mask, one after another */
+  .split-word { display: inline-block; overflow: hidden; vertical-align: bottom; padding: .1em .06em .16em; margin: -.1em -.06em -.16em; }
+  .split-word > span { display: inline-block; transform: translateY(110%); transition: transform 1s cubic-bezier(.2,.75,.2,1); }
+  .is-split .split-word > span { transform: none; }
+
+  /* [placeholders] you still need to fill in: search the file for class="ph" */
+  .ph { text-decoration: underline dashed rgba(251,133,0,.7); text-underline-offset: .2em; text-decoration-thickness: 1px; }
+
+  /* proof cards */
+  .proof-card { transition: transform .6s cubic-bezier(.22,.61,.36,1), box-shadow .6s, border-color .4s; }
+  .proof-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px -30px rgba(2,48,71,.35); border-color: rgba(2,48,71,.25); }
+  .proof-card .proof-num { transition: color .4s; }
+  .proof-card:hover .proof-num { color: #B35500; }
+  .proof-line { background: linear-gradient(90deg, #8ECAE6, #FFB703 60%, #FB8500); }
+
+  /* level quiz */
+  .quiz-opt { transition: background-color .3s, border-color .3s, transform .3s; }
+  .quiz-opt:hover { border-color: #023047; transform: translateX(4px); }
+  .quiz-opt:hover .quiz-key { background: #FFB703; border-color: #FFB703; }
+  .quiz-step { animation: quizIn .5s cubic-bezier(.22,.61,.36,1); }
+  @keyframes quizIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  [data-level] .match-tag { display: none; }
+  [data-level].is-picked .match-tag { display: inline-flex; }
+  [data-level].is-picked { outline: 2px solid #FB8500; outline-offset: 6px; }
+  [data-level="2"].is-picked { outline-color: #FFB703; }
+
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+
+  .marquee-track { animation: marquee 38s linear infinite; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .sun-rise { transform: none; transition: none; }
+    .spin-slow, .ring::before, .marquee-track, .quiz-step { animation: none; }
+    .split-word > span { transform: none; transition: none; }
+    .proof-card, .proof-card:hover, .quiz-opt:hover { transform: none; }
+  }
+
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  ::selection { background: #FFB703; color: #023047; }
+</style>
+</head>
+<body class="bg-paper text-ink antialiased">
+
+<!-- scroll progress -->
+<div class="fixed top-0 left-0 h-[3px] z-[60] w-0" id="progressBar" style="background:linear-gradient(90deg,#219EBC,#8ECAE6,#FFB703,#FB8500)"></div>
+
+<!-- ============ NAV ============ -->
+<header class="sticky top-0 z-50 bg-paper/80 backdrop-blur-md border-b border-ink/10">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="flex h-16 lg:h-[4.5rem] items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <span class="relative block h-5 w-10 overflow-hidden" aria-hidden="true"><span class="sun absolute inset-0 block"></span></span>
+        <span class="flex items-baseline gap-2.5 leading-none">
+          <span class="font-display text-xl font-extrabold tracking-[-0.04em]">YGA</span>
+          <span class="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">Your Growth Agency</span>
+        </span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-[15px] font-medium text-ink/80">
+        <a href="#gap" class="group flex items-start gap-1 hover:text-ink"><span class="ulink">The gap</span><sup class="font-mono text-[9px] text-flamedeep">01</sup></a>
+        <a href="#process" class="group flex items-start gap-1 hover:text-ink"><span class="ulink">How it works</span><sup class="font-mono text-[9px] text-flamedeep">02</sup></a>
+        <a href="#proof" class="group flex items-start gap-1 hover:text-ink"><span class="ulink">Founding</span><sup class="font-mono text-[9px] text-flamedeep">03</sup></a>
+        <a href="#inside" class="group flex items-start gap-1 hover:text-ink"><span class="ulink">What's inside</span><sup class="font-mono text-[9px] text-flamedeep">04</sup></a>
+        <a href="#pricing" class="group flex items-start gap-1 hover:text-ink"><span class="ulink">Packages</span><sup class="font-mono text-[9px] text-flamedeep">05</sup></a>
+        <a href="#faq" class="group flex items-start gap-1 hover:text-ink"><span class="ulink">FAQ</span><sup class="font-mono text-[9px] text-flamedeep">06</sup></a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener"
+           class="hidden sm:inline-flex items-center gap-2.5 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper transition hover:bg-flame hover:text-ink">
+          <span class="h-1.5 w-1.5 rounded-full bg-gold"></span>
+          DM us “GROWTH”
+        </a>
+        <button id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" class="md:hidden grid h-10 w-10 place-items-center rounded-full border border-ink/20 text-ink">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path data-menu-icon d="M4 9h16M4 15h10"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile menu -->
+  <div id="mobileMenu" class="hidden md:hidden border-t border-ink/10 bg-ink px-5 py-5">
+    <nav class="flex flex-col text-paper">
+      <a href="#gap" class="flex items-baseline justify-between border-b border-sky/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">The gap <span class="font-mono text-xs text-sky/60">01</span></a>
+      <a href="#process" class="flex items-baseline justify-between border-b border-sky/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">How it works <span class="font-mono text-xs text-sky/60">02</span></a>
+      <a href="#proof" class="flex items-baseline justify-between border-b border-sky/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">Founding spots <span class="font-mono text-xs text-sky/60">03</span></a>
+      <a href="#inside" class="flex items-baseline justify-between border-b border-sky/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">What's inside <span class="font-mono text-xs text-sky/60">04</span></a>
+      <a href="#pricing" class="flex items-baseline justify-between border-b border-sky/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">Packages <span class="font-mono text-xs text-sky/60">05</span></a>
+      <a href="#faq" class="flex items-baseline justify-between border-b border-sky/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">FAQ <span class="font-mono text-xs text-sky/60">06</span></a>
+      <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="mt-5 rounded-full bg-gold px-4 py-3.5 text-center font-bold text-ink">DM us “GROWTH”</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section id="top" class="relative overflow-hidden pt-12 lg:pt-20">
+  <div class="relative mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-14 lg:gap-12 items-end">
+
+      <!-- copy -->
+      <div class="reveal pb-2">
+        <p class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-flame animate-pulse"></span>Now booking</span>
+          <span class="h-px w-8 bg-ink/25"></span>
+          <span>For creators, coaches &amp; service pros</span>
+        </p>
+
+        <h1 data-split class="mt-8 font-display font-extrabold text-[clamp(2.7rem,6.4vw,5.6rem)] leading-[0.95] tracking-[-0.045em]">
+          Your audience is already telling you <span class="accent text-flame text-[1.12em] tracking-[-0.02em]">what to sell.</span>
+        </h1>
+
+        <div class="mt-10 flex flex-col gap-8 border-t border-ink/15 pt-8">
+          <p class="max-w-md text-lg leading-relaxed text-ink/70">
+            You're just not packaging it yet. We turn the content you already post into your first
+            digital product - start to finish, no guesswork.
+          </p>
+          <div class="flex flex-wrap items-center gap-5">
+            <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-ink">
+              DM us “GROWTH”
+              <span class="btn-dot"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a href="#process" class="inline-block py-3 font-semibold text-ink"><span class="ulink">See how it works</span></a>
+          </div>
+          <p class="-mt-4 text-sm text-ink/70">
+            Not on Instagram? <a href="mailto:hello@yourdomain.com" class="inline-block py-2 font-semibold text-ink"><span class="ulink ph">hello@yourdomain.com</span></a>
+          </p>
+        </div>
+
+        <p class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-ink/50">
+          <span class="flex items-center gap-2"><svg class="h-3.5 w-3.5 text-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4h12v16l-6-4-6 4V4z"/></svg>Save this for when you're ready</span>
+          <span class="flex items-center gap-2"><svg class="h-3.5 w-3.5 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>Share it with a creator who needs it</span>
+        </p>
+      </div>
+
+      <!-- sunset panel + carousel mock -->
+      <div class="reveal relative mx-auto w-full max-w-md" style="transition-delay:.12s">
+        <div class="grain mesh-ink relative aspect-[4/5] overflow-hidden rounded-[1.75rem]">
+          <!-- horizon -->
+          <div class="absolute inset-x-0 bottom-[22%] h-px bg-sky/30"></div>
+          <div class="sun-rise absolute bottom-[22%] -right-[12%] w-[88%]">
+            <div class="sun w-full"></div>
+          </div>
+          <!-- reflection -->
+          <div class="absolute bottom-[22%] -right-[12%] w-[88%] translate-y-full space-y-2 pt-3 flex flex-col items-center" aria-hidden="true">
+            <span class="block h-[3px] w-[70%] rounded-full bg-flame"></span>
+            <span class="block h-[3px] w-[48%] rounded-full bg-flame"></span>
+            <span class="block h-[2px] w-[30%] rounded-full bg-gold"></span>
+            <span class="block h-[2px] w-[16%] rounded-full bg-gold"></span>
+          </div>
+
+          <!-- post -->
+          <div class="absolute left-[7%] top-[6%] z-[2] w-[74%] -rotate-[4deg] rounded-[1.25rem] bg-paper p-3 shadow-[0_30px_60px_-20px_rgba(1,31,45,.7)]">
+            <div class="flex items-center gap-2.5 px-1 pb-2.5">
+              <span class="relative grid h-7 w-7 place-items-center overflow-hidden rounded-full bg-ink">
+                <span class="sun absolute bottom-1 w-5"></span>
+              </span>
+              <div class="leading-tight">
+                <p class="text-[13px] font-semibold">yourgrowthagency</p>
+                <p class="font-mono text-[9px] uppercase tracking-wider text-ink/50">Carousel · 7 slides</p>
+              </div>
+              <span class="ml-auto text-xs text-ink/40">•••</span>
+            </div>
+
+            <div class="grain mesh-sky relative flex min-h-[13.5rem] flex-col justify-between overflow-hidden rounded-xl p-5">
+              <div class="relative z-[2]">
+                <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-ink">Slide 01 / 07</span>
+                <p class="mt-3 font-display text-[1.3rem] font-bold leading-[1.12] tracking-[-0.03em] text-inkdeep">
+                  Here's exactly how we turn your content into your <span class="accent text-[1.12em]">first digital product.</span>
+                </p>
+              </div>
+              <div class="relative z-[2] flex items-center justify-between pt-4">
+                <div class="flex gap-1.5">
+                  <span class="h-1 w-6 rounded-full bg-ink"></span>
+                  <span class="h-1 w-1 rounded-full bg-ink/40"></span>
+                  <span class="h-1 w-1 rounded-full bg-ink/40"></span>
+                  <span class="h-1 w-1 rounded-full bg-ink/40"></span>
+                </div>
+                <span class="font-mono text-[10px] font-semibold uppercase tracking-wider text-inkdeep">Swipe →</span>
+              </div>
+            </div>
+
+            <div class="mt-3 flex items-center gap-4 px-1 pb-0.5 text-ink/70">
+              <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 21s-7-4.6-7-9.6A4.4 4.4 0 0 1 12 8.6a4.4 4.4 0 0 1 7 2.8C19 16.4 12 21 12 21z"/></svg>
+              <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L4 21l1.4-4.3A8.5 8.5 0 1 1 21 12z"/></svg>
+              <svg class="h-[18px] w-[18px] ml-auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M6 4h12v16l-6-4-6 4V4z"/></svg>
+            </div>
+          </div>
+
+          <p class="absolute bottom-5 left-6 z-[2] font-mono text-[10px] uppercase tracking-[0.2em] text-sky/70">Fig. 01 - content → product</p>
+        </div>
+
+        <!-- floating chips -->
+        <div class="reveal absolute -left-6 top-[58%] z-[3] hidden sm:flex items-center gap-2.5 rounded-full border border-ink/10 bg-paper py-1.5 pl-1.5 pr-4 shadow-[0_14px_30px_-12px_rgba(2,48,71,.35)]" style="transition-delay:.3s">
+          <span class="grid h-7 w-7 place-items-center rounded-full bg-gold text-ink">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>
+          </span>
+          <span class="text-xs font-semibold">Built from posts you already have</span>
+        </div>
+        <a href="#proof" class="reveal absolute -right-4 -top-4 z-[3] hidden sm:flex items-center gap-2.5 rounded-full border border-ink/10 bg-paper py-1.5 pl-1.5 pr-4 shadow-[0_14px_30px_-12px_rgba(2,48,71,.35)] transition hover:border-flame" style="transition-delay:.4s">
+          <span class="relative grid h-7 w-7 place-items-center overflow-hidden rounded-full bg-ink"><span class="sun absolute bottom-1.5 w-4"></span></span>
+          <span class="text-xs font-semibold">Founding spots open</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- hashtag marquee -->
+  <div class="marquee relative mt-16 lg:mt-24 overflow-hidden bg-ink py-5">
+    <div class="marquee-track flex w-max items-center">
+      <div class="flex shrink-0 min-w-[100vw] items-center justify-around gap-8 pr-8 text-2xl sm:text-3xl">
+        <span class="font-display font-semibold tracking-tight text-paper">#digitalproducts</span>
+        <span class="text-gold">✳</span>
+        <span class="accent text-sky">#creatoreconomy</span>
+        <span class="text-flame">✳</span>
+        <span class="font-display font-semibold tracking-tight text-paper">#passiveincome</span>
+        <span class="text-gold">✳</span>
+        <span class="accent text-sky">#contentcreator</span>
+        <span class="text-flame">✳</span>
+        <span class="font-display font-semibold tracking-tight text-paper">#wealth</span>
+        <span class="text-gold">✳</span>
+      </div>
+      <div class="flex shrink-0 min-w-[100vw] items-center justify-around gap-8 pr-8 text-2xl sm:text-3xl" aria-hidden="true">
+        <span class="font-display font-semibold tracking-tight text-paper">#digitalproducts</span>
+        <span class="text-gold">✳</span>
+        <span class="accent text-sky">#creatoreconomy</span>
+        <span class="text-flame">✳</span>
+        <span class="font-display font-semibold tracking-tight text-paper">#passiveincome</span>
+        <span class="text-gold">✳</span>
+        <span class="accent text-sky">#contentcreator</span>
+        <span class="text-flame">✳</span>
+        <span class="font-display font-semibold tracking-tight text-paper">#wealth</span>
+        <span class="text-gold">✳</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE GAP ============ -->
+<section id="gap" data-anchor="section-top" class="relative scroll-mt-20 py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid lg:grid-cols-[1fr_1fr] gap-14 lg:gap-20 items-start">
+      <div class="reveal">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55"><span class="text-flamedeep">(01)</span> - The gap</p>
+        <h2 class="mt-6 font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1] tracking-[-0.04em]">
+          You're not short on content.
+          You're short on a <span class="accent text-flame text-[1.1em]">product.</span>
+        </h2>
+        <p class="mt-6 text-lg text-ink/65 leading-relaxed max-w-lg">
+          Posting builds attention. Packaging builds income. Most creators stall right between
+          those two - because nobody ever showed them the bridge.
+        </p>
+        <figure class="mt-10 border-l-2 border-gold pl-6">
+          <blockquote class="accent text-2xl sm:text-[1.7rem] leading-snug text-ink">
+            “Your audience is already telling you what to sell. You're just not packaging it yet.”
+          </blockquote>
+          <figcaption class="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-ink/45">- the post that started this</figcaption>
+        </figure>
+      </div>
+
+      <ol class="border-t border-ink/15">
+        <li class="reveal grid grid-cols-[3.5rem_1fr] gap-4 border-b border-ink/15 py-9">
+          <span class="font-mono text-sm text-ink/40">01</span>
+          <div>
+            <h3 class="font-display text-2xl font-bold tracking-[-0.03em]">You have the audience</h3>
+            <p class="mt-2 text-ink/65 leading-relaxed">People follow, save, DM and ask the same questions on repeat. That's demand, not luck.</p>
+          </div>
+        </li>
+        <li class="reveal grid grid-cols-[3.5rem_1fr] gap-4 border-b border-ink/15 py-9" style="transition-delay:.08s">
+          <span class="font-mono text-sm text-ink/40">02</span>
+          <div>
+            <h3 class="font-display text-2xl font-bold tracking-[-0.03em]">You have the content</h3>
+            <p class="mt-2 text-ink/65 leading-relaxed">Hundreds of posts already containing the framework, the story and the proof. It's a product in disguise.</p>
+          </div>
+        </li>
+        <li class="reveal relative grid grid-cols-[3.5rem_1fr] gap-4 border-b-2 border-flame py-9" style="transition-delay:.16s">
+          <div class="absolute inset-0 -z-10 bg-[linear-gradient(0deg,rgba(255,183,3,.22),rgba(255,183,3,0)_75%)]"></div>
+          <span class="font-mono text-sm font-semibold text-flamedeep">03</span>
+          <div>
+            <div class="flex flex-wrap items-center gap-3">
+              <h3 class="font-display text-2xl font-bold tracking-[-0.03em]">You don't have the <span class="accent text-[1.12em] text-flamedeep">product</span></h3>
+              <span class="rounded-full bg-ink px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-gold">What we fix</span>
+            </div>
+            <p class="mt-2 text-ink/65 leading-relaxed">So the audience stays a vanity metric instead of a revenue line. That's the only thing we fix.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIT CHECK / WHO IT'S FOR ============ -->
+<section id="fit" class="relative bg-white border-t border-ink/10 py-24 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="max-w-3xl reveal">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70"><span class="text-flamedeep">✳</span> Fit check</p>
+      <h2 class="mt-6 font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1] tracking-[-0.04em]">
+        Built for creators with attention, <span class="accent text-flame text-[1.1em]">not a product.</span>
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-2">
+      <div class="reveal rounded-[1.75rem] border border-ink/12 bg-paper p-8 lg:p-10">
+        <p class="flex items-center gap-3 font-display text-2xl font-bold tracking-[-0.03em]">
+          <span class="grid h-9 w-9 place-items-center rounded-full bg-teal text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+          </span>
+          Right for you if
+        </p>
+        <ul class="mt-6 divide-y divide-ink/10 border-y border-ink/10 text-ink/80">
+          <li class="flex gap-3 py-3.5"><span class="font-mono text-teal">+</span> You post consistently and people actually engage.</li>
+          <li class="flex gap-3 py-3.5"><span class="font-mono text-teal">+</span> Followers save, share and DM you the same questions.</li>
+          <li class="flex gap-3 py-3.5"><span class="font-mono text-teal">+</span> You've never sold a digital product, or tried once and it flopped.</li>
+          <li class="flex gap-3 py-3.5"><span class="font-mono text-teal">+</span> You'd rather package what you know than invent something new.</li>
+        </ul>
+      </div>
+
+      <div class="reveal flex flex-col rounded-[1.75rem] border border-ink/12 bg-paper p-8 lg:p-10" style="transition-delay:.08s">
+        <p class="flex items-center gap-3 font-display text-2xl font-bold tracking-[-0.03em]">
+          <span class="grid h-9 w-9 place-items-center rounded-full border border-ink/25 text-ink">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 12h12"/></svg>
+          </span>
+          Not for you yet if
+        </p>
+        <ul class="mt-6 divide-y divide-ink/10 border-y border-ink/10 text-ink/80">
+          <li class="flex gap-3 py-3.5"><span class="font-mono text-flamedeep">-</span> You're still figuring out what to post about.</li>
+          <li class="flex gap-3 py-3.5"><span class="font-mono text-flamedeep">-</span> You want “passive income” without showing up for it.</li>
+          <li class="flex gap-3 py-3.5"><span class="font-mono text-flamedeep">-</span> You need a full brand, website and ads agency.</li>
+        </ul>
+
+        <!-- lead magnet: make sure the checklist exists before publishing -->
+        <div class="grain mesh-sun relative mt-6 overflow-hidden rounded-2xl p-6 text-ink lg:mt-auto">
+          <div class="relative z-[2] flex flex-wrap items-center justify-between gap-4">
+            <div class="max-w-xs">
+              <p class="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-ink/75">Free · not ready yet?</p>
+              <p class="mt-2 font-display text-lg font-bold leading-snug tracking-[-0.02em]">Get the <span class="accent text-[1.15em]">Audience Signal Checklist</span> - the first step of every audit we run.</p>
+            </div>
+            <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-ink text-sm">
+              DM “CHECKLIST”
+              <span class="btn-dot"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS / THE SWIPE ============ -->
+<section id="process" class="grain mesh-ink relative scroll-mt-20 overflow-hidden py-24 lg:py-32 text-paper">
+  <div class="relative z-[2] mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid lg:grid-cols-[1fr_auto] gap-8 items-end reveal">
+      <div class="max-w-3xl">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sky/70"><span class="text-gold">(02)</span> - The swipe</p>
+        <h2 class="mt-6 font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1] tracking-[-0.04em]">
+          Five slides from <span class="accent text-sky text-[1.1em]">content</span> to <span class="accent text-gold text-[1.1em]">checkout.</span>
+        </h2>
+      </div>
+      <p class="max-w-sm text-lg text-sky/80 leading-relaxed">
+        The same walkthrough from the carousel - but here it's your business, your audience, your product.
+      </p>
+    </div>
+
+    <ol class="mt-10 border-t border-sky/20">
+      <!-- 1 -->
+      <li class="row reveal grid grid-cols-[3rem_1fr_auto] md:grid-cols-[6rem_1fr_1.2fr_auto] items-start md:items-center gap-x-6 gap-y-2 border-b border-sky/20 py-5 px-1 md:px-3">
+        <span class="row-num font-mono text-sm text-sky/50">01</span>
+        <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.03em]">Content audit</h3>
+        <p class="col-span-full mt-1 md:col-span-1 md:mt-0 text-sky/75 leading-relaxed">We go through everything you've already posted and map it against what your audience actually engages with.</p>
+        <span class="row-arrow row-start-1 col-start-3 md:row-start-auto md:col-start-auto grid h-11 w-11 place-items-center rounded-full border border-sky/30 text-sky">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </li>
+      <!-- 2 -->
+      <li class="row reveal grid grid-cols-[3rem_1fr_auto] md:grid-cols-[6rem_1fr_1.2fr_auto] items-start md:items-center gap-x-6 gap-y-2 border-b border-sky/20 py-5 px-1 md:px-3" style="transition-delay:.05s">
+        <span class="row-num font-mono text-sm text-sky/50">02</span>
+        <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.03em]">Find the signal</h3>
+        <p class="col-span-full mt-1 md:col-span-1 md:mt-0 text-sky/75 leading-relaxed">The repeated question, the saved post, the DM that lands twice a week - that repetition <strong class="accent text-[1.15em] font-normal text-gold">is</strong> the offer.</p>
+        <span class="row-arrow row-start-1 col-start-3 md:row-start-auto md:col-start-auto grid h-11 w-11 place-items-center rounded-full border border-sky/30 text-sky">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </li>
+      <!-- 3 -->
+      <li class="row reveal grid grid-cols-[3rem_1fr_auto] md:grid-cols-[6rem_1fr_1.2fr_auto] items-start md:items-center gap-x-6 gap-y-2 border-b border-sky/20 py-5 px-1 md:px-3" style="transition-delay:.1s">
+        <span class="row-num font-mono text-sm text-sky/50">03</span>
+        <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.03em]">Package the offer</h3>
+        <p class="col-span-full mt-1 md:col-span-1 md:mt-0 text-sky/75 leading-relaxed">Name it, promise it, price it. A clear outcome beats a clever title every single time.</p>
+        <span class="row-arrow row-start-1 col-start-3 md:row-start-auto md:col-start-auto grid h-11 w-11 place-items-center rounded-full border border-sky/30 text-sky">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </li>
+      <!-- 4 -->
+      <li class="row reveal grid grid-cols-[3rem_1fr_auto] md:grid-cols-[6rem_1fr_1.2fr_auto] items-start md:items-center gap-x-6 gap-y-2 border-b border-sky/20 py-5 px-1 md:px-3" style="transition-delay:.05s">
+        <span class="row-num font-mono text-sm text-sky/50">04</span>
+        <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.03em]">Build the product</h3>
+        <p class="col-span-full mt-1 md:col-span-1 md:mt-0 text-sky/75 leading-relaxed">Template, guide, swipe file, mini-course or toolkit - the smallest version that delivers the promise.</p>
+        <span class="row-arrow row-start-1 col-start-3 md:row-start-auto md:col-start-auto grid h-11 w-11 place-items-center rounded-full border border-sky/30 text-sky">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </li>
+      <!-- 5 -->
+      <li class="row reveal grid grid-cols-[3rem_1fr_auto] md:grid-cols-[6rem_1fr_1.2fr_auto] items-start md:items-center gap-x-6 gap-y-2 border-b border-sky/20 py-5 px-1 md:px-3" style="transition-delay:.1s">
+        <span class="row-num font-mono text-sm text-sky/50">05</span>
+        <h3 class="font-display text-2xl md:text-3xl font-semibold tracking-[-0.03em]">Launch &amp; sell</h3>
+        <p class="col-span-full mt-1 md:col-span-1 md:mt-0 text-sky/75 leading-relaxed">A content engine that points to one CTA, a DM script that qualifies leads, and a launch you can repeat.</p>
+        <span class="row-arrow row-start-1 col-start-3 md:row-start-auto md:col-start-auto grid h-11 w-11 place-items-center rounded-full border border-sky/30 text-sky">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </li>
+    </ol>
+
+    <!-- CTA band = slide 06 -->
+    <div class="reveal grain mesh-sun relative mt-10 overflow-hidden rounded-[1.75rem] p-8 sm:p-10 text-ink">
+      <div class="relative z-[2] grid md:grid-cols-[1fr_auto] gap-8 items-end">
+        <div>
+          <p class="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/70">Slide 06 / 07</p>
+          <p class="mt-4 max-w-xl font-display text-3xl sm:text-4xl font-bold leading-[1.02] tracking-[-0.04em]">
+            Ready to skip the guesswork and <span class="accent text-[1.12em]">start building?</span>
+          </p>
+          <p class="mt-3 font-medium text-ink/75">Slide 6 is a conversation. It takes one DM.</p>
+        </div>
+        <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-ink self-start md:self-end">
+          Send “GROWTH”
+          <span class="btn-dot"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOUNDING CREATORS (replaces results until there are real ones) ============ -->
+<!-- NOTE: the [bracketed] numbers are placeholders - set your real spot count and discount before publishing. -->
+<section id="proof" class="scroll-mt-20 bg-white border-b border-ink/10 py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid lg:grid-cols-[1fr_auto] gap-8 items-end reveal">
+      <div class="max-w-3xl">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70"><span class="text-flamedeep">(03)</span> - Founding creators</p>
+        <h2 class="mt-6 font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1] tracking-[-0.04em]">
+          No case studies yet. <span class="accent text-flame text-[1.1em]">That's your advantage.</span>
+        </h2>
+      </div>
+      <p class="max-w-sm text-ink/70 leading-relaxed">
+        We're a new agency and we won't pretend otherwise. So our first round is a small group of founding creators - with more of our attention and a better deal than anyone after them.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      <article class="proof-card reveal flex flex-col rounded-[1.75rem] border border-ink/12 bg-paper p-7 lg:p-8">
+        <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/70">01 · Small group</span>
+        <p class="proof-num mt-6 font-display text-5xl font-extrabold leading-none tracking-[-0.05em]"><span class="ph">[5]</span> spots</p>
+        <p class="mt-4 leading-relaxed text-ink/75">We only take a handful of creators in the first round, so every build gets the founders' full attention. No juniors, no hand-offs.</p>
+      </article>
+
+      <article class="proof-card reveal flex flex-col rounded-[1.75rem] border border-ink/12 bg-paper p-7 lg:p-8" style="transition-delay:.07s">
+        <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/70">02 · Better deal</span>
+        <p class="proof-num mt-6 font-display text-5xl font-extrabold leading-none tracking-[-0.05em]"><span class="ph">[X]%</span> off</p>
+        <p class="mt-4 leading-relaxed text-ink/75">Founding pricing on any level, locked in for your first product. It won't come back once the first round is full.</p>
+      </article>
+
+      <article class="proof-card reveal flex flex-col rounded-[1.75rem] border border-ink/12 bg-paper p-7 lg:p-8" style="transition-delay:.14s">
+        <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/70">03 · In return</span>
+        <p class="proof-num accent mt-5 text-[3.4rem] leading-none tracking-[-0.02em]">Your story.</p>
+        <p class="mt-4 leading-relaxed text-ink/75">Honest feedback along the way, and permission to share your results as one of our first case studies - only if you're happy with them.</p>
+      </article>
+    </div>
+
+    <div class="reveal mt-5 flex flex-col gap-5 rounded-[1.75rem] border border-ink/12 px-7 py-5 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+      <div class="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
+        <span class="flex gap-1.5" aria-hidden="true">
+          <span class="relative block h-4 w-8 overflow-hidden"><span class="sun absolute inset-0 block"></span></span>
+          <span class="relative block h-4 w-8 overflow-hidden"><span class="sun absolute inset-0 block"></span></span>
+          <span class="relative block h-4 w-8 overflow-hidden"><span class="sun absolute inset-0 block"></span></span>
+          <span class="relative block h-4 w-8 overflow-hidden"><span class="sun absolute inset-0 block"></span></span>
+          <span class="relative block h-4 w-8 overflow-hidden"><span class="sun absolute inset-0 block"></span></span>
+        </span>
+        <p class="font-mono text-[11px] uppercase tracking-[0.16em] text-ink/75"><span class="ph">[5] of [5]</span> founding spots open</p>
+      </div>
+      <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-ink self-start sm:self-auto">
+        DM “FOUNDING”
+        <span class="btn-dot"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INSIDE ============ -->
+<section id="inside" class="scroll-mt-20 py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="max-w-3xl reveal">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55"><span class="text-flamedeep">(04)</span> - What's inside</p>
+      <h2 class="mt-6 font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1] tracking-[-0.04em]">
+        Everything between <span class="accent text-tealdeep text-[1.1em]">“I post a lot”</span> and <span class="accent text-flame text-[1.1em]">“I sell out.”</span>
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-px overflow-hidden rounded-[1.75rem] border border-ink/15 bg-ink/15 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="cell reveal bg-paper p-8">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45">Kit · 01</span>
+          <svg class="h-6 w-6 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
+        </div>
+        <h3 class="mt-8 font-display text-2xl font-bold tracking-[-0.03em]">Audience signal map</h3>
+        <p class="mt-2 text-ink/65 leading-relaxed">A one-page breakdown of what your people keep asking for - ranked by buying intent.</p>
+      </div>
+
+      <div class="cell reveal bg-paper p-8" style="transition-delay:.07s">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45">Kit · 02</span>
+          <svg class="h-6 w-6 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L12 16.9 6.4 20l1.4-6.2L3 9.5l6.4-.6L12 3z"/></svg>
+        </div>
+        <h3 class="mt-8 font-display text-2xl font-bold tracking-[-0.03em]">Offer positioning</h3>
+        <p class="mt-2 text-ink/65 leading-relaxed">Name, promise, price and the one-line pitch you can drop straight into a caption.</p>
+      </div>
+
+      <div class="cell reveal bg-paper p-8" style="transition-delay:.14s">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45">Kit · 03</span>
+          <svg class="h-6 w-6 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14v16H5z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg>
+        </div>
+        <h3 class="mt-8 font-display text-2xl font-bold tracking-[-0.03em]">Product blueprint</h3>
+        <p class="mt-2 text-ink/65 leading-relaxed">Module-by-module outline so you build in days, not months - and ship before motivation fades.</p>
+      </div>
+
+      <div class="cell warm reveal bg-paper p-8" style="transition-delay:.07s">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45">Kit · 04</span>
+          <svg class="h-6 w-6 text-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-6a8 8 0 0 1 16 0v6"/><path d="M8 20v-4M12 20v-6M16 20v-4"/></svg>
+        </div>
+        <h3 class="mt-8 font-display text-2xl font-bold tracking-[-0.03em]">Launch sequence</h3>
+        <p class="mt-2 text-ink/65 leading-relaxed">A 7-day content plan: tease, teach, prove, open, close. Written for Reels and Stories.</p>
+      </div>
+
+      <div class="cell warm reveal bg-paper p-8" style="transition-delay:.14s">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45">Kit · 05</span>
+          <svg class="h-6 w-6 text-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L4 21l1.4-4.3A8.5 8.5 0 1 1 21 12z"/></svg>
+        </div>
+        <h3 class="mt-8 font-display text-2xl font-bold tracking-[-0.03em]">DM &amp; sales scripts</h3>
+        <p class="mt-2 text-ink/65 leading-relaxed">Word-for-word replies that move a curious follower to a paid customer without feeling salesy.</p>
+      </div>
+
+      <div class="cell warm reveal bg-paper p-8" style="transition-delay:.21s">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/45">Kit · 06</span>
+          <svg class="h-6 w-6 text-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M21 7v5h-5"/></svg>
+        </div>
+        <h3 class="mt-8 font-display text-2xl font-bold tracking-[-0.03em]">Metrics that matter</h3>
+        <p class="mt-2 text-ink/65 leading-relaxed">Track saves-to-sales instead of likes-to-nothing. Know what to double down on next month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOUNDER ============ -->
+<!-- NOTE: replace the [bracketed] text and the photo placeholder with the real founder before publishing. -->
+<section id="founder" class="grain mesh-ink relative overflow-hidden py-24 lg:py-32 text-paper">
+  <div class="relative z-[2] mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid items-center gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+
+      <!-- photo placeholder: swap for <img src="founder.jpg" alt="[Your name], founder of YGA" class="..."> -->
+      <div class="reveal relative mx-auto w-full max-w-sm">
+        <div class="grain mesh-sky relative aspect-[4/5] overflow-hidden rounded-[1.75rem]">
+          <div class="absolute inset-x-0 bottom-0 z-[2] flex justify-center">
+            <div class="sun w-[78%]"></div>
+          </div>
+          <p class="absolute left-5 top-5 z-[2] font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-ink"><span class="ph">[Founder photo]</span></p>
+        </div>
+        <div class="absolute -bottom-5 -right-3 flex items-center gap-2.5 rounded-full border border-ink/10 bg-paper py-1.5 pl-1.5 pr-4 text-ink shadow-[0_14px_30px_-12px_rgba(1,31,45,.6)] sm:-right-6">
+          <span class="grid h-7 w-7 place-items-center rounded-full bg-gold">
+            <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8.5 8.5 0 0 1-12.4 7.6L4 21l1.4-4.3A8.5 8.5 0 1 1 21 12z"/></svg>
+          </span>
+          <span class="text-xs font-semibold">I answer every DM myself</span>
+        </div>
+      </div>
+
+      <div class="reveal" style="transition-delay:.08s">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sky/80"><span class="text-gold">✳</span> Who you'll be talking to</p>
+        <h2 class="mt-6 font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1] tracking-[-0.04em]">
+          Hi, I'm <span class="accent text-gold text-[1.1em] ph">[Your name].</span>
+        </h2>
+        <div class="mt-7 max-w-xl space-y-4 text-lg leading-relaxed text-sky/85">
+          <p>I started YGA after watching creators with real, engaged audiences stall at the same point: plenty of content, nothing to sell. <span class="ph">[One line about you - what you've built, sold or studied that makes you good at this.]</span></p>
+          <p>We're new, so there's no sales team and no account managers. You get me - in your DMs, on your calls and in the build - from the first audit to launch week.</p>
+        </div>
+        <div class="mt-9 flex flex-wrap items-end justify-between gap-6 border-t border-sky/20 pt-6">
+          <div>
+            <p class="accent text-4xl text-paper"><span class="ph">[Your name]</span></p>
+            <p class="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-sky/75">Founder, YGA · <span class="ph">@[yourhandle]</span></p>
+          </div>
+          <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-gold">
+            Say hi on Instagram
+            <span class="btn-dot"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PACKAGES ============ -->
+<section id="pricing" class="scroll-mt-20 bg-white border-y border-ink/10 py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid lg:grid-cols-[1fr_auto] gap-8 items-end reveal">
+      <div class="max-w-3xl">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55"><span class="text-flamedeep">(05)</span> - Ways to work together</p>
+        <h2 class="mt-6 font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1] tracking-[-0.04em]">
+          Three levels of <span class="accent text-flame text-[1.1em]">how far we go.</span>
+        </h2>
+      </div>
+      <p class="max-w-sm text-ink/60 leading-relaxed">
+        Every level has a clear starting price. The deeper we take the build for you, the further the investment climbs -
+        and the faster you get to a product that sells.
+      </p>
+    </div>
+
+    <div class="mt-8 grid gap-5 lg:grid-cols-3 items-stretch">
+
+      <!-- level 1 -->
+      <div id="level-1" data-level="1" class="reveal flex flex-col rounded-[1.75rem] border border-ink/12 bg-paper p-8">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/55">Level 01 · You build</span>
+          <span class="flex gap-1" aria-hidden="true">
+            <span class="h-2.5 w-2.5 rounded-full bg-teal"></span>
+            <span class="h-2.5 w-2.5 rounded-full border border-ink/25"></span>
+            <span class="h-2.5 w-2.5 rounded-full border border-ink/25"></span>
+          </span>
+        </div>
+        <span class="match-tag mt-5 w-max items-center gap-2 rounded-full bg-flame px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink"><span class="h-1.5 w-1.5 rounded-full bg-ink"></span>Your match</span>
+        <h3 class="mt-6 font-display text-3xl font-bold tracking-[-0.035em]">Content Audit</h3>
+        <p class="accent mt-1 text-2xl text-tealdeep">Direction only</p>
+        <p class="mt-3 text-sm text-ink/70 leading-relaxed">Lightest lift. You keep full control of the build - we hand you the map and the confidence to move.</p>
+        <p class="mt-3 font-mono text-xs uppercase tracking-[0.14em] text-ink/75">From <span class="ph font-semibold text-ink">[€ price]</span></p>
+        <ul class="mt-4 divide-y divide-ink/10 border-y border-ink/10 text-[15px] text-ink/80">
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-teal">+</span> Full profile + content review</li>
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-teal">+</span> Audience signal map</li>
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-teal">+</span> 3 product direction options</li>
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-teal">+</span> One walkthrough call</li>
+        </ul>
+        <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener"
+           class="mt-auto pt-6 group inline-flex items-center justify-between font-semibold text-ink">
+          <span class="ulink">Start here</span>
+          <span class="grid h-10 w-10 place-items-center rounded-full border border-ink/20 transition group-hover:bg-teal group-hover:border-teal group-hover:text-white">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <!-- level 2 -->
+      <div id="level-2" data-level="2" class="reveal ring grain mesh-ink relative flex flex-col rounded-[1.75rem] p-8 text-paper shadow-[0_40px_80px_-30px_rgba(2,48,71,.6)] lg:-mt-4 lg:pt-11" style="transition-delay:.06s">
+        <div class="relative z-[2] flex flex-1 flex-col">
+          <div class="flex items-center justify-between gap-3">
+            <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-sky/80">Level 02 · We build with you</span>
+            <span class="flex gap-1" aria-hidden="true">
+              <span class="h-2.5 w-2.5 rounded-full bg-gold"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-gold"></span>
+              <span class="h-2.5 w-2.5 rounded-full border border-sky/40"></span>
+            </span>
+          </div>
+          <div class="absolute -top-[2.7rem] left-0 flex flex-wrap gap-2 lg:-top-[3.2rem]">
+            <span class="inline-flex w-max items-center gap-2 rounded-full bg-gold px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink">
+              <span class="h-1.5 w-1.5 rounded-full bg-ink"></span>Best place to start
+            </span>
+            <span class="match-tag w-max items-center gap-2 rounded-full bg-paper px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink"><span class="h-1.5 w-1.5 rounded-full bg-flame"></span>Your match</span>
+          </div>
+          <h3 class="mt-6 font-display text-3xl font-bold tracking-[-0.035em]">Product Sprint</h3>
+          <p class="accent mt-1 text-2xl text-gold">Direction + build</p>
+          <p class="mt-3 text-sm text-sky/80 leading-relaxed">The middle path: we shape the offer and build alongside you, so it actually ships.</p>
+          <p class="mt-3 font-mono text-xs uppercase tracking-[0.14em] text-sky/80">From <span class="ph font-semibold text-paper">[€ price]</span></p>
+          <ul class="mt-4 divide-y divide-sky/15 border-y border-sky/15 text-[15px] text-paper/90">
+            <li class="flex gap-3 py-[7px]"><span class="font-mono text-gold">+</span> Everything in Content Audit</li>
+            <li class="flex gap-3 py-[7px]"><span class="font-mono text-gold">+</span> Offer positioning, naming &amp; pricing</li>
+            <li class="flex gap-3 py-[7px]"><span class="font-mono text-gold">+</span> Product blueprint &amp; build support</li>
+            <li class="flex gap-3 py-[7px]"><span class="font-mono text-gold">+</span> 7-day launch content plan</li>
+            <li class="flex gap-3 py-[7px]"><span class="font-mono text-gold">+</span> DM &amp; sales scripts</li>
+            <li class="flex gap-3 py-[7px]"><span class="font-mono text-gold">+</span> Weeks of async feedback</li>
+          </ul>
+          <div class="mt-auto pt-6">
+            <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-gold w-full justify-between">
+              DM “GROWTH” to apply
+              <span class="btn-dot"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- level 3 -->
+      <div id="level-3" data-level="3" class="reveal flex flex-col rounded-[1.75rem] border border-ink/12 bg-paper p-8" style="transition-delay:.12s">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-ink/55">Level 03 · We build it for you</span>
+          <span class="flex gap-1" aria-hidden="true">
+            <span class="h-2.5 w-2.5 rounded-full bg-flame"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-flame"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-flame"></span>
+          </span>
+        </div>
+        <span class="match-tag mt-5 w-max items-center gap-2 rounded-full bg-flame px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-ink"><span class="h-1.5 w-1.5 rounded-full bg-ink"></span>Your match</span>
+        <h3 class="mt-6 font-display text-3xl font-bold tracking-[-0.035em]">Done-With-You Launch</h3>
+        <p class="accent mt-1 text-2xl text-flamedeep">Direction + build + launch</p>
+        <p class="mt-3 text-sm text-ink/70 leading-relaxed">The deepest engagement. We carry the build and run the launch with you, week by week.</p>
+        <p class="mt-3 font-mono text-xs uppercase tracking-[0.14em] text-ink/75">From <span class="ph font-semibold text-ink">[€ price]</span></p>
+        <ul class="mt-4 divide-y divide-ink/10 border-y border-ink/10 text-[15px] text-ink/80">
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-flame">+</span> Everything in Product Sprint</li>
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-flame">+</span> Sales page &amp; checkout setup</li>
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-flame">+</span> Weekly 1:1 strategy calls</li>
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-flame">+</span> Launch-week inbox support</li>
+          <li class="flex gap-3 py-[7px]"><span class="font-mono text-flame">+</span> Post-launch optimisation review</li>
+        </ul>
+        <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener"
+           class="mt-auto pt-6 group inline-flex items-center justify-between font-semibold text-ink">
+          <span class="ulink">Talk about your launch</span>
+          <span class="grid h-10 w-10 place-items-center rounded-full border border-ink/20 transition group-hover:bg-flame group-hover:border-flame group-hover:text-ink">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- which level am I? -->
+    <div id="levelQuiz" class="reveal mt-16 grid gap-10 rounded-[1.75rem] border border-ink/12 bg-mist p-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:p-12">
+      <div>
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55">Not sure? · 3 taps</p>
+        <h3 class="mt-5 font-display text-3xl sm:text-4xl font-bold leading-[1] tracking-[-0.04em]">
+          Which level am <span class="accent text-flame text-[1.12em]">I?</span>
+        </h3>
+        <p class="mt-4 max-w-sm text-ink/65 leading-relaxed">
+          Answer three quick questions and we'll point you to the package that fits. Or just tell us your goal in the DMs - nothing more.
+        </p>
+      </div>
+      <div class="min-h-[18rem]" aria-live="polite" data-quiz-body></div>
+    </div>
+    <noscript>
+      <p class="mt-14 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-ink/50">
+        Tell us your goal in the DMs and we'll tell you which level it actually needs - nothing more.
+      </p>
+    </noscript>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" data-anchor="section-bottom" class="scroll-mt-20 py-24 lg:py-32">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="grid lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20">
+      <div class="reveal">
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55"><span class="text-flamedeep">(06)</span> - Questions</p>
+        <h2 class="mt-6 font-display text-4xl sm:text-5xl lg:text-[3.6rem] font-bold leading-[1] tracking-[-0.04em]">Before you <span class="accent text-flame text-[1.1em]">DM.</span></h2>
+      </div>
+
+      <div class="border-t border-ink/15">
+        <details class="group reveal border-b border-ink/15">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-6">
+            <span class="font-display text-xl font-semibold tracking-[-0.02em] transition group-hover:text-tealdeep">What counts as a “digital product”?</span>
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/20 transition duration-300 group-open:rotate-45 group-open:bg-gold group-open:border-gold">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-7 leading-relaxed text-ink/70">Anything that solves one specific problem for a specific person without you being live in the room: templates, toolkits, guides, swipe files, mini-courses, prompts, audits or community memberships.</p>
+        </details>
+
+        <details class="group reveal border-b border-ink/15" style="transition-delay:.05s">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-6">
+            <span class="font-display text-xl font-semibold tracking-[-0.02em] transition group-hover:text-tealdeep">How big does my audience need to be?</span>
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/20 transition duration-300 group-open:rotate-45 group-open:bg-gold group-open:border-gold">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-7 leading-relaxed text-ink/70">Smaller than you think. A few hundred people who trust you and keep asking the same question beats ten thousand passive followers. We check the signal before we commit to anything.</p>
+        </details>
+
+        <details class="group reveal border-b border-ink/15" style="transition-delay:.1s">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-6">
+            <span class="font-display text-xl font-semibold tracking-[-0.02em] transition group-hover:text-tealdeep">How long until I can sell something?</span>
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/20 transition duration-300 group-open:rotate-45 group-open:bg-gold group-open:border-gold">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-7 leading-relaxed text-ink/70">The Sprint is planned to get you to an open cart in about <span class="ph">[three weeks]</span>. The build is fast on purpose - momentum matters more than polish on version one.</p>
+        </details>
+
+        <details class="group reveal border-b border-ink/15" style="transition-delay:.15s">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-6">
+            <span class="font-display text-xl font-semibold tracking-[-0.02em] transition group-hover:text-tealdeep">Do I need a big email list or a website?</span>
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/20 transition duration-300 group-open:rotate-45 group-open:bg-gold group-open:border-gold">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-7 leading-relaxed text-ink/70">No. Instagram DMs and a simple checkout link are enough for your first launch. We'll add the funnel once there's real demand to point it at.</p>
+        </details>
+
+        <details class="group reveal border-b border-ink/15" style="transition-delay:.2s">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-6">
+            <span class="font-display text-xl font-semibold tracking-[-0.02em] transition group-hover:text-tealdeep">Which level do I actually need?</span>
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/20 transition duration-300 group-open:rotate-45 group-open:bg-gold group-open:border-gold">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-7 leading-relaxed text-ink/70">That depends on how much of the build you want off your plate. If you just need clarity, Level 01. If you need it shipped, Level 02. If you want it shipped and sold, Level 03.</p>
+        </details>
+        <details class="group reveal border-b border-ink/15" style="transition-delay:.25s">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-6">
+            <span class="font-display text-xl font-semibold tracking-[-0.02em] transition group-hover:text-tealdeep">You're a new agency - why should I trust you?</span>
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/20 transition duration-300 group-open:rotate-45 group-open:bg-gold group-open:border-gold">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-7 leading-relaxed text-ink/70">Fair question, and we won't dodge it. We don't have a wall of case studies yet, which is exactly why founding creators get a better price and the founders' full attention. You'll talk to the person doing the work, see every step as it happens, and only appear as a case study if you're happy with the result.</p>
+        </details>
+        <details class="group reveal border-b border-ink/15" style="transition-delay:.3s">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-6">
+            <span class="font-display text-xl font-semibold tracking-[-0.02em] transition group-hover:text-tealdeep">What does it cost?</span>
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/20 transition duration-300 group-open:rotate-45 group-open:bg-gold group-open:border-gold">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-7 leading-relaxed text-ink/70">Each level shows a starting price on its card. The final number depends on how much of the build we take on, and we'll confirm it in writing before anything starts - no surprises. Founding creators get <span class="ph">[X]%</span> off any level.</p>
+        </details>
+        <details class="group reveal border-b border-ink/15" style="transition-delay:.35s">
+          <summary class="flex cursor-pointer items-center justify-between gap-6 py-6">
+            <span class="font-display text-xl font-semibold tracking-[-0.02em] transition group-hover:text-tealdeep">What if my product doesn't sell?</span>
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/20 transition duration-300 group-open:rotate-45 group-open:bg-gold group-open:border-gold">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </span>
+          </summary>
+          <p class="max-w-2xl pb-7 leading-relaxed text-ink/70">We can't promise sales - anyone who does is guessing. What we do is validate demand before you build, using your saves, comments and DMs, so you launch something people have already asked for. <span class="ph">[If you offer a guarantee or a free relaunch review, state it here.]</span></p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="grain mesh-ink relative overflow-hidden pt-24 lg:pt-32 text-paper">
+  <div class="relative z-[2] mx-auto max-w-5xl px-5 text-center">
+    <div class="reveal">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">One message away</p>
+      <h2 data-split class="mt-6 font-display text-5xl sm:text-6xl lg:text-[5.5rem] font-extrabold leading-[0.95] tracking-[-0.05em]">
+        Stop guessing.<br />Start <span class="accent text-sunset text-[1.15em] pr-2">building.</span>
+      </h2>
+      <p class="mx-auto mt-6 max-w-xl text-lg text-sky/85 leading-relaxed">
+        Send one word in the DMs and we'll tell you what your audience is already trying to buy from you.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-6">
+        <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-gold">
+          DM us “GROWTH”
+          <span class="btn-dot"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a href="#pricing" class="inline-block py-3 font-semibold text-paper"><span class="ulink">Compare packages</span></a>
+      </div>
+      <p class="mt-4 text-sm text-sky/80">
+        Not on Instagram? <a href="mailto:hello@yourdomain.com" class="inline-block py-2 font-semibold text-paper"><span class="ulink ph">hello@yourdomain.com</span></a>
+      </p>
+
+      <p class="mt-8 font-mono text-[11px] uppercase tracking-[0.14em] text-sky/55">Save this for when you're ready · Share it with a creator who needs to see it</p>
+    </div>
+  </div>
+
+  <!-- the big sunrise -->
+  <div class="relative z-[2] mx-auto mt-16 max-w-5xl px-5">
+    <div class="reveal relative">
+      <!-- rotating badge -->
+      <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" aria-label="DM us GROWTH on Instagram"
+         class="group absolute left-1/2 top-[18%] z-[3] hidden h-32 w-32 -translate-x-1/2 sm:grid place-items-center text-ink">
+        <svg class="spin-slow absolute inset-0 h-full w-full" viewBox="0 0 120 120" aria-hidden="true">
+          <defs><path id="badgeCircle" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/></defs>
+          <text font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" letter-spacing="2" fill="currentColor">
+            <textPath href="#badgeCircle" textLength="292">DM US “GROWTH” ✳ DM US “GROWTH” ✳</textPath>
+          </text>
+        </svg>
+        <span class="grid h-14 w-14 place-items-center rounded-full bg-ink text-gold transition duration-500 group-hover:-rotate-45 group-hover:bg-paper group-hover:text-ink">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <div class="overflow-hidden">
+        <div class="sun-rise mx-auto w-full max-w-3xl"><div class="sun w-full"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="relative z-[2] h-px w-full bg-sky/30"></div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-inkdeep pt-14 overflow-hidden">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-start justify-between gap-10">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="relative block h-5 w-10 overflow-hidden" aria-hidden="true"><span class="sun absolute inset-0 block"></span></span>
+          <span class="font-display text-xl font-extrabold tracking-[-0.04em] text-paper">YGA</span>
+          <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-sky/50">Your Growth Agency</span>
+        </div>
+        <p class="mt-5 max-w-sm text-sky/65">Turning the content you already make into the product you keep <span class="accent text-lg text-gold">putting off.</span></p>
+      </div>
+
+      <div class="flex flex-wrap gap-x-16 gap-y-6 text-sm">
+        <div>
+          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sky/40">Site</p>
+          <a href="#gap" class="block py-1.5 text-sky/80 transition hover:text-gold"><span class="ulink">The gap</span></a>
+          <a href="#process" class="block py-1.5 text-sky/80 transition hover:text-gold"><span class="ulink">How it works</span></a>
+          <a href="#proof" class="block py-1.5 text-sky/80 transition hover:text-gold"><span class="ulink">Founding spots</span></a>
+          <a href="#pricing" class="block py-1.5 text-sky/80 transition hover:text-gold"><span class="ulink">Packages</span></a>
+        </div>
+        <div>
+          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sky/40">Elsewhere</p>
+          <a href="https://instagram.com/yourgrowthagency" target="_blank" rel="noopener" class="inline-flex items-center gap-2 py-1.5 text-sky/80 transition hover:text-gold">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            <span class="ulink">Instagram</span>
+          </a>
+          <a href="mailto:hello@yourdomain.com" class="flex items-center gap-2 py-1.5 text-sky/80 transition hover:text-gold">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+            <span class="ulink ph">hello@yourdomain.com</span>
+          </a>
+        </div>
+        <div>
+          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sky/40">Legal</p>
+          <!-- create privacy.html (and terms if you need them) before publishing -->
+          <a href="privacy.html" class="block py-1.5 text-sky/80 transition hover:text-gold"><span class="ulink">Privacy policy</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-sky/10 pt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-sky/40">
+      <p>© <span id="year">2026</span> YGA - Your Growth Agency. All rights reserved.</p>
+      <p class="ph">[Registered company name · Company ID · Address]</p>
+    </div>
+  </div>
+
+  <!-- giant wordmark -->
+  <p aria-hidden="true" class="select-none text-center font-display font-extrabold leading-[0.78] tracking-[-0.07em] text-[34vw] -mb-[4vw] mt-6"
+     style="background-image:linear-gradient(180deg,rgba(142,202,230,.22) 0%,rgba(142,202,230,0) 80%);-webkit-background-clip:text;background-clip:text;color:transparent;">YGA</p>
+</footer>
+
+<script>
+  (function () {
+    // Guard: run once only. Stops "already declared" errors if the
+    // preview re-executes this script in the same scope.
+    if (document.documentElement.dataset.ygaReady === '1') return;
+    document.documentElement.dataset.ygaReady = '1';
+
+    // year
+    var yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // mobile menu
+    var menuBtn = document.getElementById('menuBtn');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn && mobileMenu) {
+      var menuIcon = menuBtn.querySelector('[data-menu-icon]');
+      function setMenu(open) {
+        mobileMenu.classList.toggle('hidden', !open);
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (menuIcon) menuIcon.setAttribute('d', open ? 'M6 6l12 12M18 6L6 18' : 'M4 9h16M4 15h10');
+      }
+      menuBtn.addEventListener('click', function () {
+        setMenu(mobileMenu.classList.contains('hidden'));
+      });
+      mobileMenu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setMenu(false); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) { setMenu(false); menuBtn.focus(); }
+      });
+    }
+
+    // in-page anchors: scroll in JS so links work in previews/iframes too.
+    // Sections land where their content starts (skipping the big top padding),
+    // just under the sticky header, so as much of the section as possible fits on screen.
+    var header = document.querySelector('header');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function scrollToSection(id) {
+      var target = id === 'top' ? document.body : document.getElementById(id);
+      if (!target) return;
+      var y = 0;
+      if (id !== 'top') {
+        var headerH = header ? header.offsetHeight : 0;
+        var top = target.getBoundingClientRect().top + window.pageYOffset;
+        var pad = parseFloat(getComputedStyle(target).paddingTop) || 0;
+        var gap = Math.min(28, pad);
+        y = top + pad - gap - headerH;
+        var mode = target.getAttribute('data-anchor');
+        if (mode === 'section-top') {
+          // the header sits right where the previous section (the hashtag strip) ends
+          y = top - headerH;
+        } else if (mode === 'section-bottom') {
+          // the section's bottom meets the bottom of the screen, so the next section stays hidden;
+          // never scroll further than the default, so tall sections (phones) still show their start
+          y = Math.min(y, top + target.offsetHeight - window.innerHeight);
+        }
+      }
+      window.scrollTo({ top: Math.max(0, y), behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    window.ygaScrollTo = scrollToSection;
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href').slice(1);
+        if (!id || !(id === 'top' || document.getElementById(id))) return;
+        e.preventDefault();
+        scrollToSection(id);
+      });
+    });
+
+    // highlight the nav link of the section in view
+    var navLinks = document.querySelectorAll('header nav a[href^="#"]');
+    if ('IntersectionObserver' in window && navLinks.length) {
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach(function (a) {
+            a.classList.toggle('is-active', a.getAttribute('href') === '#' + entry.target.id);
+          });
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      ['top', 'gap', 'process', 'proof', 'inside', 'pricing', 'faq'].forEach(function (id) {
+        var s = document.getElementById(id);
+        if (s) spy.observe(s);
+      });
+    }
+
+    // scroll progress
+    var bar = document.getElementById('progressBar');
+    function onScroll() {
+      if (!bar) return;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // reveal on scroll
+    if ('IntersectionObserver' in window) {
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    } else {
+      // fallback: just show everything
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+    }
+
+    // headline reveal: wrap each word in a mask and let it rise in turn
+    function splitWords(el) {
+      var i = 0;
+      function wrap(node) {
+        var mask = document.createElement('span');
+        var inner = document.createElement('span');
+        mask.className = 'split-word';
+        inner.style.transitionDelay = (0.15 + i++ * 0.07) + 's';
+        node.parentNode.insertBefore(mask, node);
+        inner.appendChild(node);
+        mask.appendChild(inner);
+      }
+      function walk(parent) {
+        Array.prototype.slice.call(parent.childNodes).forEach(function (node) {
+          if (node.nodeType === 3) {
+            node.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              var t = document.createTextNode(part);
+              parent.insertBefore(t, node);
+              if (/\S/.test(part)) wrap(t);
+            });
+            parent.removeChild(node);
+          } else if (node.nodeType === 1 && node.tagName !== 'BR') {
+            // gradient text can't be split without losing its fill: move it as one piece
+            if (node.classList.contains('text-sunset')) wrap(node);
+            else walk(node);
+          }
+        });
+      }
+      el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+      walk(el);
+      Array.prototype.forEach.call(el.children, function (c) { c.setAttribute('aria-hidden', 'true'); });
+    }
+    var splitEls = document.querySelectorAll('[data-split]');
+    if (!reduceMotion && splitEls.length) {
+      splitEls.forEach(splitWords);
+      var play = function (el) { requestAnimationFrame(function () { requestAnimationFrame(function () { el.classList.add('is-split'); }); }); };
+      if ('IntersectionObserver' in window) {
+        var splitObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { play(entry.target); splitObserver.unobserve(entry.target); }
+          });
+        }, { threshold: 0.2 });
+        splitEls.forEach(function (el) { splitObserver.observe(el); });
+      } else {
+        splitEls.forEach(play);
+      }
+    }
+
+    // "which level am I?" quiz
+    var quizBody = document.querySelector('[data-quiz-body]');
+    if (quizBody) {
+      var questions = [
+        { q: 'What do you need most right now?', a: ['Clarity on what to sell', 'Help shaping and building it', 'Someone to build and launch it with me'] },
+        { q: 'How much time can you give it each week?', a: ['Plenty - I like doing it myself', 'A few focused hours', 'Barely any'] },
+        { q: 'When do you want to start selling?', a: ['Just exploring for now', 'In the next month or two', 'As soon as possible'] }
+      ];
+      var levels = {
+        1: { name: 'Content Audit', tag: 'Direction only', why: 'You want direction, not a done-for-you build. We hand you the map and you keep full control.' },
+        2: { name: 'Product Sprint', tag: 'Direction + build', why: 'You are ready to build, you just want it shaped properly and shipped with someone in your corner.' },
+        3: { name: 'Done-With-You Launch', tag: 'Direction + build + launch', why: 'You want it built and sold, with us carrying the heavy lifting from blueprint to launch week.' }
+      };
+      var answers = [];
+      var arrow = '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+      function progress(step) {
+        var html = '<div class="flex items-center gap-3"><div class="flex flex-1 gap-1.5">';
+        for (var s = 0; s < questions.length; s++) {
+          html += '<span class="h-1 flex-1 rounded-full ' + (s < step ? 'bg-flame' : s === step ? 'bg-ink' : 'bg-ink/15') + '"></span>';
+        }
+        return html + '</div><span class="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">' +
+          (step < questions.length ? 'Q' + (step + 1) + ' / ' + questions.length : 'Done') + '</span></div>';
+      }
+
+      function pick(level) {
+        document.querySelectorAll('[data-level]').forEach(function (card) {
+          card.classList.toggle('is-picked', card.getAttribute('data-level') === String(level));
+        });
+      }
+
+      function render() {
+        var step = answers.length;
+        if (step < questions.length) {
+          var item = questions[step];
+          var html = '<div class="quiz-step">' + progress(step) +
+            '<p class="mt-7 font-display text-2xl font-semibold tracking-[-0.03em]">' + item.q + '</p><div class="mt-5 space-y-2.5">';
+          item.a.forEach(function (label, idx) {
+            html += '<button type="button" data-answer="' + (idx + 1) + '" class="quiz-opt flex w-full items-center gap-4 rounded-2xl border border-ink/15 bg-white px-4 py-3.5 text-left font-medium">' +
+              '<span class="quiz-key grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink/20 font-mono text-xs transition">' + 'ABC'.charAt(idx) + '</span>' +
+              '<span>' + label + '</span></button>';
+          });
+          html += '</div>' + (step > 0 ? '<button type="button" data-back class="ulink mt-5 font-mono text-[11px] uppercase tracking-[0.16em] text-ink/55">← Back</button>' : '') + '</div>';
+          quizBody.innerHTML = html;
+        } else {
+          // "what do you need" counts double; time and urgency nudge it up or down.
+          // Score runs 4-12: 4-6 = Level 01, 7-9 = Level 02, 10-12 = Level 03
+          var score = answers[0] * 2 + answers[1] + answers[2];
+          var level = score <= 6 ? 1 : score <= 9 ? 2 : 3;
+          var info = levels[level];
+          quizBody.innerHTML = '<div class="quiz-step">' + progress(step) +
+            '<div class="grain mesh-ink mt-7 overflow-hidden rounded-2xl p-7 text-paper">' +
+              '<div class="relative z-[2]">' +
+                '<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-gold">Your match · Level 0' + level + '</p>' +
+                '<p class="mt-3 font-display text-3xl font-bold tracking-[-0.035em]">' + info.name + '</p>' +
+                '<p class="accent text-2xl text-sky">' + info.tag + '</p>' +
+                '<p class="mt-3 max-w-md text-sky/80 leading-relaxed">' + info.why + '</p>' +
+                '<p class="mt-5 rounded-xl border border-sky/25 px-4 py-3 text-sm text-sky/90">DM us <span class="font-mono font-semibold text-gold">GROWTH 0' + level + '</span> and we\'ll skip straight to your level.</p>' +
+                '<div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">' +
+                  '<a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-gold">DM “GROWTH 0' + level + '”<span class="btn-dot">' + arrow + '</span></a>' +
+                  '<button type="button" data-see="' + level + '" class="py-3 font-semibold text-paper"><span class="ulink">See the package</span></button>' +
+                  '<button type="button" data-restart class="py-3 font-semibold text-sky/80"><span class="ulink">Start over</span></button>' +
+                '</div>' +
+              '</div>' +
+            '</div></div>';
+          pick(level);
+        }
+      }
+
+      quizBody.addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        if (btn.hasAttribute('data-answer')) answers.push(parseInt(btn.getAttribute('data-answer'), 10));
+        else if (btn.hasAttribute('data-back')) answers.pop();
+        else if (btn.hasAttribute('data-restart')) { answers = []; pick(0); }
+        else if (btn.hasAttribute('data-see')) {
+          var card = document.getElementById('level-' + btn.getAttribute('data-see'));
+          if (card) {
+            var y = card.getBoundingClientRect().top + window.pageYOffset - (header ? header.offsetHeight : 0) - 32;
+            window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+          }
+          return;
+        }
+        render();
+      });
+      render();
+    }
+
+    // close other FAQs when one opens
+    var details = document.querySelectorAll('#faq details');
+    details.forEach(function (d) {
+      d.addEventListener('toggle', function () {
+        if (d.open) details.forEach(function (o) { if (o !== d) o.open = false; });
+      });
+    });
+  })();
+</script>
+</body>
+</html>
