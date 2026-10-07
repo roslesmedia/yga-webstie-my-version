@@ -277,6 +277,7 @@ function createStage(canvas){
       part(root,[0,-1.95,2.14],[7.45,.09,.09],'gold');
       const ribs=mobile?4:7,step=4.26/(ribs-1);
       for(let i=0;i<ribs;i++)part(root,[-2.13+i*step,-1.70,-.7],[.028,.020,1.75],'gold');
+      part(root,[0,2.60,.16],[5.30,1.02,.08],'bone',null,M.slab);part(root,[0,2.06,.17],[5.30,.05,.07],'gold',null,M.slab);
       letter(root,-1.45,2.6,'Y');letter(root,0,2.6,'G');letter(root,1.52,2.6,'A');
       /* laptop: the guide product page */
       const lap=mul(root,transform([-.35,-1.64,1.05],[0,-.13,0]));
@@ -456,7 +457,7 @@ function createStage(canvas){
     }}
   };
   function letter(parent,x,y,type){
-    const L=mul(parent,transform([x,y,1.0],[0,0,0],[.7,.7,.7])),part=(P,p,s,m,r)=>draw(M.bar,mul(P,transform(p,r||[0,0,0],s)),'forest');
+    const L=mul(parent,transform([x,y,.33],[0,0,0],[.62,.62,.62])),part=(P,p,s,m,r)=>draw(M.bar,mul(P,transform(p,r||[0,0,0],s)),'forest');
     if(type==='Y'){part(L,[-.38,.3,0],[.38,1.12,.36],'forest',[0,0,.55]);part(L,[.38,.3,0],[.38,1.12,.36],'forest',[0,0,-.55]);part(L,[0,-.47,0],[.39,.9,.36],'forest');}
     if(type==='G'){part(L,[-.58,0,0],[.35,1.75,.36],'forest');part(L,[0,.7,0],[1.3,.35,.36],'forest');part(L,[0,-.7,0],[1.3,.35,.36],'forest');part(L,[.5,-.32,0],[.35,.9,.36],'forest');part(L,[.33,.06,0],[.65,.33,.36],'forest');}
     if(type==='A'){part(L,[-.38,0,0],[.37,1.9,.36],'forest',[0,0,-.32]);part(L,[.38,0,0],[.37,1.9,.36],'forest',[0,0,.32]);part(L,[0,-.18,0],[.8,.3,.36],'forest');}
