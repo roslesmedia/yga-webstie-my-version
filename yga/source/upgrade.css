@@ -39,9 +39,8 @@ p { text-wrap: pretty; }
 
 /* ---------- Grain: breaks the digital flatness of the gradients ---------- */
 .yga-grain {
-  position: fixed; inset: -50%; z-index: 80; pointer-events: none; opacity: .07;
+  position: fixed; inset: 0; z-index: 80; pointer-events: none; opacity: .045;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .38 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  mix-blend-mode: overlay;
 }
 
 /* ---------- Scroll progress hairline ---------- */
@@ -117,6 +116,7 @@ p { text-wrap: pretty; }
 /* Navigation hides while reading down, returns on the way up */
 .navigation { transition: height .3s, background .3s, backdrop-filter .3s, translate .6s var(--ease-out-expo); }
 .navigation[data-yga-hidden] { translate: 0 -110%; }
+.navigation[data-yga-hidden]:focus-within { translate: none; }
 
 /* Product cards: lift + warmer light on hover */
 .product-card .product-art { transition: transform .2s ease-out, box-shadow .6s var(--ease-out-expo); }
@@ -139,14 +139,14 @@ p { text-wrap: pretty; }
 .result-pillars p { position: relative; }
 
 /* Intro curtain: wordmark rises, gold line draws, curtain lifts */
-.page-intro { animation: yga-curtain 1.05s .95s var(--ease-in-out-quint) forwards; clip-path: inset(0 0 0 0); }
+.page-intro { animation: yga-curtain .95s .5s var(--ease-in-out-quint) forwards; clip-path: inset(0 0 0 0); }
 .page-intro span { display: block; animation: yga-rise 1s .05s var(--ease-out-expo) both; }
-.page-intro i { animation: intro-line .9s .35s var(--ease-out-expo) both; }
+.page-intro i { animation: intro-line .7s .15s var(--ease-out-expo) both; }
 @keyframes yga-curtain { to { clip-path: inset(0 0 100% 0); visibility: hidden; } }
 @keyframes yga-rise { from { opacity: 0; translate: 0 40%; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
 
 @media (prefers-reduced-motion: no-preference) {
-  .hero-environment { animation: yga-arrive 2.6s .9s var(--ease-out-expo) both, yga-drift 28s 3.5s ease-in-out infinite alternate; }
+  .hero-environment { animation: yga-arrive 2.4s .45s var(--ease-out-expo) both, yga-drift 28s 3.5s ease-in-out infinite alternate; }
   .hero-environment::after { animation: yga-sun 9s ease-in-out infinite alternate; }
   .hero-environment::before { animation: yga-rays 16s ease-in-out infinite alternate; }
   .process-environment, .partnership-environment, .results-environment { animation: yga-drift 32s ease-in-out infinite alternate; }
@@ -180,9 +180,10 @@ p { text-wrap: pretty; }
 @keyframes yga-float { from { translate: 0 -6px; } to { translate: 0 8px; } }
 @keyframes yga-cue { 0% { transform: translateY(-4px); opacity: 0; } 35% { opacity: 1; } 100% { transform: translateY(8px); opacity: 0; } }
 @keyframes yga-breathe { 0%, 100% { box-shadow: 0 0 0 0 #dfb57800; } 50% { box-shadow: 0 0 0 3px #dfb57826; } }
-@keyframes yga-grain { 0% { translate: 0 0; } 20% { translate: -4% 3%; } 40% { translate: 3% -5%; } 60% { translate: -6% -2%; } 80% { translate: 5% 4%; } 100% { translate: 0 0; } }
+@keyframes yga-grain { 0% { background-position: 0 0; } 20% { background-position: -37px 23px; } 40% { background-position: 29px -51px; } 60% { background-position: -63px -17px; } 80% { background-position: 47px 41px; } 100% { background-position: 0 0; } }
 
 @media (max-width: 899px) {
+  .yga-grain { display: none; }
   .hero h1 { font-size: clamp(36px, 9.6vw, 64px); }
   .hero-environment::after { width: 120vw; height: 120vw; right: -40%; }
 }
@@ -195,3 +196,7 @@ p { text-wrap: pretty; }
 
 /* The results ribbon passes behind the heading; keep the type legible over the gold */
 .results h2 { text-shadow: 0 2px 22px #03150fcc, 0 0 2px #03150f88; }
+
+/* Small serif inside the product mockups: heavier cut so it stays readable */
+.course-caption, .tablet-header > b, .book-bottom b, .book-title, .resource-tile b, .resource-tile em,
+.resource-tile--photo, .worksheet > b { font-weight: 600; }

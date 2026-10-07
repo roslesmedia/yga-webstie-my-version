@@ -31,7 +31,7 @@
     ST.create({
       start: 0, end: 'max',
       onUpdate(self) {
-        const hide = self.direction === 1 && self.scroll() > 520 && !nav.classList.contains('menu-open');
+        const hide = self.direction === 1 && self.scroll() > 520 && !nav.classList.contains('menu-open') && !nav.contains(document.activeElement);
         nav.toggleAttribute('data-yga-hidden', hide);
       },
     });
@@ -63,8 +63,8 @@
     [['.process-environment', '.process-section', 'top 35%'], ['.partnership-environment', '.partnership', 'top 40%'], ['.results-environment', '.results', 'top 72%']]
       .forEach(([env, sec, end]) => {
         gsap.fromTo(env,
-          { clipPath: 'inset(9% 7% 9% 7% round 36px)', filter: 'brightness(.6) saturate(.7)' },
-          { clipPath: 'inset(0% 0% 0% 0% round 0px)', filter: 'brightness(1) saturate(1)', ease: 'none',
+          { clipPath: 'inset(9% 7% 9% 7% round 36px)' },
+          { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none',
             scrollTrigger: { trigger: sec, start: 'top bottom', end, scrub: .6 } });
       });
 
@@ -76,7 +76,13 @@
     const reveal = (targets, vars, trigger, start = 'top 86%') => {
       const els = typeof targets === 'string' ? $$(targets) : targets;
       if (!els.length) return;
-      gsap.fromTo(els, vars.from, { ...vars.to, scrollTrigger: { trigger: trigger || els[0], start, once: true } });
+      gsap.fromTo(els, vars.from, {
+        ...vars.to,
+        clearProps: vars.to.clearProps || 'transform,opacity',
+        onStart() { els.forEach(e => { e.style.transition = 'none'; }); },
+        onComplete() { els.forEach(e => { e.style.transition = ''; }); },
+        scrollTrigger: { trigger: trigger || els[0], start, once: true },
+      });
     };
     $$('.process-heading h2, .products-heading-group h2, .partnership-copy h2, .demand-copy h2, .evidence h2, .results h2').forEach(h => {
       reveal([h], {
@@ -86,30 +92,31 @@
     });
     $$('main .eyebrow, .products-eyebrow, .demand-eyebrow').forEach(e => {
       if (e.closest('.hero')) return;
-      reveal([e], { from: { opacity: 0, x: -18 }, to: { opacity: 1, x: 0, duration: 1, ease: 'power3.out', clearProps: 'transform' } });
+      reveal([e], { from: { opacity: 0, x: -18 }, to: { opacity: 1, x: 0, duration: 1, ease: 'power3.out', clearProps: 'transform,opacity' } });
     });
     $$('.process-intro, .products-intro, .partnership-copy > p:last-child, .demand-description, .demand-cta, .demand-signals, .demand-progression')
-      .forEach((p, i) => reveal([p], { from: { opacity: 0, y: 22 }, to: { opacity: 1, y: 0, duration: 1.1, delay: .12, ease: 'power3.out', clearProps: 'transform' } }));
+      .forEach((p, i) => reveal([p], { from: { opacity: 0, y: 22 }, to: { opacity: 1, y: 0, duration: 1.1, delay: .12, ease: 'power3.out', clearProps: 'transform,opacity' } }));
 
     // Process steps cascade
-    reveal('.process-detail li', { from: { opacity: 0, x: 26 }, to: { opacity: 1, x: 0, duration: 1, stagger: .1, ease: 'power3.out', clearProps: 'transform' } }, '.process-detail');
-    reveal('.process-heading .button', { from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0, duration: .9, ease: 'power3.out', clearProps: 'transform' } }, '.process-section', 'top 55%');
+    reveal('.process-detail li', { from: { opacity: 0, x: 26 }, to: { opacity: 1, x: 0, duration: 1, stagger: .1, ease: 'power3.out', clearProps: 'transform,opacity' } }, '.process-detail');
+    reveal('.process-heading .button', { from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0, duration: .9, ease: 'power3.out', clearProps: 'transform,opacity' } }, '.process-section', 'top 55%');
 
     // Product cards: staggered rise, the artwork wipes open from below
     const items = $$('.product-item');
-    gsap.fromTo(items, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, stagger: .09, ease: 'expo.out', clearProps: 'transform',
+    gsap.fromTo(items, { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, stagger: .09, ease: 'expo.out', clearProps: 'transform,opacity',
       scrollTrigger: { trigger: '.products-track', start: 'top 88%', once: true } });
     gsap.fromTo($$('.products-track .product-art'), { clipPath: 'inset(22% 0% 0% 0% round 9px)' }, { clipPath: 'inset(0% 0% 0% 0% round 9px)', duration: 1.5, stagger: .09, ease: 'expo.out', clearProps: 'clipPath',
       scrollTrigger: { trigger: '.products-track', start: 'top 88%', once: true } });
     // Carousel: a short slide that follows the arrow direction
+    const wide = matchMedia('(min-width: 900px)');
     $$('.products-controls button').forEach((b, i) => b.addEventListener('click', () => {
-      requestAnimationFrame(() => gsap.fromTo($$('.product-item'), { x: i ? 46 : -46, opacity: .25 }, { x: 0, opacity: 1, duration: .9, stagger: .05, ease: 'expo.out', clearProps: 'transform,opacity' }));
+      if (!wide.matches) return; // mobile uses native scroll-snap; don't fight it
+      requestAnimationFrame(() => gsap.fromTo($$('.product-item'), { x: i ? 46 : -46, opacity: .25 }, { x: 0, opacity: 1, duration: .9, stagger: .05, ease: 'expo.out', overwrite: 'auto', clearProps: 'transform,opacity' }));
     }));
 
     // Partnership: card arrives, light follows the pointer across the glass
-    reveal('.partnership-visual', { from: { y: 70, opacity: 0, scale: .96 }, to: { y: 0, opacity: 1, scale: 1, duration: 1.4, ease: 'expo.out', clearProps: 'transform' } }, '.partnership', 'top 75%');
+    reveal('.partnership-visual', { from: { y: 70, opacity: 0, scale: .96 }, to: { y: 0, opacity: 1, scale: 1, duration: 1.4, ease: 'expo.out', clearProps: 'transform,opacity' } }, '.partnership', 'top 75%');
     reveal('.partnership-side-note', { from: { opacity: 0, y: 14 }, to: { opacity: 1, y: 0, duration: 1, delay: .4 } }, '.partnership', 'top 70%');
-    reveal('.growth-bars i', { from: { scaleY: 0, transformOrigin: '50% 100%' }, to: { scaleY: 1, duration: 1, stagger: .12, ease: 'back.out(2)', clearProps: 'transform' } }, '.partnership', 'top 70%');
     const card = $('.partnership-card');
     if (card && fine) card.addEventListener('pointermove', e => {
       const r = card.getBoundingClientRect();
@@ -119,7 +126,7 @@
 
     // Evidence: steps light up one after another
     const steps = $$('.evidence-step');
-    gsap.fromTo(steps, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, stagger: .12, ease: 'expo.out', clearProps: 'transform',
+    gsap.fromTo(steps, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, stagger: .12, ease: 'expo.out', clearProps: 'transform,opacity',
       scrollTrigger: { trigger: '.evidence', start: 'top 85%', once: true,
         onEnter: () => steps.forEach((s, i) => setTimeout(() => s.classList.add('is-lit'), 500 + i * 260)) } });
 
@@ -127,11 +134,11 @@
     const ribbon = $('.results-ribbon');
     if (ribbon) ST.create({ trigger: '.results', start: 'top bottom', end: 'bottom top', scrub: true,
       onUpdate: s => { ribbon.style.rotate = `${(-7 + s.progress * 14).toFixed(2)}deg`; ribbon.style.translate = `0 ${(s.progress * 60 - 30).toFixed(1)}px`; } });
-    reveal('.result-pillars p', { from: { opacity: 0, y: 26 }, to: { opacity: 1, y: 0, duration: 1, stagger: .12, ease: 'power3.out', clearProps: 'transform' } }, '.results', 'top 80%');
-    reveal('.results > .button', { from: { opacity: 0, scale: .9 }, to: { opacity: 1, scale: 1, duration: .9, delay: .4, ease: 'back.out(1.6)', clearProps: 'transform' } }, '.results', 'top 80%');
+    reveal('.result-pillars p', { from: { opacity: 0, y: 26 }, to: { opacity: 1, y: 0, duration: 1, stagger: .12, ease: 'power3.out', clearProps: 'transform,opacity' } }, '.results', 'top 80%');
+    reveal('.results > .button', { from: { opacity: 0, scale: .9 }, to: { opacity: 1, scale: 1, duration: .9, delay: .4, ease: 'back.out(1.6)', clearProps: 'transform,opacity' } }, '.results', 'top 80%');
 
     // Footer settles in
-    reveal('.footer-top > *', { from: { opacity: 0, y: 18 }, to: { opacity: 1, y: 0, duration: 1, stagger: .07, ease: 'power3.out', clearProps: 'transform' } }, '.footer', 'top 92%');
+    reveal('.footer-top > *', { from: { opacity: 0, y: 18 }, to: { opacity: 1, y: 0, duration: 1, stagger: .07, ease: 'power3.out', clearProps: 'transform,opacity' } }, '.footer', 'top 92%');
 
     // ---- Magnetic buttons (pointer devices only)
     if (fine) {
