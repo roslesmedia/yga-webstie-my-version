@@ -16,7 +16,7 @@ function normalMatrix(m){const a=[m[0],m[1],m[2]],b=[m[4],m[5],m[6]],c=[m[8],m[9
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const ss=(e0,e1,x)=>{const t=clamp((x-e0)/(e1-e0||1),0,1);return t*t*(3-2*t);};
 const lerp=(a,b,t)=>a+(b-a)*t;
-const lerpA=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
+const lerpA=(a,b,t)=>typeof a==='number'?a+(b-a)*t:Array.from(a,(v,i)=>v+(b[i]-v)*t);
 const PI=Math.PI, H=PI/2;
 
 /* ---- 2. geometry: four primitives, flat per-face normals -------------------- */
@@ -68,7 +68,7 @@ const TONE={
 };
 const MAT={
   pine  :{d:'pineDeep',m:'pine',   l:'gold',    s:.62,k:.10,r:'gold',  rk:.26},
-  forest:{d:'pine',    m:'forest', l:'goldLo',  s:.60,k:.06,r:'gold',  rk:.24},
+  forest:{d:'pine',    m:'forest', l:'goldLo',  s:.56,k:.06,r:'gold',  rk:.30},
   gold  :{d:'bronze',  m:'goldLo', l:'goldHi',  s:.46,k:.85,r:'forest',rk:.26},
   bone  :{d:'boneLo',  m:'bone',   l:'boneHi',  s:.52,k:.00,r:'forest',rk:.46},
   almond:{d:'almondLo',m:'almond', l:'boneHi',  s:.55,k:.00,r:'forest',rk:.42},
@@ -249,8 +249,8 @@ function createStage(canvas){
   const disc=(root,y,r,mat='bone')=>{draw(M.cyl,mul(root,transform([0,y,0],[0,0,0],[r,.24,r])),mat);draw(M.cyl,mul(root,transform([0,y-.17,0],[0,0,0],[r*.91,.16,r*.91])),'forest');};
   /* 7-bar numeral table: a top, b top-right, c bottom-right, d bottom, e bottom-left, f top-left, g middle */
   const DIG=['abcdef','bc','abged','abgcd','fgbc','afgcd','afgedc','abc','abcdefg','abcdfg'];
-  const BAR={a:[0,1.24,1.56,.42,0],d:[0,-1.24,1.56,.42,0],g:[0,0,1.56,.42,0],
-    f:[-.57,.62,.42,1.66,1],b:[.57,.62,.42,1.66,1],e:[-.57,-.62,.42,1.66,1],c:[.57,-.62,.42,1.66,1]};
+  const BAR={a:[0,1.22,1.78,.46,0],d:[0,-1.22,1.78,.46,0],g:[0,0,1.78,.46,0],
+    f:[-.66,.61,.46,1.68,1],b:[.66,.61,.46,1.68,1],e:[-.66,-.61,.46,1.68,1],c:[.66,-.61,.46,1.68,1]};
 
   /* ---- 6. the cast ---------------------------------------------------------- */
   const OBJ={
@@ -260,7 +260,7 @@ function createStage(canvas){
     build(c){
       const{root,p,bob,mobile}=c,mode=clamp(p*2,0,2),launch=clamp(mode-1,0,1);
       ground(root,-2.19,[1,1],[0,0],[20,13]);
-      draw(M.ring,mul(root,transform([0,-1.9+launch*3.0,-2.75],[.06,0,0],[7.4,7.4,.17])),'gold');
+      if(launch>.01)draw(M.ring,mul(root,transform([0,-6.2+launch*7.3,-2.75],[.06,0,0],[7.4,7.4,.17])),'gold');
       /* Pine arch, Gold reveal, Bone aperture */
       part(root,[-3.12,.18,-.65],[.86,4.45,1.55],'pine',[0,0,-.04],M.bar);
       part(root,[3.12,.18,-.65],[.86,4.45,1.55],'pine',[0,0,.04],M.bar);
@@ -324,10 +324,10 @@ function createStage(canvas){
     cam:p=>({eye:[3.1-p*.5,3.5-p*.5,8.6-p*.6],target:[.15,-.45+p*.35,0],fov:.56}),
     build(c){
       const{root,p}=c,s=clamp(p*6,0,6)-.5,i0=clamp(Math.floor(s),0,4),f=ss(.18,.82,clamp(s-i0,0,1));
-      const K=list=>typeof list[0]==="number"?lerp(list[i0],list[i0+1],f):lerpA(list[i0],list[i0+1],f);
+      const K=list=>lerpA(list[i0],list[i0+1],f);
       ground(root,-1.53,[.95,.85]);
-      part(root,[0,-1.30,0],[6.8,.22,3.4],'bone',null,M.slab);
-      part(root,[0,-1.45,.02],[6.5,.14,3.2],'forest',null,M.slab);
+      part(root,[0,-1.30,0],[6.8,.22,3.4],c.dark?'forest':'bone',null,M.slab);
+      part(root,[0,-1.45,.02],[6.5,.14,3.2],c.dark?'pine':'forest',null,M.slab);
       part(root,[0,-1.22,1.70],[6.8,.07,.07],'gold');
       /* present: the whole case pivots on its front edge toward the camera */
       const pr=K([0,0,0,0,0,1]),pv=[0,-1.19,1.17];
@@ -362,12 +362,12 @@ function createStage(canvas){
     }},
 
   kit:{fog:[11,28],fit:1,
-    cam:p=>({eye:[3.0,2.9-p*.5,7.4],target:[0,-.2,0],fov:.54}),
+    cam:p=>({eye:[2.9,2.8-p*.5,6.9],target:[0,-.45,0],fov:.54}),
     build(c){
-      const{root,p,bob}=c,n=ss(.12,.80,p);
-      ground(root,-1.69,[.62,.95]);
-      disc(root,-1.44,4.6);
-      const L=[['pine',2.30,1.65,.34],['bone',2.10,1.50,.26],['gold',1.92,1.36,.14],['almond',1.74,1.22,.20]];
+      const{root,p}=c,n=ss(.08,.56,p);
+      ground(root,-1.69,[.5,.75]);
+      disc(root,-1.44,3.3);
+      const L=[['pine',2.9,2.1,.46],['bone',2.66,1.92,.36],['gold',2.44,1.74,.20],['almond',2.22,1.56,.30]];
       let y=-1.32;
       L.forEach((s,i)=>{
         const spread=(1-n)*(1.55-i*.30),yaw=-.22+(1-n)*(.30-i*.14);
@@ -375,12 +375,12 @@ function createStage(canvas){
         y+=s[3]*n+(1-n)*.3;
       });
       if(n>.55){const b=ss(.55,1,n),G=mul(root,transform([0,-1.32,0],[0,-.22,0]));
-        part(G,[0,.47,0],[.30,1.0,1.70*b+.04],'gold',null,M.slab);
-        part(G,[0,.62,.89*b],[.40,.40,.08],'gold');}
+        part(G,[-.45,.67,0],[.34,1.40,2.16*b+.04],'gold',null,M.slab);
+        part(G,[-.45,.86,1.12*b],[.48,.48,.08],'gold');}
     }},
 
   tiers:{fog:[12,30],fit:1.3,
-    cam:()=>({eye:[2.6,2.8,8.6],target:[0,-.3,0],fov:.52}),
+    cam:()=>({eye:[2.4,3.0,10.4],target:[0,-.25,0],fov:.52}),
     build(c){
       const{root,p,variant}=c,pick=variant|0;
       ground(root,-1.84,[1,.75]);
@@ -399,24 +399,25 @@ function createStage(canvas){
     }},
 
   digit:{fog:[10,26],fit:.9,
-    cam:p=>({eye:[2.2,1.7,7.6-p*.4],target:[0,-.35,0],fov:.52}),
+    cam:p=>({eye:[1.5,1.25,9.0-p*.4],target:[0,-.30,0],fov:.52}),
     build(c){
       const{root,p,variant}=c,on=ss(0,.6,p),d=DIG[clamp(parseInt(variant,10)||0,0,9)];
       ground(root,-2.24,[.55,.8]);
       disc(root,-2.00,4.0);
-      draw(M.thin,mul(root,transform([0,-.18,-.62],[0,0,0],[3.7,3.7,.14])),'gold');
-      const g=mul(root,transform([0,-.18-(1-on)*1.4,0],[0,-.26+(1-on)*.30,0]));
-      part(g,[0,0,-.38],[2.40,3.40,.10],'forest',null,M.slab);
-      for(const k of d){const b=BAR[k];part(g,[b[0],b[1],b[4]?-.04:0],[b[2],b[3],b[4]?.52:.62],'pine',null,M.bar);}
+      draw(M.thin,mul(root,transform([0,-.18,-.62],[0,0,0],[4.3,4.3,.14])),'gold');
+      const g=mul(root,transform([0,-.18-(1-on)*1.4,0],[0,-.12+(1-on)*.30,0]));
+      part(g,[0,0,-.28],[1.90,2.80,.12],'forest',null,M.slab);
+      for(const k of d){const b=BAR[k];part(g,[b[0],b[1],b[4]?-.03:0],[b[2],b[3],b[4]?.40:.46],'pine',null,M.bar);}
+      if(d==='abcdef')part(g,[0,0,.02],[.26,1.9,.30],'gold',[0,0,-.42],M.bar);
     }},
 
   launch:{fog:[12,32],fit:1,idle:1,
-    cam:p=>({eye:[2.4,2.0,9.0-p*1.0],target:[.1,.15+p*.3,0],fov:.54}),
+    cam:p=>({eye:[2.3,1.9,13.2-p*.6],target:[.25,.05+p*.15,-.4],fov:.54}),
     build(c){
       const{root,p,bob}=c,go=ss(.08,.75,p);
       ground(root,-2.26,[.6,.9]);
       disc(root,-2.00,4.4);
-      draw(M.thin,mul(root,transform([0,.25,-1.9],[.05,0,0],[5.8,5.8,.16])),'gold');
+      draw(M.thin,mul(root,transform([0,.05,-1.9],[.05,0,0],[5.0,5.0,.16])),'gold');
       part(root,[0,-1.57,0],[2.60,.62,2.60],'pine',[0,-.22,0],M.bar);
       part(root,[0,-1.22,0],[2.20,.10,2.20],'gold',[0,-.22,0],M.slab);
       const a=mul(root,transform([-.2+go*.45,-1.05+go*1.25+bob*.5,.2],[0,-.30,-.7854]));
@@ -425,8 +426,8 @@ function createStage(canvas){
       part(a,[0,-1.0,0],[.62,.18,.62],'forest',null,M.slab);
     }},
 
-  card:{fog:[8,22],fit:.78,
-    cam:()=>({eye:[0,.8,7.4],target:[0,-.25,0],fov:.56}),
+  card:{fog:[8,22],fit:.86,
+    cam:()=>({eye:[0,.8,7.6],target:[0,-.32,0],fov:.56}),
     build(c){
       const{root,p,variant}=c,on=ss(0,.45,p),v=clamp(variant|0,0,2);
       ground(root,-2.06,[.45,.35]);
@@ -455,7 +456,7 @@ function createStage(canvas){
     }}
   };
   function letter(parent,x,y,type){
-    const L=mul(parent,transform([x,y,.96],[0,0,0],[.7,.7,.7]));
+    const L=mul(parent,transform([x,y,1.0],[0,0,0],[.7,.7,.7])),part=(P,p,s,m,r)=>draw(M.bar,mul(P,transform(p,r||[0,0,0],s)),'forest');
     if(type==='Y'){part(L,[-.38,.3,0],[.38,1.12,.36],'forest',[0,0,.55]);part(L,[.38,.3,0],[.38,1.12,.36],'forest',[0,0,-.55]);part(L,[0,-.47,0],[.39,.9,.36],'forest');}
     if(type==='G'){part(L,[-.58,0,0],[.35,1.75,.36],'forest');part(L,[0,.7,0],[1.3,.35,.36],'forest');part(L,[0,-.7,0],[1.3,.35,.36],'forest');part(L,[.5,-.32,0],[.35,.9,.36],'forest');part(L,[.33,.06,0],[.65,.33,.36],'forest');}
     if(type==='A'){part(L,[-.38,0,0],[.37,1.9,.36],'forest',[0,0,-.32]);part(L,[.38,0,0],[.37,1.9,.36],'forest',[0,0,.32]);part(L,[0,-.18,0],[.8,.3,.36],'forest');}
@@ -469,18 +470,20 @@ function createStage(canvas){
   const anchors=[];
   const BG={deep:hex('#002416'),pine:hex('#00311F'),almond:hex('#F9E9DA'),beige:hex('#FFF7E6')};
   function backdrop(el){
+    for(let n=el;n&&n.nodeType===1;n=n.parentElement){
+      const m=getComputedStyle(n).backgroundColor.match(/[\d.]+/g);
+      if(m&&m.length>=3&&(m.length<4||+m[3]>.5))return m.slice(0,3).map(v=>v/255);
+      if(n.hasAttribute('data-section'))break;}
     if(el.closest('.inv-deep'))return BG.deep;
     if(el.closest('.inv'))return BG.pine;
     if(el.closest('#inside'))return BG.almond;
-    const s=el.closest('[data-section]');
-    if(s){const m=getComputedStyle(s).backgroundColor.match(/[\d.]+/g);if(m&&m.length>=3&&(m.length<4||+m[3]>.5))return m.slice(0,3).map(v=>v/255);}
     return BG.beige;
   }
   function tint(a){
     a.bg=backdrop(a.el);
     const lum=.2126*a.bg[0]+.7152*a.bg[1]+.0722*a.bg[2];
     /* light ground: warm green-grey pool; dark ground: the section colour, deeper */
-    a.shade=lum<.35?a.bg.map(v=>v*.18):TONE.boneLo;
+    a.dark=lum<.35;a.shade=a.dark?a.bg.map(v=>v*.18):TONE.boneLo;
   }
   const io=new IntersectionObserver(entries=>{
     for(const e of entries){const a=anchors.find(x=>x.el===e.target);if(a&&a.near!==e.isIntersecting){a.near=e.isIntersecting;live+=a.near?1:-1;}}
@@ -549,7 +552,7 @@ function createStage(canvas){
       const enter=still?1:ss(0,.18,a.v),exit=still?1:1-ss(.9,1,a.v);
       const away=(1-enter)*16+(1-exit)*12;
       const root=mul(transform([0,0,-away]),transform([0,-.1,0],[a.pitch,-.18+a.yaw,0]));
-      D.build({root,p:a.p,enter,exit,t,bob:(!still&&D.idle)?Math.sin(t*.8+a.idx)*.055:0,mobile,variant:a.variant});
+      D.build({root,p:a.p,enter,exit,t,bob:(!still&&D.idle)?Math.sin(t*.8+a.idx)*.055:0,mobile,variant:a.variant,dark:a.dark});
       drawn++;
     }
     if(!settled||(idle&&!still))frame=requestAnimationFrame(render);

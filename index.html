@@ -277,8 +277,8 @@ html.no-gl:not(.gl) .gl-fallback{visibility:visible}
 .fb-gold{left:22%;top:12%}
 .fb-pine{left:22%;top:12%;background:var(--pine);color:var(--gold);box-shadow:inset 6px 0 0 rgba(229,198,144,.18),var(--sh-gold-s)}
 .fb-bone{left:22%;top:12%;background:var(--bone);color:var(--pine);box-shadow:inset 6px 0 0 rgba(0,49,31,.1),var(--sh-pine-s)}
-.fb-chip{position:absolute;background:var(--beige);border:1px solid var(--line-strong);padding:9px 12px;font:700 11px/1 var(--ff-label);text-transform:uppercase;letter-spacing:.1em;box-shadow:var(--sh-float)}
-.fb-chip-a{right:4%;top:14%;transform:rotate(4deg)}
+.fb-chip{position:absolute;white-space:nowrap;background:var(--beige);border:1px solid var(--line-strong);padding:9px 12px;font:700 11px/1 var(--ff-label);text-transform:uppercase;letter-spacing:.1em;box-shadow:var(--sh-float)}
+.fb-chip-a{left:38%;top:30%;transform:rotate(4deg)}
 .fb-chip-b{right:12%;bottom:12%;transform:rotate(-3deg);background:var(--pine);color:var(--gold);border-color:var(--pine)}
 .fb-cube{position:absolute;inset:18%;transform-style:preserve-3d;transform:rotateX(-24deg) rotateY(-36deg)}
 .fb-cube i{position:absolute;inset:0}
@@ -360,7 +360,7 @@ html.no-gl:not(.gl) .gl-fallback{visibility:visible}
 .gap-card h3{font-size:22px;margin:auto 0 12px}
 .gap-card p{font-size:var(--fs-sm);line-height:1.55}
 .gap-num{font-size:84px;line-height:.8;color:var(--gold-ink);margin-bottom:var(--s6)}
-.gap-card-fix{border-color:var(--pine);box-shadow:var(--sh-gold-m)}
+.gap-card-fix{background:var(--pine);color:var(--beige);border-color:var(--pine);box-shadow:var(--sh-gold-m)}
 .gap-card-fix .gap-num{color:var(--gold)}
 .gap-card-fix .badge{position:absolute;top:-14px;right:20px;transform:rotate(3deg)}
 .gap-card-fix:hover{box-shadow:20px 18px 0 var(--gold)}
@@ -2428,7 +2428,7 @@ function normalMatrix(m){const a=[m[0],m[1],m[2]],b=[m[4],m[5],m[6]],c=[m[8],m[9
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const ss=(e0,e1,x)=>{const t=clamp((x-e0)/(e1-e0||1),0,1);return t*t*(3-2*t);};
 const lerp=(a,b,t)=>a+(b-a)*t;
-const lerpA=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
+const lerpA=(a,b,t)=>typeof a==='number'?a+(b-a)*t:Array.from(a,(v,i)=>v+(b[i]-v)*t);
 const PI=Math.PI, H=PI/2;
 
 /* ---- 2. geometry: four primitives, flat per-face normals -------------------- */
@@ -2480,7 +2480,7 @@ const TONE={
 };
 const MAT={
   pine  :{d:'pineDeep',m:'pine',   l:'gold',    s:.62,k:.10,r:'gold',  rk:.26},
-  forest:{d:'pine',    m:'forest', l:'goldLo',  s:.60,k:.06,r:'gold',  rk:.24},
+  forest:{d:'pine',    m:'forest', l:'goldLo',  s:.56,k:.06,r:'gold',  rk:.30},
   gold  :{d:'bronze',  m:'goldLo', l:'goldHi',  s:.46,k:.85,r:'forest',rk:.26},
   bone  :{d:'boneLo',  m:'bone',   l:'boneHi',  s:.52,k:.00,r:'forest',rk:.46},
   almond:{d:'almondLo',m:'almond', l:'boneHi',  s:.55,k:.00,r:'forest',rk:.42},
@@ -2736,7 +2736,7 @@ function createStage(canvas){
     cam:p=>({eye:[3.1-p*.5,3.5-p*.5,8.6-p*.6],target:[.15,-.45+p*.35,0],fov:.56}),
     build(c){
       const{root,p}=c,s=clamp(p*6,0,6)-.5,i0=clamp(Math.floor(s),0,4),f=ss(.18,.82,clamp(s-i0,0,1));
-      const K=list=>typeof list[0]==="number"?lerp(list[i0],list[i0+1],f):lerpA(list[i0],list[i0+1],f);
+      const K=list=>lerpA(list[i0],list[i0+1],f);
       ground(root,-1.53,[.95,.85]);
       part(root,[0,-1.30,0],[6.8,.22,3.4],c.dark?'forest':'bone',null,M.slab);
       part(root,[0,-1.45,.02],[6.5,.14,3.2],c.dark?'pine':'forest',null,M.slab);
@@ -2774,11 +2774,11 @@ function createStage(canvas){
     }},
 
   kit:{fog:[11,28],fit:1,
-    cam:p=>({eye:[3.2,3.1-p*.6,7.6],target:[0,-.35,0],fov:.54}),
+    cam:p=>({eye:[2.9,2.8-p*.5,6.9],target:[0,-.45,0],fov:.54}),
     build(c){
       const{root,p}=c,n=ss(.08,.56,p);
-      ground(root,-1.69,[.62,.95]);
-      disc(root,-1.44,4.3);
+      ground(root,-1.69,[.5,.75]);
+      disc(root,-1.44,3.3);
       const L=[['pine',2.9,2.1,.46],['bone',2.66,1.92,.36],['gold',2.44,1.74,.20],['almond',2.22,1.56,.30]];
       let y=-1.32;
       L.forEach((s,i)=>{
@@ -2824,7 +2824,7 @@ function createStage(canvas){
     }},
 
   launch:{fog:[12,32],fit:1,idle:1,
-    cam:p=>({eye:[2.4,1.9,10.6-p*.8],target:[.1,-.05+p*.25,0],fov:.54}),
+    cam:p=>({eye:[2.3,1.9,13.2-p*.6],target:[.25,.05+p*.15,-.4],fov:.54}),
     build(c){
       const{root,p,bob}=c,go=ss(.08,.75,p);
       ground(root,-2.26,[.6,.9]);
@@ -2868,7 +2868,7 @@ function createStage(canvas){
     }}
   };
   function letter(parent,x,y,type){
-    const L=mul(parent,transform([x,y,.96],[0,0,0],[.7,.7,.7]));
+    const L=mul(parent,transform([x,y,1.0],[0,0,0],[.7,.7,.7])),part=(P,p,s,m,r)=>draw(M.bar,mul(P,transform(p,r||[0,0,0],s)),'forest');
     if(type==='Y'){part(L,[-.38,.3,0],[.38,1.12,.36],'forest',[0,0,.55]);part(L,[.38,.3,0],[.38,1.12,.36],'forest',[0,0,-.55]);part(L,[0,-.47,0],[.39,.9,.36],'forest');}
     if(type==='G'){part(L,[-.58,0,0],[.35,1.75,.36],'forest');part(L,[0,.7,0],[1.3,.35,.36],'forest');part(L,[0,-.7,0],[1.3,.35,.36],'forest');part(L,[.5,-.32,0],[.35,.9,.36],'forest');part(L,[.33,.06,0],[.65,.33,.36],'forest');}
     if(type==='A'){part(L,[-.38,0,0],[.37,1.9,.36],'forest',[0,0,-.32]);part(L,[.38,0,0],[.37,1.9,.36],'forest',[0,0,.32]);part(L,[0,-.18,0],[.8,.3,.36],'forest');}

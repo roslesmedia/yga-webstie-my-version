@@ -245,8 +245,8 @@ html.no-gl:not(.gl) .gl-fallback{visibility:visible}
 .fb-gold{left:22%;top:12%}
 .fb-pine{left:22%;top:12%;background:var(--pine);color:var(--gold);box-shadow:inset 6px 0 0 rgba(229,198,144,.18),var(--sh-gold-s)}
 .fb-bone{left:22%;top:12%;background:var(--bone);color:var(--pine);box-shadow:inset 6px 0 0 rgba(0,49,31,.1),var(--sh-pine-s)}
-.fb-chip{position:absolute;background:var(--beige);border:1px solid var(--line-strong);padding:9px 12px;font:700 11px/1 var(--ff-label);text-transform:uppercase;letter-spacing:.1em;box-shadow:var(--sh-float)}
-.fb-chip-a{right:4%;top:14%;transform:rotate(4deg)}
+.fb-chip{position:absolute;white-space:nowrap;background:var(--beige);border:1px solid var(--line-strong);padding:9px 12px;font:700 11px/1 var(--ff-label);text-transform:uppercase;letter-spacing:.1em;box-shadow:var(--sh-float)}
+.fb-chip-a{left:38%;top:30%;transform:rotate(4deg)}
 .fb-chip-b{right:12%;bottom:12%;transform:rotate(-3deg);background:var(--pine);color:var(--gold);border-color:var(--pine)}
 .fb-cube{position:absolute;inset:18%;transform-style:preserve-3d;transform:rotateX(-24deg) rotateY(-36deg)}
 .fb-cube i{position:absolute;inset:0}
@@ -328,7 +328,7 @@ html.no-gl:not(.gl) .gl-fallback{visibility:visible}
 .gap-card h3{font-size:22px;margin:auto 0 12px}
 .gap-card p{font-size:var(--fs-sm);line-height:1.55}
 .gap-num{font-size:84px;line-height:.8;color:var(--gold-ink);margin-bottom:var(--s6)}
-.gap-card-fix{border-color:var(--pine);box-shadow:var(--sh-gold-m)}
+.gap-card-fix{background:var(--pine);color:var(--beige);border-color:var(--pine);box-shadow:var(--sh-gold-m)}
 .gap-card-fix .gap-num{color:var(--gold)}
 .gap-card-fix .badge{position:absolute;top:-14px;right:20px;transform:rotate(3deg)}
 .gap-card-fix:hover{box-shadow:20px 18px 0 var(--gold)}
