@@ -256,11 +256,11 @@ function createStage(canvas){
   const OBJ={
   hero:{fog:[14,36],fit:1.15,idle:1,
     cam(p){const focus=Math.sin(clamp(p*2,0,2)*H),launch=clamp(p*2-1,0,1),travel=Math.sin(p*PI);
-      return{eye:[7.8-focus*2.3-travel*.5+launch*.6,4.3-focus*1.0+launch*.9,12.3-focus*2.4-travel*.7+launch*1.1],target:[0,.6+launch*.55,0],fov:.56};},
+      return{eye:[8.2-focus*1.6-travel*.4+launch*.6,4.4-focus*.8+launch*.9,13.0-focus*1.6-travel*.5+launch*1.3],target:[.1,.38+launch*.45,0],fov:.56};},
     build(c){
       const{root,p,bob,mobile}=c,mode=clamp(p*2,0,2),launch=clamp(mode-1,0,1);
       ground(root,-2.19,[1,1],[0,0],[20,13]);
-      if(launch>.01)draw(M.ring,mul(root,transform([0,-6.2+launch*7.3,-2.75],[.06,0,0],[7.4,7.4,.17])),'gold');
+      if(launch>.01)draw(M.ring,mul(root,transform([0,-5.6+launch*6.0,-2.75],[.06,0,0],[6.6,6.6,.17])),'gold');
       /* Pine arch, Gold reveal, Bone aperture */
       part(root,[-3.12,.18,-.65],[.86,4.45,1.55],'pine',[0,0,-.04],M.bar);
       part(root,[3.12,.18,-.65],[.86,4.45,1.55],'pine',[0,0,.04],M.bar);
