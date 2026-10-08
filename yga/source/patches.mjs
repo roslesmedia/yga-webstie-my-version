@@ -1,0 +1,47 @@
+// Targeted edits applied to the original YGA bundle (YGA.original.html) by tools/build-yga.mjs.
+// Each `find` must occur exactly once in the source, otherwise the build fails loudly.
+
+// ---------------------------------------------------------------- 3D scene
+// Original Dre(): lights, rock, book, one gold ribbon, DOM panels.
+// Upgrade: intro choreography (book rises and turns in, rings unwind, rocks settle),
+// a second counter-rotating ribbon, drifting gold dust, an orbiting glint light,
+// damped camera parallax + scroll dolly, and floating panels that stagger in.
+const DRE_OLD = `function Dre({variant:n,reduced:e,progress:t,pointer:i,panels:r}){let o=(0,Fn.useRef)(null),a=(0,Fn.useRef)(null),l=(0,Fn.useRef)(null),c=Yl(f=>f.invalidate);return(0,Fn.useEffect)(()=>{c()},[c,e]),qg(({clock:f},h)=>{if(!o.current||e)return;let m=Math.min(h,.04),p=t.current??0;o.current.rotation.y=Pg.damp(o.current.rotation.y,(i.current?.x??0)*.09+p*.17,3,m),o.current.rotation.x=Pg.damp(o.current.rotation.x,(i.current?.y??0)*.035,3,m),a.current&&(a.current.position.y=.2+Math.sin(f.elapsedTime*.65)*.035+p*.12,a.current.rotation.y=-.27+p*.16),l.current&&(l.current.rotation.y=p*-.24+Math.sin(f.elapsedTime*.25)*.045)}),(0,ct.jsxs)(ct.Fragment,{children:[`;
+
+const DRE_NEW = `function Ygd({reduced:e,intro:k,variant:v}){let n=v==="hero"?130:100,W=v==="hero"?5.4:7,H=3.8,D=2.8,R=(0,Fn.useRef)(null),x=(0,Fn.useMemo)(()=>uD((c,s)=>{let g=c.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);g.addColorStop(0,"rgba(255,242,210,1)"),g.addColorStop(.28,"rgba(246,210,146,.6)"),g.addColorStop(1,"rgba(246,210,146,0)"),c.fillStyle=g,c.fillRect(0,0,s,s)},64),[]),d=(0,Fn.useMemo)(()=>{let r=lD(v==="hero"?11:23),p=[],s=[];for(let j=0;j<n;j++)p.push((r()-.5)*W,(r()-.5)*H,(r()-.5)*D-.3),s.push(.06+r()*.3);let g=new Xt,a=new vt(p,3);return g.setAttribute("position",a),{g,a,s}},[n,W,v]);return(0,Fn.useEffect)(()=>()=>{d.g.dispose(),x.dispose()},[d,x]),qg(({clock:c},h)=>{if(!R.current)return;let m=Math.min(h,.05),A=d.a.array,t=c.elapsedTime;if(R.current.material.opacity=.85*(k.current??1)*(.82+Math.sin(t*1.7)*.18),e)return;for(let j=0;j<n;j++){let b=j*3;A[b+1]+=d.s[j]*m*.32,A[b]+=Math.sin(t*.37+j*1.73)*m*.05,A[b+1]>H/2&&(A[b+1]=-H/2)}d.a.needsUpdate=!0}),(0,ct.jsx)("points",{ref:R,geometry:d.g,frustumCulled:!1,renderOrder:6,children:(0,ct.jsx)("pointsMaterial",{map:x,color:"#ffd79a",size:v==="hero"?.06:.065,sizeAttenuation:!0,transparent:!0,depthWrite:!1,blending:2,opacity:0})})}function Dre({variant:n,reduced:e,progress:t,pointer:i,panels:r}){let o=(0,Fn.useRef)(null),a=(0,Fn.useRef)(null),l=(0,Fn.useRef)(null),q=(0,Fn.useRef)(null),w=(0,Fn.useRef)(null),L=(0,Fn.useRef)(null),K=(0,Fn.useRef)(e?1:0),T=(0,Fn.useRef)(0),B=(0,Fn.useRef)(null),G=(0,Fn.useRef)({x:0,y:0,p:0}),c=Yl(f=>f.invalidate);return(0,Fn.useEffect)(()=>{c()},[c,e]),qg(({clock:f,camera:C},h)=>{if(!o.current)return;if(e){K.current=1,B.current&&C.position.copy(B.current),C.lookAt(0,0,0);return}let m=Math.min(h,.04),p=t.current??0,el=f.elapsedTime,g=G.current;p>-.42&&(T.current+=Math.min(h,.1));let u=Pg.clamp((T.current-.2)/2.2,0,1),E=1-Math.pow(1-u,3),Q=1-Math.pow(1-Pg.clamp(T.current/3,0,1),4);K.current=E,B.current||(B.current=C.position.clone()),g.x=Pg.damp(g.x,i.current?.x??0,2.4,m),g.y=Pg.damp(g.y,i.current?.y??0,2.4,m),g.p=Pg.damp(g.p,p,4,m),C.position.set(B.current.x+g.x*.24,B.current.y-g.y*.12-g.p*.3,B.current.z+(1-Q)*1.5+g.p*.85),C.lookAt(0,0,0),o.current.rotation.y=g.x*.09+g.p*.17,o.current.rotation.x=g.y*.035,a.current&&(a.current.position.y=.2-(1-E)*1.1+Math.sin(el*.65)*.045+g.p*.12,a.current.rotation.y=-.27-(1-E)*1.15+Math.sin(el*.31)*.07+g.p*.34,a.current.rotation.z=.17+Math.sin(el*.43)*.022,a.current.scale.setScalar(.84+.16*E)),l.current&&(l.current.rotation.y=(1-E)*2.6+el*.11-g.p*.45,l.current.scale.setScalar(.55+.45*Q)),w.current&&(w.current.rotation.y=-(1-E)*2.2-el*.08+g.p*.35,w.current.scale.setScalar(.6+.4*Q)),q.current&&(q.current.position.y=-(1-Q)*.5),L.current&&(L.current.position.set(Math.cos(el*.35)*2.6,1.1+Math.sin(el*.5)*.45,Math.sin(el*.35)*2.2+.6),L.current.intensity=(6+Math.sin(el*1.3)*2)*E)}),(0,ct.jsxs)(ct.Fragment,{children:[(0,ct.jsx)("pointLight",{ref:L,color:"#ffc97f",intensity:e?4:0,distance:7,decay:1.4,position:[2,1.2,1.6]}),(0,ct.jsx)(Ygd,{reduced:e,intro:K,variant:n}),`;
+
+const DRE_TREE_OLD = `children:[(0,ct.jsx)(Rre,{small:n!=="hero"}),n==="hero"&&(0,ct.jsx)("group",{ref:a,position:[-.34,.2,0],rotation:[.04,-.27,.17],children:(0,ct.jsx)(Are,{})}),(0,ct.jsx)("group",{ref:l,position:[0,n==="hero"?-.3:-.1,-.03],rotation:[.15,0,-.18],children:(0,ct.jsx)(Cre,{phase:-.4,radius:n==="hero"?1.73:1.98,height:1.2,width:.075})}),IG[n].map(f=>(0,ct.jsx)(zre,{config:f,elements:r,progress:t,reduced:e},f.id))]`;
+
+const DRE_TREE_NEW = `children:[(0,ct.jsx)("group",{ref:q,children:(0,ct.jsx)(Rre,{small:n!=="hero"})}),n==="hero"&&(0,ct.jsx)("group",{ref:a,position:[-.34,.2,0],rotation:[.04,-.27,.17],children:(0,ct.jsx)(Are,{})}),(0,ct.jsx)("group",{position:[0,n==="hero"?-.3:-.1,-.03],rotation:[.15,0,-.18],children:(0,ct.jsx)("group",{ref:l,children:(0,ct.jsx)(Cre,{phase:-.4,radius:n==="hero"?1.73:1.98,height:1.2,width:.075})})}),(0,ct.jsx)("group",{position:[.04,n==="hero"?-.18:-.05,-.1],rotation:[-.3,.5,.27],children:(0,ct.jsx)("group",{ref:w,children:(0,ct.jsx)(Cre,{phase:1.15,radius:n==="hero"?2.02:2.3,height:.55,width:.03})})}),IG[n].map((f,j)=>(0,ct.jsx)(zre,{config:f,elements:r,progress:t,reduced:e,intro:K,index:j},f.id))]`;
+
+// Panels: stagger in from below, then breathe on their own phase.
+const ZRE_OLD = `function zre({config:n,elements:e,progress:t,reduced:i}){let r=(0,Fn.useRef)(null),o=(0,Fn.useMemo)(()=>new F,[]),a=(0,Fn.useMemo)(()=>new F,[]);return qg(({camera:l,size:c})=>{let f=e.current[n.id];if(!f||!r.current)return;let h=i?0:Math.max(0,t.current);r.current.position.z=n.position[2]+h*(n.id==="audience"?.7:-.45),r.current.position.y=n.position[1]+h*(n.id==="audience"?-.18:.2),`;
+const ZRE_NEW = `function zre({config:n,elements:e,progress:t,reduced:i,intro:K,index:I=0}){let r=(0,Fn.useRef)(null),o=(0,Fn.useMemo)(()=>new F,[]),a=(0,Fn.useMemo)(()=>new F,[]);return qg(({camera:l,size:c,clock:C})=>{let f=e.current[n.id];if(!f||!r.current)return;let h=i?0:Math.max(0,t.current),k=i?1:Pg.clamp(((K?.current??1)-.18-.13*I)/.5,0,1),E=1-Math.pow(1-k,3),b=i?0:Math.sin(C.elapsedTime*.8+I*2.1)*.05;r.current.position.z=n.position[2]+h*(n.id==="audience"?.7:-.45),r.current.position.y=n.position[1]+h*(n.id==="audience"?-.18:.2)+b-(1-E)*.6,`;
+const ZRE_STYLE_OLD = 'f.style.transform=`translate(-50%,-50%) rotate(${-n.rotation[2]}rad) scale(${g})`,f.style.left=`${m}px`,f.style.top=`${p}px`,f.style.opacity="1"}';
+const ZRE_STYLE_NEW = 'f.style.transform=`translate(-50%,-50%) rotate(${-n.rotation[2]+(i?0:Math.sin(C.elapsedTime*.55+I)*.015)}rad) scale(${g*(.92+.08*E)})`,f.style.left=`${m}px`,f.style.top=`${p}px`,f.style.opacity=String(E)}';
+
+// ---------------------------------------------------------------- motion hooks
+export const scenePatches = [
+  { find: DRE_OLD, replace: DRE_NEW, note: 'scene: intro, rings, dust, camera' },
+  { find: DRE_TREE_OLD, replace: DRE_TREE_NEW, note: 'scene: second ribbon + animated groups' },
+  { find: ZRE_OLD, replace: ZRE_NEW, note: 'panels: staggered entrance + float' },
+  { find: ZRE_STYLE_OLD, replace: ZRE_STYLE_NEW, note: 'panels: fade/blur in' },
+  // Panel type follows the new site fonts instead of Arial/Georgia.
+  { find: 'fontFamily:"Arial, sans-serif",backdropFilter', replace: 'fontFamily:"Jost, Arial, sans-serif",backdropFilter' },
+  { find: 'fontFamily:"Georgia, serif",fontSize:25,marginTop:9', replace: 'fontFamily:"Cormorant Garamond, Georgia, serif",fontWeight:500,fontSize:27,marginTop:7' },
+  { find: 'fontFamily:"Georgia, serif",fontSize:26', replace: 'fontFamily:"Cormorant Garamond, Georgia, serif",fontSize:28' },
+  // Lights a touch warmer so the gold reads like late sun, as in the reference.
+  { find: `(0,ct.jsx)("directionalLight",{position:[3,2,-3],intensity:5.8,color:"#ffd899"})`, replace: `(0,ct.jsx)("directionalLight",{position:[3,2,-3],intensity:6.4,color:"#ffd08a"})` },
+];
+
+export const motionPatches = [
+  // Expose the bundled GSAP/ScrollTrigger and Lenis so upgrade.js can choreograph without a second copy.
+  { find: 'eo.registerPlugin(Zt);function sN(){', replace: 'eo.registerPlugin(Zt);window.__yga={gsap:eo,ScrollTrigger:Zt};function sN(){' },
+  { find: 't=new w6({duration:1.05,smoothWheel:!0,anchors:!0}),t.on("scroll",Zt.update)', replace: 't=new w6({duration:1.15,smoothWheel:!0,anchors:!0}),t.on("scroll",Zt.update),window.__yga.lenis=t' },
+  // Hero copy waits for the intro curtain instead of animating underneath it.
+  { find: '{yPercent:0,duration:1.15,stagger:.12,ease:"power3.out",delay:.15}', replace: '{yPercent:0,rotate:0,duration:1.3,stagger:.11,ease:"expo.out",delay:.6}' },
+  { find: 'eo.fromTo(".hero-copy .reveal-line > span",{yPercent:108}', replace: 'eo.fromTo(".hero-copy .reveal-line > span",{yPercent:112,rotate:2.5}' },
+  { find: '{opacity:1,y:0,duration:.8,stagger:.12,delay:.55}', replace: '{opacity:1,y:0,duration:1,stagger:.1,ease:"power3.out",delay:.95}' },
+  // Generic [data-reveal] lift is replaced by upgrade.js (masked line reveals); keep a soft version.
+  { find: 'eo.fromTo(f,{y:28},{y:0,duration:.9,ease:"power2.out",scrollTrigger:{trigger:f,start:"top 94%",once:!0}})', replace: 'eo.fromTo(f,{y:36},{y:0,duration:1.2,ease:"expo.out",scrollTrigger:{trigger:f,start:"top 92%",once:!0}})' },
+];

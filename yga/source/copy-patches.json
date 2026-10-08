@@ -1,0 +1,387 @@
+[
+ {
+  "find": "\"A clear path from inspiration to action.\"",
+  "replace": "\"Everything you know, in the right order.\"",
+  "note": "Guide format line: drop abstract 'inspiration to action'"
+ },
+ {
+  "find": "\"Turn the expertise your audience comes to you for into a beautifully designed digital guide. Together, we shape the chapters, practical examples, and actionable advice into a resource they can return to.\"",
+  "replace": "\"The answers people keep asking you for, organized into one well-designed guide. We plan the chapters with you, write around your examples and advice, and lay it out as a PDF worth keeping.\"",
+  "note": "Guide detail: concrete, spoken"
+ },
+ {
+  "find": "\"Thoughtful editorial design\"",
+  "replace": "\"Clean, readable layout\"",
+  "note": "Guide include"
+ },
+ {
+  "find": "\"Actionable chapters and exercises\"",
+  "replace": "\"Chapters with exercises built in\"",
+  "note": "Guide include"
+ },
+ {
+  "find": "\"Your expertise, brought to life.\"",
+  "replace": "\"Your method, taught on camera.\"",
+  "note": "Course format: remove 'brought to life'"
+ },
+ {
+  "find": "\"Make your knowledge accessible through a focused series of video lessons. We help structure your curriculum, prepare the learning experience, and create a home for the course while you bring your voice and expertise.\"",
+  "replace": "\"A short series of video lessons where you teach what you already know. We plan the modules with you, prepare the supporting material and set up the platform it lives on. You show up and teach.\"",
+  "note": "Course detail"
+ },
+ {
+  "find": "\"Structured video lessons\"",
+  "replace": "\"Video lessons in a clear order\"",
+  "note": "Course include"
+ },
+ {
+  "find": "\"Supporting learning materials\"",
+  "replace": "\"Notes and worksheets alongside\"",
+  "note": "Course include"
+ },
+ {
+  "find": "\"A dedicated course experience\"",
+  "replace": "\"A course page of its own\"",
+  "note": "Course include"
+ },
+ {
+  "find": "\"Less starting from scratch. More making progress.\"",
+  "replace": "\"Your advice, in a form people can fill in.\"",
+  "note": "Workbook format: drop 'Less X. More Y.'"
+ },
+ {
+  "find": "\"Give your audience practical tools to put your advice to work. From guided worksheets to repeatable templates, we create useful resources around the questions your community is already asking.\"",
+  "replace": "\"Advice is easier to follow when there\\u2019s a page to write on. We turn your methods into worksheets, planners and templates, built around the questions your community already sends you.\"",
+  "note": "Workbook detail"
+ },
+ {
+  "find": "\"Practical worksheets\"",
+  "replace": "\"Worksheets and planners\"",
+  "note": "Workbook include"
+ },
+ {
+  "find": "\"Reusable templates\"",
+  "replace": "\"Templates they can reuse\"",
+  "note": "Workbook include"
+ },
+ {
+  "find": "\"Clear, guided instructions\"",
+  "replace": "\"Plain instructions on each page\"",
+  "note": "Workbook include"
+ },
+ {
+  "find": "\"Your creative toolkit, carefully curated.\"",
+  "replace": "\"The tools you use, ready to download.\"",
+  "note": "Resource format: drop 'carefully curated'"
+ },
+ {
+  "find": "\"Package your most useful resources into an intentional collection. We help organize, design, and present assets that make your audience\\u2019s next project easier, with a format tailored to your niche.\"",
+  "replace": "\"Presets, templates, checklists \\u2014 the things you use every day and your followers keep asking about. We sort them, design them and package them in a format that suits your niche.\"",
+  "note": "Resource detail"
+ },
+ {
+  "find": "\"A curated digital collection\"",
+  "replace": "\"One tidy, downloadable bundle\"",
+  "note": "Resource include"
+ },
+ {
+  "find": "\"Easy-to-use organization\"",
+  "replace": "\"Sorted so it\\u2019s easy to use\"",
+  "note": "Resource include"
+ },
+ {
+  "find": "\"A format suited to your audience\"",
+  "replace": "\"Formats that fit your niche\"",
+  "note": "Resource include"
+ },
+ {
+  "find": "\"A LITTLE KNOWLEDGE.\",(0,Se.jsx)(\"br\",{}),\"A WORLD OF POSSIBILITY.\"",
+  "replace": "\"THE THINGS I GET\",(0,Se.jsx)(\"br\",{}),\"ASKED ABOUT MOST.\"",
+  "note": "Book cover eyebrow: creator voice, no cliche"
+ },
+ {
+  "find": "\"MADE TO MAKE A DIFFERENCE.\"",
+  "replace": "\"STEP BY STEP, PAGE BY PAGE.\"",
+  "note": "Book cover footer"
+ },
+ {
+  "find": "\"YOUR NEXT CHAPTER\"",
+  "replace": "\"THE STARTER COURSE\"",
+  "note": "Course mockup brand: drop 'next chapter'"
+ },
+ {
+  "find": "[\"Welcome & introduction\",\"Finding your direction\",\"Building your foundation\",\"Creating with intention\",\"Your next steps\"]",
+  "replace": "[\"Welcome & how this works\",\"Where most people go wrong\",\"The basics, done properly\",\"Putting it into practice\",\"What to do this week\"]",
+  "note": "Course lesson names: concrete lesson titles"
+ },
+ {
+  "find": "\"YOUR SPACE TO GROW\"",
+  "replace": "\"FILL IT IN AS YOU GO\"",
+  "note": "Workbook header"
+ },
+ {
+  "find": "\"Make room\",(0,Se.jsx)(\"br\",{}),\"for what\\u2019s next.\"",
+  "replace": "\"Make a plan\",(0,Se.jsx)(\"br\",{}),\"you\\u2019ll stick to.\"",
+  "note": "Workbook headline"
+ },
+ {
+  "find": "\"01 / YOUR VISION\"",
+  "replace": "\"01 / WHERE YOU ARE\"",
+  "note": "Worksheet label"
+ },
+ {
+  "find": "\"02 / YOUR AUDIENCE\"",
+  "replace": "\"02 / WHAT YOU WANT\"",
+  "note": "Worksheet label"
+ },
+ {
+  "find": "\"03 / YOUR DIRECTION\"",
+  "replace": "\"03 / WHAT\\u2019S IN THE WAY\"",
+  "note": "Worksheet label"
+ },
+ {
+  "find": "\"04 / YOUR NEXT STEP\"",
+  "replace": "\"04 / THIS WEEK\"",
+  "note": "Worksheet label"
+ },
+ {
+  "find": "\"Start with the possibility.\"",
+  "replace": "\"Be honest about today.\"",
+  "note": "Worksheet prompt"
+ },
+ {
+  "find": "\"Get to know your people.\"",
+  "replace": "\"Write down the goal.\"",
+  "note": "Worksheet prompt"
+ },
+ {
+  "find": "\"Find your own perspective.\"",
+  "replace": "\"List what stops you.\"",
+  "note": "Worksheet prompt"
+ },
+ {
+  "find": "\"Turn intention into action.\"",
+  "replace": "\"Pick one thing to do.\"",
+  "note": "Worksheet prompt"
+ },
+ {
+  "find": "\"YOUR IDEAS, REIMAGINED.\"",
+  "replace": "\"PRESETS & TEMPLATES\"",
+  "note": "Resource sheet subtitle"
+ },
+ {
+  "find": "\"A fresh\",(0,Se.jsx)(\"br\",{}),(0,Se.jsx)(\"em\",{children:\"perspective.\"})",
+  "replace": "\"Warm\",(0,Se.jsx)(\"br\",{}),(0,Se.jsx)(\"em\",{children:\"film tone.\"})",
+  "note": "Photo tile reads like a preset"
+ },
+ {
+  "find": "\"01 / THE BEGINNING\"",
+  "replace": "\"01 / CHECKLIST\"",
+  "note": "Tile label"
+ },
+ {
+  "find": "\"Good things\",(0,Se.jsx)(\"br\",{}),\"start with\",(0,Se.jsx)(\"br\",{}),\"an idea.\"",
+  "replace": "\"Shot list\",(0,Se.jsx)(\"br\",{}),\"for a week\",(0,Se.jsx)(\"br\",{}),\"of posts.\"",
+  "note": "Tile headline: a real resource"
+ },
+ {
+  "find": "\"Designed\",(0,Se.jsx)(\"br\",{}),\"to inspire.\"",
+  "replace": "\"Ready\",(0,Se.jsx)(\"br\",{}),\"to edit.\"",
+  "note": "Tile headline"
+ },
+ {
+  "find": "\"THE LITTLE DETAILS\"",
+  "replace": "\"NOTES & CHECKLISTS\"",
+  "note": "Tile label"
+ },
+ {
+  "find": "\"Made for your next chapter.\"",
+  "replace": "\"Tick it off as you go.\"",
+  "note": "Tile line: drop 'next chapter'"
+ },
+ {
+  "find": "\"The questions are already there. We look at recurring comments and DMs to turn audience demand into a product that answers them.\"",
+  "replace": "\"We analyze real comments and DMs to validate demand, then turn it into digital products that solve the exact questions your audience has.\"",
+  "note": "Client reference copy"
+ },
+ {
+  "find": "\"Every question is a clue\"",
+  "replace": "\"Same question, again\"",
+  "note": "Phone header subline"
+ },
+ {
+  "find": "\"One question. Then another.\"",
+  "replace": "\"The same question, again.\"",
+  "note": "Chat summary: less gimmicky"
+ },
+ {
+  "find": "\"A product idea starts to take shape.\"",
+  "replace": "\"That\\u2019s a product waiting to be made.\"",
+  "note": "Chat summary"
+ },
+ {
+  "find": "\"From questions to opportunity\"",
+  "replace": "\"What the messages add up to\"",
+  "note": "Demand card label"
+ },
+ {
+  "find": "\"Validated Audience Demand\"",
+  "replace": "\"Demand you can point to\"",
+  "note": "Demand card title: less jargon"
+ },
+ {
+  "find": "\"Illustrative example \\xB7 Your audience guides the idea.\"",
+  "replace": "\"Illustrative example \\xB7 Your audience picks the topic.\"",
+  "note": "Demand card note (disclaimer kept)"
+ },
+ {
+  "find": "\"A PARTNERSHIP, FROM DAY ONE\"",
+  "replace": "\"TELL US ABOUT YOUR AUDIENCE\"",
+  "note": "Contact eyebrow"
+ },
+ {
+  "find": "(0,Xn.jsx)(\"em\",{children:\"what\\u2019s next.\"})",
+  "replace": "(0,Xn.jsx)(\"em\",{children:\"your product.\"})",
+  "note": "Contact heading second line: drop 'what's next'"
+ },
+ {
+  "find": "\"You bring the audience. We bring the research, product and launch. Tell us a little about your world.\"",
+  "replace": "\"You bring the audience. We handle research, product and launch. Tell us who you make content for.\"",
+  "note": "Contact intro"
+ },
+ {
+  "find": "\"We analyze your audience, comments, questions and market demand.\"",
+  "replace": "\"We analyze your audience and market demand.\"",
+  "note": "Client reference step"
+ },
+ {
+  "find": "\"We build the product, positioning, design and launch assets.\"",
+  "replace": "\"We build the product, design and prepare everything.\"",
+  "note": "Client reference step"
+ },
+ {
+  "find": "\"We handle the funnel, launch strategy and marketing system.\"",
+  "replace": "\"We handle the funnel, emails and launch.\"",
+  "note": "Client reference step"
+ },
+ {
+  "find": "\"We analyze results and continuously improve the offer.\"",
+  "replace": "\"You stay the face. We keep improving and scaling.\"",
+  "note": "Client reference step, grammar fixed"
+ },
+ {
+  "find": "\"We find the idea your audience needs. Then we bring it to life \\u2014 from the first insight to launch day and beyond.\"",
+  "replace": "\"We analyze your audience, find real demand, create the product, handle the design and setup, and launch it with you.\"",
+  "note": "Client reference process intro"
+ },
+ {
+  "find": "\"eyebrow\",children:\"MONETIZATION\"",
+  "replace": "\"eyebrow\",children:\"HOW WE GET PAID\"",
+  "note": "Plain-spoken eyebrow"
+ },
+ {
+  "find": "\"You don\\u2019t pay an agency fee upfront. We invest our time, expertise and resources into building and launching your product \\u2014 and grow together through an agreed revenue share.\"",
+  "replace": "\"You don\\u2019t pay anything upfront. We invest our time, expertise and resources to build and launch your products \\u2014 and we grow together through a revenue share partnership.\"",
+  "note": "Client reference body"
+ },
+ {
+  "find": "\"No upfront agency fee.\",(0,ae.jsx)(\"br\",{}),\"Our time. Our expertise.\",(0,ae.jsx)(\"br\",{}),\"A shared ambition.\"",
+  "replace": "\"No setup fees.\",(0,ae.jsx)(\"br\",{}),\"We cover the build\",(0,ae.jsx)(\"br\",{}),\"and the launch.\"",
+  "note": "Card: softened client ref, no 'no risk' claim"
+ },
+ {
+  "find": "\"Aligned incentives.\",(0,ae.jsx)(\"br\",{}),\"We grow when\",(0,ae.jsx)(\"br\",{}),\"the product grows.\"",
+  "replace": "\"We grow together.\",(0,ae.jsx)(\"br\",{}),\"You earn as your\",(0,ae.jsx)(\"br\",{}),\"products sell.\"",
+  "note": "Card: client ref"
+ },
+ {
+  "find": "\"OUR SHARED AMBITION\"",
+  "replace": "\"REAL REVENUE\"",
+  "note": "Side note: client ref"
+ },
+ {
+  "find": "\"BUILT ON REAL INSIGHT\"",
+  "replace": "\"WHERE IDEAS COME FROM\"",
+  "note": "Evidence eyebrow"
+ },
+ {
+  "find": "\"A real question.\",(0,ae.jsx)(\"br\",{}),\" A meaningful product.\"",
+  "replace": "\"A common question.\",(0,ae.jsx)(\"br\",{}),\" A product to answer it.\"",
+  "note": "Evidence heading: drop 'meaningful'"
+ },
+ {
+  "find": "[\"01\",\"Listen\",\"An audience question.\"]",
+  "replace": "[\"01\",\"Listen\",\"Someone asks a question.\"]",
+  "note": "Evidence step"
+ },
+ {
+  "find": "[\"02\",\"Understand\",\"A recurring need.\"]",
+  "replace": "[\"02\",\"Understand\",\"Others ask it too.\"]",
+  "note": "Evidence step"
+ },
+ {
+  "find": "[\"03\",\"Create\",\"A useful product.\"]",
+  "replace": "[\"03\",\"Create\",\"We build the answer.\"]",
+  "note": "Evidence step"
+ },
+ {
+  "find": "[\"04\",\"Launch\",\"A shared opportunity.\"]",
+  "replace": "[\"04\",\"Launch\",\"Your audience can buy it.\"]",
+  "note": "Evidence step"
+ },
+ {
+  "find": "\"For the influence you\\u2019ve built.\"",
+  "replace": "\"For creators who know their stuff.\"",
+  "note": "Footer tagline line 1"
+ },
+ {
+  "find": "\" And everything that comes next.\"",
+  "replace": "\" And audiences who keep asking.\"",
+  "note": "Footer tagline line 2: drop 'what comes next'"
+ },
+ {
+  "find": "\"Made for what comes next.\"",
+  "replace": "\"You stay the face. We do the rest.\"",
+  "note": "Hero creator note line 2"
+ },
+ {
+  "find": "\"SCROLL TO DISCOVER\"",
+  "replace": "\"KEEP SCROLLING\"",
+  "note": "Scroll cue"
+ },
+ {
+  "find": "\"eyebrow\",children:\"A SHARED AMBITION\"",
+  "replace": "\"eyebrow\",children:\"WHAT WE\\u2019RE AFTER\"",
+  "note": "Results eyebrow"
+ },
+ {
+  "find": "\"Built around real demand\"",
+  "replace": "\"Made from real questions\"",
+  "note": "Pillar"
+ },
+ {
+  "find": "\"Your voice. Your expertise.\"",
+  "replace": "\"Your name on the cover\"",
+  "note": "Pillar: drop triad-style pair"
+ },
+ {
+  "find": "\"Our success is shared\"",
+  "replace": "\"We earn when you earn\"",
+  "note": "Pillar: concrete"
+ },
+ {
+  "find": "\"Built to grow.\"",
+  "replace": "\"Keep it selling.\"",
+  "note": "3D panel headline"
+ },
+ {
+  "find": "\"Ideas into products.\"",
+  "replace": "\"Questions, packaged.\"",
+  "note": "3D panel headline"
+ },
+ {
+  "find": "\"Real demand.\"",
+  "replace": "\"Listen first.\"",
+  "note": "3D panel headline"
+ }
+]
