@@ -1,11 +1,10 @@
+node_modules/
+.DS_Store
+.vercel
 .claude
-research
-reference
-src
+yga/source
 tools
-BUILD-PROMPT.md
 README.md
 .codex
 AGENTS.md
 .kian-codex-system-version
-yga/source
