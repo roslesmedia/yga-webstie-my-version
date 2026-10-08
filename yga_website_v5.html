@@ -3,23 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>YGA — Your Growth Agency | Turn your content into your first digital product</title>
-<meta name="description" content="Your audience is already telling you what to sell. YGA turns the content you already post into your first digital product—start to finish, no guesswork." />
+<title>YGA - Your Growth Agency | Turn your content into your first digital product</title>
+<meta name="description" content="Your audience is already telling you what to sell. YGA turns the content you already post into your first digital product - start to finish, no guesswork." />
 <meta name="theme-color" content="#08261e" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%23F3D9A6'/%3E%3Cstop offset='1' stop-color='%23A9793D'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2308261E'/%3E%3Cpath d='M8 46a24 24 0 0 1 48 0z' fill='url(%23g)'/%3E%3Cg fill='%2308261E'%3E%3Crect y='33' width='64' height='2.5'/%3E%3Crect y='39' width='64' height='2.5'/%3E%3C/g%3E%3Crect x='14' y='50' width='36' height='2.5' rx='1.25' fill='%23D6D9CF' fill-opacity='.55'/%3E%3C/svg%3E" />
 
 <!-- social preview: once the site is live, change og:url and og:image to absolute URLs (e.g. https://yourdomain.com/og-image.png) -->
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="YGA — Your Growth Agency" />
+<meta property="og:site_name" content="YGA - Your Growth Agency" />
 <meta property="og:title" content="Your audience is already telling you what to sell." />
-<meta property="og:description" content="We turn the content you already post into your first digital product—start to finish, no guesswork." />
+<meta property="og:description" content="We turn the content you already post into your first digital product - start to finish, no guesswork." />
 <meta property="og:image" content="og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://yourdomain.com/" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Your audience is already telling you what to sell." />
-<meta name="twitter:description" content="We turn the content you already post into your first digital product—start to finish, no guesswork." />
+<meta name="twitter:description" content="We turn the content you already post into your first digital product - start to finish, no guesswork." />
 <meta name="twitter:image" content="og-image.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,24 +65,23 @@
   --ease-out-soft: cubic-bezier(.22, .61, .36, 1);
   --ease-out-expo: cubic-bezier(.16, 1, .3, 1);
   --animate-marquee: marquee 38s linear infinite;
-  --animate-float-a: float-a 11s ease-in-out infinite alternate;
-  --animate-float-b: float-b 12s ease-in-out infinite alternate;
-  --animate-float-c: float-c 13s ease-in-out infinite alternate;
+  --animate-float-a: float-a 7s ease-in-out infinite alternate;
+  --animate-float-b: float-b 8s ease-in-out infinite alternate;
+  --animate-float-c: float-c 9s ease-in-out infinite alternate;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
   --animate-quiz-in: quiz-in .5s cubic-bezier(.22, .61, .36, 1);
-  --animate-ring-spin: spin 18s linear infinite;
-  --animate-sun-rise: sun-rise 1.2s cubic-bezier(.16, 1, .3, 1) .15s both;
+  --animate-ring-spin: spin 9s linear infinite;
 }
 
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@keyframes float-a { from { transform: translateY(-3px) rotate(-7deg); } to { transform: translateY(4px) rotate(-6deg); } }
-@keyframes float-b { from { transform: translateY(-3px); } to { transform: translateY(4px); } }
-@keyframes float-c { from { transform: translateY(3px) rotate(6deg); } to { transform: translateY(-4px) rotate(7deg); } }
-@keyframes sun-rise { from { transform: translateY(38%); } to { transform: none; } }
+@keyframes float-a { from { transform: translateY(-6px) rotate(-7deg); } to { transform: translateY(8px) rotate(-5deg); } }
+@keyframes float-b { from { transform: translateY(-6px); } to { transform: translateY(8px); } }
+@keyframes float-c { from { transform: translateY(6px) rotate(6deg); } to { transform: translateY(-8px) rotate(8deg); } }
+@keyframes pulse-dot { 50% { opacity: .35; } }
 @keyframes quiz-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 @layer base {
-  html { scroll-padding-top: 5rem; }
   body { font-optical-sizing: auto; }
   button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
   ::selection { background: var(--color-gold); color: var(--color-forest); }
@@ -125,6 +124,8 @@
     --stripes: linear-gradient(180deg, #000 0 52%, transparent 52% 56%, #000 56% 67%, transparent 67% 72%, #000 72% 80%, transparent 80% 86%, #000 86% 91%, transparent 91% 97%, #000 97%);
     -webkit-mask: var(--stripes); mask: var(--stripes);
   }
+  .sun-rise { transform: translateY(38%); transition: transform 1.6s var(--ease-out-soft) .2s; }
+  [data-shown] .sun-rise { transform: none; }
 
   /* featured package: a slowly rotating gold border (rotates a layer, no repaint) */
   .ring-border {
@@ -141,15 +142,15 @@
   /* buttons: solid pills with a sliding fill + arrow dot */
   .btn {
     @apply relative isolate inline-flex items-center gap-[.9rem] overflow-hidden rounded-full py-[.45rem] pr-[.45rem] pl-6 font-semibold tracking-[-0.01em];
-    transition: color .2s ease .15s, transform .2s ease;
+    transition: color .4s ease, transform .2s ease;
   }
   .btn::before {
     content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
-    background: var(--fill); transform: translateY(101%); transition: transform .45s var(--ease-out-expo);
+    background: var(--fill); transform: translateY(101%); transition: transform .5s var(--ease-out-soft);
   }
   .btn:hover::before { transform: none; }
   .btn:active { transform: scale(.97); }
-  .btn-dot { @apply grid size-[2.6rem] place-items-center rounded-full; transition: transform .45s var(--ease-out-expo), background-color 0s .15s, color 0s .15s; }
+  .btn-dot { @apply grid size-[2.6rem] place-items-center rounded-full; transition: transform .5s var(--ease-out-soft), background-color .4s, color .4s; }
   .btn:hover .btn-dot { transform: rotate(-45deg); }
   .btn-ink { @apply bg-forest text-cream; --fill: var(--color-gold); }
   .btn-ink:hover { @apply text-forest; }
@@ -157,7 +158,7 @@
   .btn-ink:hover .btn-dot { @apply bg-forest text-gold; }
   .btn-gold { @apply bg-gold text-forest; --fill: var(--color-cream); }
   .btn-gold .btn-dot { @apply bg-forest text-gold; }
-  .btn-line { @apply border border-goldlo py-[.3rem] pr-[.3rem] pl-[1.4rem] text-forest; --fill: var(--color-forest); }
+  .btn-line { @apply border border-goldlo/55 py-[.3rem] pr-[.3rem] pl-[1.4rem] text-forest; --fill: var(--color-forest); }
   .btn-line:hover { @apply text-cream; }
   .btn-line .btn-dot { @apply size-[2.3rem]; }
 
@@ -181,9 +182,8 @@
   .reveal[data-shown] { opacity: 1; transform: none; }
 
   /* process: steps light up with scroll (JS sets data-state="active" / "done") */
-  .step:not([data-state]) .step-dot { opacity: .45; }
-  .step[data-state="active"] h3 { color: var(--color-goldhi); }
-  .step h3 { transition: color .4s; }
+  .step { opacity: .5; transition: opacity .5s; }
+  .step[data-state] { opacity: 1; }
   .step .step-dot { transition: transform .5s var(--ease-out-expo), background-color .4s, box-shadow .4s; }
   .step[data-state="active"] .step-dot { transform: scale(1.6); background: var(--color-gold); box-shadow: 0 0 0 5px rgba(223,181,120,.14), 0 0 16px rgba(223,181,120,.55); }
   .step[data-state="done"] .step-dot { background: var(--color-gold); }
@@ -197,7 +197,6 @@
   .stage[data-on] { @apply text-bronze; }
 
   /* quiz */
-  .quiz-result:focus { outline: none; }
   .quiz-opt { transition: background-color .3s, border-color .3s, transform .3s; }
   .quiz-opt:hover { @apply border-forest; transform: translateX(4px); }
   .quiz-opt:hover .quiz-key { @apply border-gold bg-gold; }
@@ -213,6 +212,7 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .sun-rise { transform: none; transition: none; }
   .ring-border::before { animation: none; }
   .split-word > span { transform: none; transition: none; }
   .quiz-opt:hover { transform: none; }
@@ -234,20 +234,20 @@
 <header class="sticky top-0 z-50 border-b border-forest/10 bg-cream">
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
     <div class="flex h-16 items-center justify-between lg:h-[4.5rem]">
-      <a href="#top" class="flex items-center gap-3" aria-label="YGA — back to top">
+      <a href="#top" class="flex items-center gap-3" aria-label="YGA - back to top">
         <span class="relative block h-5 w-10 overflow-hidden" aria-hidden="true"><span class="sun absolute inset-0 block"></span></span>
         <span class="flex items-baseline gap-2.5 leading-none">
           <span class="font-display text-xl font-extrabold tracking-[-0.04em]">YGA</span>
-          <span class="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-forest/75 sm:inline">Your Growth Agency</span>
+          <span class="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-forest/60 sm:inline">Your Growth Agency</span>
         </span>
       </a>
 
       <nav aria-label="Main" class="hidden items-center gap-7 text-[15px] font-medium text-forest/80 md:flex">
-        <a href="#process" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">How it works</span><sup aria-hidden="true" class="font-mono text-[9px] text-bronze">01</sup></a>
-        <a href="#gap" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">The gap</span><sup aria-hidden="true" class="font-mono text-[9px] text-bronze">02</sup></a>
-        <a href="#products" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Products</span><sup aria-hidden="true" class="font-mono text-[9px] text-bronze">03</sup></a>
-        <a href="#demand" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Demand</span><sup aria-hidden="true" class="font-mono text-[9px] text-bronze">04</sup></a>
-        <a href="#pricing" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Packages</span><sup aria-hidden="true" class="font-mono text-[9px] text-bronze">05</sup></a>
+        <a href="#process" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">How it works</span><sup class="font-mono text-[9px] text-bronze">01</sup></a>
+        <a href="#gap" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">The gap</span><sup class="font-mono text-[9px] text-bronze">02</sup></a>
+        <a href="#products" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Products</span><sup class="font-mono text-[9px] text-bronze">03</sup></a>
+        <a href="#demand" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Demand</span><sup class="font-mono text-[9px] text-bronze">04</sup></a>
+        <a href="#pricing" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Packages</span><sup class="font-mono text-[9px] text-bronze">05</sup></a>
       </nav>
 
       <div class="flex items-center gap-3">
@@ -256,10 +256,7 @@
           <span class="h-1.5 w-1.5 rounded-full bg-gold"></span>
           DM us “GROWTH”
         </a>
-        <button id="motionBtn" type="button" aria-pressed="false" aria-label="Pause animations" title="Pause animations" class="grid h-10 w-10 place-items-center rounded-full border border-forest/55 text-forest transition hover:bg-forest hover:text-cream motion-reduce:hidden">
-          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path data-motion-icon d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
-        </button>
-        <button id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" class="grid h-10 w-10 place-items-center rounded-full border border-forest/55 text-forest md:hidden">
+        <button id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" class="grid h-10 w-10 place-items-center rounded-full border border-forest/20 text-forest md:hidden">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path data-menu-icon d="M4 9h16M4 15h10"/></svg>
         </button>
       </div>
@@ -269,11 +266,11 @@
   <!-- mobile menu -->
   <div id="mobileMenu" hidden class="border-t border-forest/10 bg-forest px-5 py-5 md:hidden">
     <nav aria-label="Mobile" class="flex flex-col text-cream">
-      <a href="#process" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">How it works <span aria-hidden="true" class="font-mono text-xs text-sage/60">01</span></a>
-      <a href="#gap" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">The gap <span aria-hidden="true" class="font-mono text-xs text-sage/60">02</span></a>
-      <a href="#products" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">Products <span aria-hidden="true" class="font-mono text-xs text-sage/60">03</span></a>
-      <a href="#demand" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">Audience demand <span aria-hidden="true" class="font-mono text-xs text-sage/60">04</span></a>
-      <a href="#pricing" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">Packages <span aria-hidden="true" class="font-mono text-xs text-sage/60">05</span></a>
+      <a href="#process" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">How it works <span class="font-mono text-xs text-sage/60">01</span></a>
+      <a href="#gap" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">The gap <span class="font-mono text-xs text-sage/60">02</span></a>
+      <a href="#products" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">Products <span class="font-mono text-xs text-sage/60">03</span></a>
+      <a href="#demand" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">Audience demand <span class="font-mono text-xs text-sage/60">04</span></a>
+      <a href="#pricing" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">Packages <span class="font-mono text-xs text-sage/60">05</span></a>
       <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="mt-5 rounded-full bg-gold px-4 py-3.5 text-center font-bold text-forest">DM us “GROWTH”</a>
     </nav>
   </div>
@@ -287,21 +284,21 @@
     <div class="grid items-end gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-12">
 
       <!-- copy -->
-      <div class="pb-2">
+      <div class="reveal pb-2">
         <p class="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-[0.18em] text-forest/65">
-          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-goldlo"></span>Now booking</span>
+          <span class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-goldlo motion-safe:animate-pulse-dot"></span>Now booking</span>
           <span class="h-px w-8 bg-forest/25"></span>
           <span>For creators, coaches &amp; service pros</span>
         </p>
 
-        <h1 class="mt-8 font-display text-[clamp(2.7rem,6.4vw,5.6rem)] font-extrabold leading-[0.95] tracking-[-0.045em]">
+        <h1 data-split class="mt-8 font-display text-[clamp(2.7rem,6.4vw,5.6rem)] font-extrabold leading-[0.95] tracking-[-0.045em]">
           Your audience is already telling you <span class="accent text-[1.12em] tracking-[-0.02em] text-goldlo">what to sell.</span>
         </h1>
 
         <div class="mt-10 flex flex-col gap-8 border-t border-forest/15 pt-8">
           <p class="max-w-md text-lg leading-relaxed text-forest/75">
-            You’re just not packaging it yet. We turn the content you already post into your first
-            digital product—start to finish, no guesswork.
+            You're just not packaging it yet. We turn the content you already post into your first
+            digital product - start to finish, no guesswork.
           </p>
           <div class="flex flex-wrap items-center gap-5">
             <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-ink">
@@ -315,18 +312,18 @@
           </p>
         </div>
 
-        <p class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-forest/75">
-          <span class="flex items-center gap-2"><svg class="h-3.5 w-3.5 text-goldlo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4V4z"/></svg>Save this for when you’re ready</span>
+        <p class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-[0.14em] text-forest/55">
+          <span class="flex items-center gap-2"><svg class="h-3.5 w-3.5 text-goldlo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 4h12v16l-6-4-6 4V4z"/></svg>Save this for when you're ready</span>
           <span class="flex items-center gap-2"><svg class="h-3.5 w-3.5 text-moss" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg>Share it with a creator who needs it</span>
         </p>
       </div>
 
       <!-- sunset panel + carousel mock -->
-      <div class="relative mx-auto w-full max-w-md">
+      <div class="reveal relative mx-auto w-full max-w-md [transition-delay:.12s]">
         <div class="grain mesh-forest relative aspect-[4/5] overflow-hidden rounded-[1.75rem]">
           <!-- horizon -->
           <div class="absolute inset-x-0 bottom-[22%] h-px bg-sage/30"></div>
-          <div class="animate-sun-rise motion-reduce:animate-none absolute -right-[12%] bottom-[22%] w-[88%]">
+          <div class="sun-rise absolute -right-[12%] bottom-[22%] w-[88%]">
             <div class="sun w-full"></div>
           </div>
           <!-- reflection -->
@@ -345,16 +342,16 @@
               </span>
               <div class="leading-tight">
                 <p class="text-[13px] font-semibold">yourgrowthagency</p>
-                <p class="font-mono text-[9px] uppercase tracking-wider text-forest/75">Carousel · 7 slides</p>
+                <p class="font-mono text-[9px] uppercase tracking-wider text-forest/55">Carousel · 7 slides</p>
               </div>
-              <span class="ml-auto text-xs text-forest/75" aria-hidden="true">•••</span>
+              <span class="ml-auto text-xs text-forest/40" aria-hidden="true">•••</span>
             </div>
 
             <div class="grain mesh-sage relative flex min-h-[13.5rem] flex-col justify-between overflow-hidden rounded-xl p-5">
               <div class="relative z-[2]">
                 <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-forest">Slide 01 / 07</span>
                 <p class="mt-3 font-display text-[1.3rem] font-bold leading-[1.12] tracking-[-0.03em] text-forestdeep">
-                  Here’s exactly how we turn your content into your <span class="accent text-[1.12em]">first digital product.</span>
+                  Here's exactly how we turn your content into your <span class="accent text-[1.12em]">first digital product.</span>
                 </p>
               </div>
               <div class="relative z-[2] flex items-center justify-between pt-4">
@@ -375,7 +372,7 @@
             </div>
           </div>
 
-          <p class="absolute bottom-5 left-6 z-[2] font-mono text-[10px] uppercase tracking-[0.2em] text-sage/75">Fig. 01 · content → product</p>
+          <p class="absolute bottom-5 left-6 z-[2] font-mono text-[10px] uppercase tracking-[0.2em] text-sage/75">Fig. 01 - content → product</p>
         </div>
 
         <!-- floating chips -->
@@ -401,11 +398,11 @@
         <span class="text-gold">✳</span>
         <span class="accent text-sage">#creatoreconomy</span>
         <span class="text-goldlo">✳</span>
-        <span class="font-display font-semibold tracking-tight text-cream">#audiencefirst</span>
+        <span class="font-display font-semibold tracking-tight text-cream">#passiveincome</span>
         <span class="text-gold">✳</span>
         <span class="accent text-sage">#contentcreator</span>
         <span class="text-goldlo">✳</span>
-        <span class="font-display font-semibold tracking-tight text-cream">#yourexpertise</span>
+        <span class="font-display font-semibold tracking-tight text-cream">#wealth</span>
         <span class="text-gold">✳</span>
       </div>
       <div class="flex min-w-[100vw] shrink-0 items-center justify-around gap-8 pr-8 text-2xl sm:text-3xl">
@@ -413,11 +410,11 @@
         <span class="text-gold">✳</span>
         <span class="accent text-sage">#creatoreconomy</span>
         <span class="text-goldlo">✳</span>
-        <span class="font-display font-semibold tracking-tight text-cream">#audiencefirst</span>
+        <span class="font-display font-semibold tracking-tight text-cream">#passiveincome</span>
         <span class="text-gold">✳</span>
         <span class="accent text-sage">#contentcreator</span>
         <span class="text-goldlo">✳</span>
-        <span class="font-display font-semibold tracking-tight text-cream">#yourexpertise</span>
+        <span class="font-display font-semibold tracking-tight text-cream">#wealth</span>
         <span class="text-gold">✳</span>
       </div>
     </div>
@@ -440,43 +437,46 @@
       </svg>
 
       <!-- card: research -->
-      <div class="animate-float-a motion-reduce:animate-none absolute left-[5%] top-[24%] w-[38%] max-w-[15rem] grain mesh-forest rounded-2xl border border-gold/35 shadow-[0_22px_45px_-18px_rgba(3,15,11,.7)] p-3 sm:p-4">
-        <p class="relative z-[2] text-[10px] text-sage/90 sm:text-[11px]">Audience research</p>
-        <p class="relative z-[2] mt-1 accent text-xl leading-none sm:text-2xl lg:text-[1.75rem]">Listen first.</p>
-        <svg class="relative z-[2] mt-3 w-full text-gold" viewBox="0 0 120 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 30 22 20l14 6 22-16 16 8 18-12 26 4"/></svg>
+      <div class="animate-float-a motion-reduce:animate-none absolute left-[5%] top-[24%] w-[38%] max-w-[15rem] rounded-2xl border border-[rgba(241,218,170,.5)] bg-[linear-gradient(125deg,rgba(40,67,56,.92),rgba(110,107,74,.78))] p-3 shadow-[0_15px_35px_rgba(0,18,11,.45)] sm:p-4">
+        <p class="text-[9px] text-cream/80 sm:text-[11px]">Audience research</p>
+        <p class="mt-1 font-serif text-lg leading-none sm:text-2xl lg:text-[1.75rem]">Listen first.</p>
+        <svg class="mt-3 w-full text-gold" viewBox="0 0 120 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 30 22 20l14 6 22-16 16 8 18-12 26 4"/></svg>
+        <p class="mt-3 font-mono text-[7px] uppercase tracking-[0.18em] text-cream/55 sm:text-[8px]">Illustrative concept</p>
       </div>
 
       <!-- card: product (front) -->
-      <div class="animate-float-b motion-reduce:animate-none absolute left-[30%] top-[33%] z-[2] w-[42%] max-w-[16.5rem] grain mesh-forest rounded-2xl border border-gold/35 shadow-[0_22px_45px_-18px_rgba(3,15,11,.7)] p-3 sm:p-4">
-        <p class="relative z-[2] text-[10px] text-sage/90 sm:text-[11px]">Product creation</p>
-        <p class="relative z-[2] mt-1 accent text-xl leading-[.95] sm:text-2xl lg:text-[1.9rem]">Questions,<br />packaged.</p>
-        <div class="relative z-[2] mt-3 hidden items-center gap-3 rounded-lg bg-linen px-3 py-2 text-forest sm:flex">
+      <div class="animate-float-b motion-reduce:animate-none absolute left-[30%] top-[33%] z-[2] w-[42%] max-w-[16.5rem] rounded-2xl border border-[rgba(241,218,170,.6)] bg-[linear-gradient(125deg,rgba(40,67,56,.95),rgba(110,107,74,.82))] p-3 shadow-[0_22px_45px_rgba(0,18,11,.55)] sm:p-4">
+        <p class="text-[9px] text-cream/80 sm:text-[11px]">Product creation</p>
+        <p class="mt-1 font-serif text-lg leading-[.95] sm:text-2xl lg:text-[1.9rem]">Questions,<br />packaged.</p>
+        <div class="mt-3 flex items-center gap-2 rounded-lg bg-linen px-2.5 py-2 text-forest sm:gap-3 sm:px-3">
           <span class="font-serif text-lg leading-none sm:text-2xl">Aa</span>
-          <span class="font-mono text-[8px] uppercase leading-snug tracking-[0.12em]">Guides &amp; workbooks<br />Templates &amp; courses</span>
+          <span class="font-mono text-[6px] uppercase leading-snug tracking-[0.12em] sm:text-[8px]">Guides &amp; workbooks<br />Templates &amp; courses</span>
         </div>
+        <p class="mt-3 font-mono text-[7px] uppercase tracking-[0.18em] text-cream/55 sm:text-[8px]">Illustrative concept</p>
       </div>
 
       <!-- card: launch -->
-      <div class="animate-float-c motion-reduce:animate-none absolute left-[58%] top-[20%] w-[37%] max-w-[15rem] grain mesh-forest rounded-2xl border border-gold/35 shadow-[0_22px_45px_-18px_rgba(3,15,11,.7)] p-3 sm:p-4">
-        <p class="relative z-[2] text-[10px] text-sage/90 sm:text-[11px]">Launch &amp; growth</p>
-        <p class="relative z-[2] mt-1 accent text-xl leading-none sm:text-2xl lg:text-[1.75rem]">Keep improving.</p>
-        <div class="relative z-[2] mt-3 flex h-10 items-end justify-end gap-1.5 sm:h-12">
+      <div class="animate-float-c motion-reduce:animate-none absolute left-[58%] top-[20%] w-[37%] max-w-[15rem] rounded-2xl border border-[rgba(241,218,170,.5)] bg-[linear-gradient(125deg,rgba(40,67,56,.9),rgba(110,107,74,.75))] p-3 shadow-[0_15px_35px_rgba(0,18,11,.45)] sm:p-4">
+        <p class="text-[9px] text-cream/80 sm:text-[11px]">Launch &amp; growth</p>
+        <p class="mt-1 font-serif text-lg leading-none sm:text-2xl lg:text-[1.75rem]">Keep it selling.</p>
+        <div class="mt-3 flex h-10 items-end justify-end gap-1.5 sm:h-12">
           <span class="h-[35%] w-2.5 rounded-sm bg-goldhi sm:w-3"></span>
           <span class="h-[55%] w-2.5 rounded-sm bg-goldhi sm:w-3"></span>
           <span class="h-[75%] w-2.5 rounded-sm bg-gold sm:w-3"></span>
           <span class="h-full w-2.5 rounded-sm bg-gold sm:w-3"></span>
         </div>
+        <p class="mt-3 font-mono text-[7px] uppercase tracking-[0.18em] text-cream/55 sm:text-[8px]">Illustrative concept</p>
       </div>
 
-      <p class="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.2em] text-sage/75 lg:left-8">Fig. 02 · illustrative concept</p>
+      <p class="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.2em] text-sage/75 lg:left-8">Fig. 02 - insight → product → revenue</p>
     </div>
 
     <!-- copy + steps -->
     <div class="relative px-5 pb-20 pt-4 sm:pt-10 lg:px-12 lg:py-24 xl:pr-[max(3rem,calc((100vw-80rem)/2+2rem))]">
       <div class="reveal">
-        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sage/80"><span class="text-gold">(01)</span>&ensp;·&ensp;How it works</p>
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-sage/80"><span class="text-gold">(01)</span> - How it works</p>
         <h2 id="process-title" class="mt-6 font-display text-4xl font-bold leading-[1] tracking-[-0.04em] sm:text-5xl lg:text-[3.4rem]">
-          From audience insights to a <span class="accent text-[1.1em] text-gold">product they already asked for.</span>
+          From audience insights to a <span class="accent text-[1.1em] text-gold">sold-out product.</span>
         </h2>
         <p class="mt-6 max-w-md text-lg leading-relaxed text-sage/90">
           We analyze your audience, find real demand, create the product, handle the design and setup, and launch it with you.
@@ -489,7 +489,7 @@
           <span class="flex justify-center pt-[.55rem]" aria-hidden="true"><span class="step-dot block h-1.5 w-1.5 rounded-full bg-sage"></span></span>
           <div>
             <h3 class="font-display text-2xl font-semibold tracking-[-0.03em]">Research</h3>
-            <p class="mt-1 leading-relaxed text-sage/85">We analyze your audience and market demand—the comments, saves and DMs that keep coming back.</p>
+            <p class="mt-1 leading-relaxed text-sage/85">We analyze your audience and market demand - the comments, saves and DMs that keep coming back.</p>
           </div>
         </li>
         <li class="step grid grid-cols-[2.5rem_0.75rem_1fr] gap-x-3 border-b border-cream/15 py-5">
@@ -520,7 +520,7 @@
 
       <a href="#pricing" class="mt-8 inline-flex items-center gap-3 py-2 font-semibold text-cream">
         <span class="ulink">See the two packages</span>
-        <span class="grid h-10 w-10 place-items-center rounded-full border border-gold/75 text-gold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="grid h-10 w-10 place-items-center rounded-full border border-gold/40 text-gold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
     </div>
   </div>
@@ -531,36 +531,36 @@
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
     <div class="grid items-start gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
       <div class="reveal">
-        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75"><span class="text-bronze">(02)</span>&ensp;·&ensp;The gap</p>
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/60"><span class="text-bronze">(02)</span> - The gap</p>
         <h2 class="mt-6 font-display text-4xl font-bold leading-[1] tracking-[-0.04em] sm:text-5xl lg:text-[3.6rem]">
-          You’re not short on demand.
-          You’re short on a <span class="accent text-[1.1em] text-goldlo">product.</span>
+          You're not short on demand.
+          You're short on a <span class="accent text-[1.1em] text-goldlo">product.</span>
         </h2>
         <p class="mt-6 max-w-lg text-lg leading-relaxed text-forest/70">
-          Posting builds attention. Packaging gives it somewhere to go. Most creators stall right between
-          those two—because nobody ever showed them the bridge.
+          Posting builds attention. Packaging builds income. Most creators stall right between
+          those two - because nobody ever showed them the bridge.
         </p>
         <figure class="mt-10 border-l-2 border-gold pl-6">
           <blockquote class="accent text-2xl leading-snug text-forest sm:text-[1.7rem]">
-            “Your audience is already telling you what to sell. You’re just not packaging it yet.”
+            “Your audience is already telling you what to sell. You're just not packaging it yet.”
           </blockquote>
-          <figcaption class="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-forest/75">—&thinsp;the post that started this</figcaption>
+          <figcaption class="mt-3 font-mono text-[10px] uppercase tracking-[0.2em] text-forest/55">- the post that started this</figcaption>
         </figure>
       </div>
 
       <ol class="border-t border-forest/15">
         <li class="reveal grid grid-cols-[3.5rem_1fr] gap-4 border-b border-forest/15 py-9">
-          <span class="font-mono text-sm text-forest/75">01</span>
+          <span class="font-mono text-sm text-forest/45">01</span>
           <div>
             <h3 class="font-display text-2xl font-bold tracking-[-0.03em]">You have the audience</h3>
-            <p class="mt-2 leading-relaxed text-forest/70">People follow, save, DM and ask the same questions on repeat. That’s demand, not luck.</p>
+            <p class="mt-2 leading-relaxed text-forest/70">People follow, save, DM and ask the same questions on repeat. That's demand, not luck.</p>
           </div>
         </li>
         <li class="reveal grid grid-cols-[3.5rem_1fr] gap-4 border-b border-forest/15 py-9 [transition-delay:.08s]">
-          <span class="font-mono text-sm text-forest/75">02</span>
+          <span class="font-mono text-sm text-forest/45">02</span>
           <div>
             <h3 class="font-display text-2xl font-bold tracking-[-0.03em]">You have the content</h3>
-            <p class="mt-2 leading-relaxed text-forest/70">Hundreds of posts already containing the framework, the story and the proof. It’s a product in disguise.</p>
+            <p class="mt-2 leading-relaxed text-forest/70">Hundreds of posts already containing the framework, the story and the proof. It's a product in disguise.</p>
           </div>
         </li>
         <li class="reveal relative isolate grid grid-cols-[3.5rem_1fr] gap-4 border-b-2 border-goldlo py-9 [transition-delay:.16s]">
@@ -568,10 +568,10 @@
           <span class="font-mono text-sm font-semibold text-bronze">03</span>
           <div>
             <div class="flex flex-wrap items-center gap-3">
-              <h3 class="font-display text-2xl font-bold tracking-[-0.03em]">You don’t have the <span class="accent text-[1.12em] text-bronze">product</span></h3>
+              <h3 class="font-display text-2xl font-bold tracking-[-0.03em]">You don't have the <span class="accent text-[1.12em] text-bronze">product</span></h3>
               <span class="rounded-full bg-forest px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-gold">What we fix</span>
             </div>
-            <p class="mt-2 leading-relaxed text-forest/70">So the audience stays a vanity metric instead of something they can buy from you. That’s the only thing we fix.</p>
+            <p class="mt-2 leading-relaxed text-forest/70">So the audience stays a vanity metric instead of a revenue line. That's the only thing we fix.</p>
           </div>
         </li>
       </ol>
@@ -580,33 +580,33 @@
 </section>
 
 <!-- ============ CREATOR PRODUCTS (from the index site) ============ -->
-<section id="products" class="scroll-mt-16 bg-sand py-24 lg:py-28" aria-labelledby="products-title">
+<section id="products" class="scroll-mt-16 border-y border-forest/10 bg-sand py-24 lg:py-28" aria-labelledby="products-title">
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
-    <div class="reveal grid gap-8 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-10">
+    <div class="reveal grid gap-8 lg:grid-cols-[1.3fr_1fr_auto] lg:items-end lg:gap-10">
       <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75"><span class="text-bronze">(03)</span>&ensp;·&ensp;Creator products</p>
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/60"><span class="text-bronze">(03)</span> - Creator products</p>
         <h2 id="products-title" class="mt-6 font-display text-4xl font-bold leading-[1] tracking-[-0.04em] sm:text-5xl lg:text-[3.4rem]">
           Digital products your audience <span class="accent text-[1.1em] text-goldlo">actually wants.</span>
         </h2>
       </div>
       <p class="max-w-sm border-l border-forest/20 pl-6 leading-relaxed text-forest/70">
-        Guides, workbooks, templates, video courses and resource packs—built from real audience demand in your niche. Tap one to see what’s inside.
+        Guides, workbooks, templates, video courses and resource packs - built from real audience demand in your niche. Tap one to see what's inside.
       </p>
-      <div class="flex gap-2.5 lg:hidden">
-        <button type="button" data-products="prev" aria-label="Previous product" class="grid h-12 w-12 place-items-center rounded-full border border-forest/55 transition hover:border-forest hover:bg-cream">
+      <div class="flex gap-2.5">
+        <button type="button" data-products="prev" aria-label="Previous product" class="grid h-12 w-12 place-items-center rounded-full border border-forest/20 transition hover:border-forest/50 hover:bg-cream">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
         </button>
-        <button type="button" data-products="next" aria-label="Next product" class="grid h-12 w-12 place-items-center rounded-full border border-forest/55 transition hover:border-forest hover:bg-cream">
+        <button type="button" data-products="next" aria-label="Next product" class="grid h-12 w-12 place-items-center rounded-full border border-forest/20 transition hover:border-forest/50 hover:bg-cream">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
         </button>
       </div>
     </div>
 
-    <div id="productTrack" role="region" aria-label="Digital product formats" class="-mx-5 -my-2 mt-8 flex py-2 snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-2 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
+    <div id="productTrack" aria-label="Digital product formats" class="-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-2 [scrollbar-width:none] lg:mx-0 lg:grid lg:grid-cols-4 lg:gap-5 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
 
       <!-- guide -->
       <article class="w-[78%] shrink-0 snap-start sm:w-[46%] lg:w-auto">
-        <button type="button" class="product-card group block w-full text-left" data-product="guide">
+        <button type="button" class="product-card group block w-full text-left" data-product="guide" aria-label="Explore Guides and eBooks">
           <span class="art relative block aspect-[1.39] overflow-hidden rounded-xl bg-[#c4b190] shadow-[inset_0_0_0_1px_rgba(31,39,17,.08)] [container-type:inline-size]" aria-hidden="true">
             <span class="bg-[image:var(--arch)] absolute inset-0 h-full w-full bg-cover bg-[position:20%_80%]" aria-hidden="true"></span>
             <span class="absolute inset-0 bg-[linear-gradient(160deg,rgba(255,246,222,.12),rgba(65,75,56,.35))]"></span>
@@ -628,7 +628,7 @@
 
       <!-- course -->
       <article class="w-[78%] shrink-0 snap-start sm:w-[46%] lg:w-auto">
-        <button type="button" class="product-card group block w-full text-left" data-product="course">
+        <button type="button" class="product-card group block w-full text-left" data-product="course" aria-label="Explore Video Courses">
           <span class="art relative block aspect-[1.39] overflow-hidden rounded-xl bg-[linear-gradient(110deg,#c2aa89,#ddd0b5_46%,#917f63)] shadow-[inset_0_0_0_1px_rgba(31,39,17,.08)] [container-type:inline-size]" aria-hidden="true">
             <span class="absolute right-0 top-0 h-full w-[40%] -skew-x-[19deg] bg-[linear-gradient(110deg,#fce9c0,rgba(232,209,160,.2)_70%)]"></span>
             <span class="absolute bottom-0 h-[14%] w-full bg-[linear-gradient(#eddbc0,#c9b08c)]"></span>
@@ -643,7 +643,7 @@
                     <span class="absolute left-[31%] top-[27%] grid aspect-square h-[20%] place-items-center rounded-full bg-cream/85 text-forest"><svg class="h-1/2 w-1/2" viewBox="0 0 24 24"><path d="m9 6 9 6-9 6Z" fill="currentColor"/></svg></span>
                   </span>
                   <span class="flex flex-col gap-[.8cqw] p-[1.3cqw]">
-                    <span class="font-mono text-[1.3cqw] tracking-[.1em] text-forest/75">THE STARTER COURSE</span>
+                    <span class="font-mono text-[1.3cqw] tracking-[.1em] text-forest/60">THE STARTER COURSE</span>
                     <span class="flex items-center gap-[1cqw] rounded-[.5cqw] bg-white/80 px-[1cqw] py-[.6cqw]"><i class="font-mono text-[1.2cqw] not-italic text-goldlo">01</i><span class="text-[1.35cqw] leading-tight text-forest">Welcome &amp; how this works</span></span>
                     <span class="flex items-center gap-[1cqw] rounded-[.5cqw] bg-white/60 px-[1cqw] py-[.6cqw]"><i class="font-mono text-[1.2cqw] not-italic text-goldlo">02</i><span class="text-[1.35cqw] leading-tight text-forest">Where most people go wrong</span></span>
                     <span class="flex items-center gap-[1cqw] rounded-[.5cqw] bg-white/60 px-[1cqw] py-[.6cqw]"><i class="font-mono text-[1.2cqw] not-italic text-goldlo">03</i><span class="text-[1.35cqw] leading-tight text-forest">The basics, done properly</span></span>
@@ -665,20 +665,20 @@
 
       <!-- workbook -->
       <article class="w-[78%] shrink-0 snap-start sm:w-[46%] lg:w-auto">
-        <button type="button" class="product-card group block w-full text-left" data-product="workbook">
+        <button type="button" class="product-card group block w-full text-left" data-product="workbook" aria-label="Explore Workbooks and Templates">
           <span class="art relative block aspect-[1.39] overflow-hidden rounded-xl bg-[linear-gradient(135deg,#e9dfcc,#d3c3a5)] shadow-[inset_0_0_0_1px_rgba(31,39,17,.08)] [container-type:inline-size]" aria-hidden="true">
             <span class="absolute inset-0 bg-[repeating-linear-gradient(45deg,rgba(255,255,255,.1)_0_2px,transparent_2px_9px)]"></span>
             <span class="transition-[rotate,scale] duration-[550ms] ease-[cubic-bezier(.2,.6,.25,1)] group-hover:rotate-[12deg] group-hover:scale-[1.03] group-focus-visible:rotate-[12deg] group-focus-visible:scale-[1.03] absolute left-1/2 top-1/2 w-[70%] -translate-x-1/2 -translate-y-1/2 rotate-[15deg] rounded-[2.4cqw] bg-[#1b211d] p-[1.6cqw] shadow-[14px_22px_28px_-10px_rgba(50,38,20,.55)]">
               <span class="block aspect-[4/3] overflow-hidden rounded-[1.2cqw] bg-[#f3ecdd]">
                 <span class="block bg-forest px-[5%] py-[4%] text-cream">
                   <span class="block font-mono text-[1.3cqw] tracking-[.12em] text-gold">FILL IT IN AS YOU GO</span>
-                  <b class="mt-[1cqw] block font-serif text-[4.2cqw] font-normal leading-[1]">Make a plan<br />you’ll stick to.</b>
+                  <b class="mt-[1cqw] block font-serif text-[4.2cqw] font-normal leading-[1]">Make a plan<br />you'll stick to.</b>
                 </span>
                 <span class="grid grid-cols-2 gap-[1.6cqw] p-[2.2cqw]">
-                  <span class="rounded-[.8cqw] bg-white p-[1.3cqw]"><b class="block font-mono text-[1.15cqw] font-semibold text-forest">01 / WHERE YOU ARE</b><span class="block text-[1.3cqw] text-forest/75">Be honest about today.</span><i class="mt-[1cqw] block h-px bg-forest/15"></i><i class="mt-[1.1cqw] block h-px bg-forest/15"></i></span>
-                  <span class="rounded-[.8cqw] bg-white p-[1.3cqw]"><b class="block font-mono text-[1.15cqw] font-semibold text-forest">02 / WHAT YOU WANT</b><span class="block text-[1.3cqw] text-forest/75">Write down the goal.</span><i class="mt-[1cqw] block h-px bg-forest/15"></i><i class="mt-[1.1cqw] block h-px bg-forest/15"></i></span>
-                  <span class="rounded-[.8cqw] bg-white p-[1.3cqw]"><b class="block font-mono text-[1.15cqw] font-semibold text-forest">03 / IN THE WAY</b><span class="block text-[1.3cqw] text-forest/75">List what stops you.</span><i class="mt-[1cqw] block h-px bg-forest/15"></i><i class="mt-[1.1cqw] block h-px bg-forest/15"></i></span>
-                  <span class="rounded-[.8cqw] bg-white p-[1.3cqw]"><b class="block font-mono text-[1.15cqw] font-semibold text-forest">04 / THIS WEEK</b><span class="block text-[1.3cqw] text-forest/75">Pick one thing to do.</span><i class="mt-[1cqw] block h-px bg-forest/15"></i><i class="mt-[1.1cqw] block h-px bg-forest/15"></i></span>
+                  <span class="rounded-[.8cqw] bg-white p-[1.3cqw]"><b class="block font-mono text-[1.15cqw] font-semibold text-forest">01 / WHERE YOU ARE</b><span class="block text-[1.3cqw] text-forest/60">Be honest about today.</span><i class="mt-[1cqw] block h-px bg-forest/15"></i><i class="mt-[1.1cqw] block h-px bg-forest/15"></i></span>
+                  <span class="rounded-[.8cqw] bg-white p-[1.3cqw]"><b class="block font-mono text-[1.15cqw] font-semibold text-forest">02 / WHAT YOU WANT</b><span class="block text-[1.3cqw] text-forest/60">Write down the goal.</span><i class="mt-[1cqw] block h-px bg-forest/15"></i><i class="mt-[1.1cqw] block h-px bg-forest/15"></i></span>
+                  <span class="rounded-[.8cqw] bg-white p-[1.3cqw]"><b class="block font-mono text-[1.15cqw] font-semibold text-forest">03 / IN THE WAY</b><span class="block text-[1.3cqw] text-forest/60">List what stops you.</span><i class="mt-[1cqw] block h-px bg-forest/15"></i><i class="mt-[1.1cqw] block h-px bg-forest/15"></i></span>
+                  <span class="rounded-[.8cqw] bg-white p-[1.3cqw]"><b class="block font-mono text-[1.15cqw] font-semibold text-forest">04 / THIS WEEK</b><span class="block text-[1.3cqw] text-forest/60">Pick one thing to do.</span><i class="mt-[1cqw] block h-px bg-forest/15"></i><i class="mt-[1.1cqw] block h-px bg-forest/15"></i></span>
                 </span>
               </span>
             </span>
@@ -693,7 +693,7 @@
 
       <!-- resources -->
       <article class="w-[78%] shrink-0 snap-start sm:w-[46%] lg:w-auto">
-        <button type="button" class="product-card group block w-full text-left" data-product="resources">
+        <button type="button" class="product-card group block w-full text-left" data-product="resources" aria-label="Explore Resource Packs">
           <span class="art relative block aspect-[1.39] overflow-hidden rounded-xl bg-[#b6a07c] shadow-[inset_0_0_0_1px_rgba(31,39,17,.08)] [container-type:inline-size]" aria-hidden="true">
             <span class="bg-[image:var(--arch)] absolute inset-0 h-full w-full bg-cover bg-[position:95%_60%]" aria-hidden="true"></span>
             <span class="absolute inset-0 bg-[linear-gradient(160deg,rgba(255,246,222,.1),rgba(40,50,35,.3))]"></span>
@@ -702,9 +702,9 @@
               <span class="block font-mono text-[1.4cqw] tracking-[.12em] text-forest">THE CREATOR COLLECTION<span class="block text-forest/50">PRESETS &amp; TEMPLATES</span></span>
               <span class="mt-[4%] grid grid-cols-2 gap-[2.2cqw]">
                 <span class="relative aspect-square overflow-hidden rounded-[.8cqw]"><span class="bg-[image:var(--arch)] absolute inset-0 h-full w-full bg-cover bg-[position:70%_40%]" aria-hidden="true"></span><span class="absolute bottom-[8%] left-[9%] font-serif text-[2.8cqw] leading-[1] text-cream">Warm<br /><em>film tone.</em></span></span>
-                <span class="aspect-square rounded-[.8cqw] bg-[#d9cfbb] p-[9%]"><small class="block font-mono text-[1.1cqw] text-forest/75">01 / CHECKLIST</small><b class="mt-[8%] block font-serif text-[2.8cqw] font-normal leading-[1] text-forest">Shot list<br />for a week<br />of posts.</b></span>
+                <span class="aspect-square rounded-[.8cqw] bg-[#d9cfbb] p-[9%]"><small class="block font-mono text-[1.1cqw] text-forest/60">01 / CHECKLIST</small><b class="mt-[8%] block font-serif text-[2.8cqw] font-normal leading-[1] text-forest">Shot list<br />for a week<br />of posts.</b></span>
                 <span class="flex aspect-square flex-col rounded-[.8cqw] bg-forest p-[9%] text-cream"><small class="block font-mono text-[1.1cqw] text-gold">MAKE IT YOURS</small><b class="mt-[8%] block font-serif text-[3cqw] font-normal leading-[1]">Ready<br />to edit.</b><i class="mt-auto self-end font-serif text-[2cqw] not-italic text-gold">YGA</i></span>
-                <span class="flex aspect-square flex-col rounded-[.8cqw] bg-white p-[9%]"><small class="block font-mono text-[1.1cqw] text-forest/75">NOTES &amp; CHECKLISTS</small><i class="mt-[10%] block h-px bg-forest/20"></i><i class="mt-[9%] block h-px bg-forest/20"></i><i class="mt-[9%] block h-px bg-forest/20"></i><b class="mt-auto block text-[1.3cqw] font-medium text-forest">Tick it off as you go.</b></span>
+                <span class="flex aspect-square flex-col rounded-[.8cqw] bg-white p-[9%]"><small class="block font-mono text-[1.1cqw] text-forest/60">NOTES &amp; CHECKLISTS</small><i class="mt-[10%] block h-px bg-forest/20"></i><i class="mt-[9%] block h-px bg-forest/20"></i><i class="mt-[9%] block h-px bg-forest/20"></i><b class="mt-auto block text-[1.3cqw] font-medium text-forest">Tick it off as you go.</b></span>
               </span>
             </span>
           </span>
@@ -718,18 +718,18 @@
   </div>
 
   <!-- product detail -->
-  <dialog id="productDialog" aria-labelledby="pdTitle" class="m-auto max-h-[calc(100dvh-2rem)] w-[min(62rem,calc(100vw-2rem))] overflow-auto rounded-[1.75rem] bg-linen p-0 text-forest shadow-[0_40px_90px_-30px_rgba(3,15,11,.7)] translate-y-3 scale-[.98] opacity-0 transition-[opacity,translate,scale,overlay,display] transition-discrete duration-300 ease-out-expo open:translate-y-0 open:scale-100 open:opacity-100 starting:open:translate-y-3 starting:open:scale-[.98] starting:open:opacity-0 backdrop:bg-forestdeep/75 backdrop:opacity-0 backdrop:transition-[opacity,overlay,display] backdrop:transition-discrete backdrop:duration-300 open:backdrop:opacity-100 starting:open:backdrop:opacity-0 motion-reduce:transition-none motion-reduce:backdrop:transition-none">
+  <dialog id="productDialog" aria-labelledby="pdTitle" class="m-auto max-h-[calc(100dvh-2rem)] w-[min(62rem,calc(100vw-2rem))] overflow-auto rounded-[1.75rem] bg-linen p-0 text-forest shadow-[0_40px_90px_-30px_rgba(3,15,11,.7)] backdrop:bg-forestdeep/75">
     <div class="grid md:grid-cols-[1.1fr_1fr]">
       <div data-pd-art class="p-3 sm:p-5"></div>
       <div class="px-6 pb-8 pt-3 md:py-10 md:pl-3 md:pr-10">
-        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75"><span class="text-bronze">✳</span> Creator products</p>
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/60"><span class="text-bronze">✳</span> Creator products</p>
         <h2 id="pdTitle" class="mt-4 font-display text-3xl font-bold tracking-[-0.035em] sm:text-4xl"></h2>
         <p data-pd-format class="accent mt-1 text-2xl text-bronze"></p>
         <p data-pd-detail class="mt-4 leading-relaxed text-forest/75"></p>
         <ul data-pd-includes class="mt-5 divide-y divide-forest/10 border-y border-forest/10 text-[15px] text-forest/85"></ul>
         <div class="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
           <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-ink">
-            Let’s build yours
+            Let's build yours
             <span class="btn-dot"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
           </a>
           <a href="#pricing" data-pd-close class="py-3 font-semibold text-forest"><span class="ulink">See the packages</span></a>
@@ -743,13 +743,13 @@
 <!-- ============ AUDIENCE DEMAND (from the index site) ============ -->
 <section id="demand" class="relative scroll-mt-16 overflow-hidden bg-cream" aria-labelledby="demand-title">
   <div class="pointer-events-none absolute inset-0" aria-hidden="true">
-    <span class="bg-[image:var(--arch)] [mask-image:linear-gradient(180deg,transparent,#000_18%,#000_82%,transparent)] absolute bottom-0 right-0 h-[62%] w-full bg-cover bg-[position:80%_60%] lg:h-full lg:w-[72%] lg:bg-right" aria-hidden="true"></span>
+    <span class="bg-[image:var(--arch)] absolute bottom-0 right-0 h-[62%] w-full bg-cover bg-[position:80%_60%] lg:h-full lg:w-[72%] lg:bg-right" aria-hidden="true"></span>
     <div class="absolute inset-0 bg-[linear-gradient(180deg,#f7efdf_0%,#f7efdf_38%,rgba(247,239,223,.75)_55%,rgba(247,239,223,.2)_80%,rgba(247,239,223,.1)_100%)] lg:bg-[linear-gradient(90deg,#f7efdf_0%,#f7efdf_34%,rgba(247,239,223,.92)_42%,rgba(247,239,223,.45)_55%,rgba(247,239,223,0)_76%)]"></div>
   </div>
 
   <div class="relative mx-auto grid max-w-7xl items-center gap-16 px-5 py-24 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:px-8 lg:py-28">
     <div class="reveal">
-      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75"><span class="text-bronze">(04)</span>&ensp;·&ensp;Audience demand</p>
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/60"><span class="text-bronze">(04)</span> - Audience demand</p>
       <h2 id="demand-title" class="mt-6 font-display text-4xl font-bold leading-[1] tracking-[-0.04em] sm:text-5xl lg:text-[3.6rem]">
         Your audience is <span class="accent text-[1.1em] text-goldlo">already asking.</span>
       </h2>
@@ -757,16 +757,16 @@
         We analyze real comments and DMs to validate demand, then turn it into digital products that solve the exact questions your audience has.
       </p>
       <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-line mt-8">
-        Turn demand into a product
+        Turn demand into revenue
         <span class="btn-dot bg-forest text-gold"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
       <dl class="mt-10 grid max-w-md grid-cols-3 divide-x divide-forest/15 border-y border-forest/15 py-4">
-        <div class="pr-4"><dt class="text-sm text-forest/75">Recurring</dt><dd class="accent text-xl sm:text-2xl">Questions</dd></div>
-        <div class="px-4"><dt class="text-sm text-forest/75">Audience</dt><dd class="accent text-xl sm:text-2xl">Demand</dd></div>
-        <div class="pl-4"><dt class="text-sm text-forest/75">Product</dt><dd class="accent text-xl sm:text-2xl">Opportunity</dd></div>
+        <div class="pr-4"><dt class="text-sm text-forest/60">Recurring</dt><dd class="accent text-xl sm:text-2xl">Questions</dd></div>
+        <div class="px-4"><dt class="text-sm text-forest/60">Audience</dt><dd class="accent text-xl sm:text-2xl">Demand</dd></div>
+        <div class="pl-4"><dt class="text-sm text-forest/60">Product</dt><dd class="accent text-xl sm:text-2xl">Opportunity</dd></div>
       </dl>
-      <p class="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-forest/75" aria-hidden="true">
+      <p class="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px] uppercase tracking-[0.14em] text-forest/45" aria-hidden="true">
         <span class="stage">Question</span><span>→</span><span class="stage">Pattern</span><span>→</span><span class="stage">Demand</span><span>→</span><span class="stage">Product opportunity</span>
       </p>
     </div>
@@ -774,7 +774,7 @@
     <figure id="demandVisual" class="mx-auto w-full max-w-[21rem] sm:max-w-[23rem]" data-pause>
       <div class="relative">
       <div class="absolute -bottom-6 left-1/2 h-10 w-[80%] -translate-x-1/2 rounded-[50%] bg-forestdeep/30 blur-xl" aria-hidden="true"></div>
-      <div>
+      <div class="animate-float-b motion-reduce:animate-none">
         <div class="rotate-[5deg] rounded-[3rem] bg-[linear-gradient(145deg,#e4dccb,#8c8672_45%,#e8e2cf)] p-[3px] shadow-[0_40px_70px_-30px_rgba(8,24,18,.7)]">
           <div class="rounded-[2.85rem] bg-[#141a17] p-[9px]">
             <div class="relative flex h-[33rem] flex-col overflow-hidden rounded-[2.35rem] bg-[#f6f1e7] text-forest sm:h-[35rem]">
@@ -791,29 +791,29 @@
               <div class="flex items-center gap-3 border-b border-forest/10 px-4 py-3" aria-hidden="true">
                 <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="m13 5-7 7 7 7M6 12h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <span class="grid h-8 w-8 place-items-center rounded-full bg-moss text-sm font-semibold text-cream">C</span>
-                <span class="leading-tight"><span class="block text-sm font-semibold">Your community</span><small class="block font-serif text-xs italic text-forest/75">Same question, again</small></span>
+                <span class="leading-tight"><span class="block text-sm font-semibold">Your community</span><small class="block font-serif text-xs italic text-forest/60">Same question, again</small></span>
                 <svg class="ml-auto" width="19" height="19" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M12 11v6m0-10v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
               </div>
               <!-- messages -->
-              <div id="demandViewport" class="relative min-h-0 flex-1 overflow-hidden motion-reduce:overflow-y-auto" role="region" aria-label="Example audience messages">
+              <div id="demandViewport" class="relative min-h-0 flex-1 overflow-hidden motion-reduce:overflow-y-auto" tabindex="0" role="region" aria-label="Example audience messages">
                 <div class="demand-list space-y-3 px-4 pb-6 pt-3">
-                  <p class="text-center font-mono text-[11px] uppercase tracking-[0.16em] text-forest/75">Illustrative conversation</p>
-                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#b79b74] text-[11px] font-semibold text-cream" aria-hidden="true">A</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">How did you build a routine that lasts?</p><time class="pb-1 font-mono text-[9px] text-forest/75">10:21</time></div>
-                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#8d9a83] text-[11px] font-semibold text-cream" aria-hidden="true">J</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">What helped you stay consistent?</p><time class="pb-1 font-mono text-[9px] text-forest/75">10:22</time></div>
-                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-moss text-[11px] font-semibold text-cream" aria-hidden="true">M</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">How did you approach losing weight?</p><time class="pb-1 font-mono text-[9px] text-forest/75">10:23</time></div>
-                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#a9795a] text-[11px] font-semibold text-cream" aria-hidden="true">S</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">What does your weekly routine look like?</p><time class="pb-1 font-mono text-[9px] text-forest/75">10:24</time></div>
-                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#b79b74] text-[11px] font-semibold text-cream" aria-hidden="true">A</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">Where would you suggest I start?</p><time class="pb-1 font-mono text-[9px] text-forest/75">10:25</time></div>
-                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#8d9a83] text-[11px] font-semibold text-cream" aria-hidden="true">J</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">Do you have a guide I could follow?</p><time class="pb-1 font-mono text-[9px] text-forest/75">10:26</time></div>
-                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-moss text-[11px] font-semibold text-cream" aria-hidden="true">M</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">How do you plan your meals?</p><time class="pb-1 font-mono text-[9px] text-forest/75">10:27</time></div>
-                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#a9795a] text-[11px] font-semibold text-cream" aria-hidden="true">S</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">Could you put your tips in one place?</p><time class="pb-1 font-mono text-[9px] text-forest/75">10:28</time></div>
+                  <p class="text-center font-mono text-[9px] uppercase tracking-[0.2em] text-forest/45">Illustrative conversation</p>
+                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#b79b74] text-[11px] font-semibold text-cream" aria-hidden="true">A</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">How did you build a routine that lasts?</p><time class="pb-1 font-mono text-[9px] text-forest/40">10:21</time></div>
+                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#8d9a83] text-[11px] font-semibold text-cream" aria-hidden="true">J</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">What helped you stay consistent?</p><time class="pb-1 font-mono text-[9px] text-forest/40">10:22</time></div>
+                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-moss text-[11px] font-semibold text-cream" aria-hidden="true">M</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">How did you approach losing weight?</p><time class="pb-1 font-mono text-[9px] text-forest/40">10:23</time></div>
+                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#a9795a] text-[11px] font-semibold text-cream" aria-hidden="true">S</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">What does your weekly routine look like?</p><time class="pb-1 font-mono text-[9px] text-forest/40">10:24</time></div>
+                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#b79b74] text-[11px] font-semibold text-cream" aria-hidden="true">A</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">Where would you suggest I start?</p><time class="pb-1 font-mono text-[9px] text-forest/40">10:25</time></div>
+                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#8d9a83] text-[11px] font-semibold text-cream" aria-hidden="true">J</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">Do you have a guide I could follow?</p><time class="pb-1 font-mono text-[9px] text-forest/40">10:26</time></div>
+                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-moss text-[11px] font-semibold text-cream" aria-hidden="true">M</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">How do you plan your meals?</p><time class="pb-1 font-mono text-[9px] text-forest/40">10:27</time></div>
+                  <div class="flex items-end gap-2"><span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#a9795a] text-[11px] font-semibold text-cream" aria-hidden="true">S</span><p class="rounded-2xl rounded-bl-md bg-[#e9e2d3] px-3.5 py-2 text-[13px] leading-snug">Could you put your tips in one place?</p><time class="pb-1 font-mono text-[9px] text-forest/40">10:28</time></div>
                   <div class="rounded-2xl bg-forest px-4 py-3.5 text-cream">
                     <span class="block text-xs text-sage/80">The same question, again.</span>
-                    <strong class="mt-1 block font-serif text-xl font-normal leading-tight text-gold">That’s a product waiting to be made.</strong>
+                    <strong class="mt-1 block font-serif text-xl font-normal leading-tight text-gold">That's a product waiting to be made.</strong>
                   </div>
                 </div>
               </div>
               <!-- input -->
-              <div class="mx-3 mb-2 flex items-center gap-2.5 rounded-full border border-forest/15 bg-white/70 px-2 py-1.5 text-sm text-forest/75" aria-hidden="true">
+              <div class="mx-3 mb-2 flex items-center gap-2.5 rounded-full border border-forest/15 bg-white/70 px-2 py-1.5 text-sm text-forest/45" aria-hidden="true">
                 <span class="grid h-7 w-7 place-items-center rounded-full bg-moss text-cream"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 7h4l2-3h4l2 3h4v13H4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3" stroke="currentColor" stroke-width="1.6"/></svg></span>
                 <span>Message…</span><span class="ml-auto pr-2 text-lg">♡</span>
               </div>
@@ -841,13 +841,13 @@
 
 <!-- ============ PACKAGES ============ -->
 <!-- NOTE: the [bracketed] prices and terms are placeholders - set them before publishing. -->
-<section id="pricing" class="scroll-mt-20 bg-cream py-24 lg:py-32">
+<section id="pricing" class="scroll-mt-20 border-b border-forest/10 bg-linen py-24 lg:py-32">
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
-    <div class="reveal mx-auto grid max-w-5xl items-end gap-8 lg:grid-cols-[1fr_auto]">
+    <div class="reveal grid items-end gap-8 lg:grid-cols-[1fr_auto]">
       <div class="max-w-3xl">
-        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75"><span class="text-bronze">(05)</span>&ensp;·&ensp;Ways to work together</p>
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/60"><span class="text-bronze">(05)</span> - Ways to work together</p>
         <h2 class="mt-6 font-display text-4xl font-bold leading-[1] tracking-[-0.04em] sm:text-5xl lg:text-[3.6rem]">
-          One product, or a <span class="accent text-[1.1em] text-goldlo"><span class="whitespace-nowrap">long-term</span> partner.</span>
+          One product, or a <span class="accent text-[1.1em] text-goldlo">long-term partner.</span>
         </h2>
       </div>
       <p class="max-w-sm leading-relaxed text-forest/70">
@@ -859,15 +859,15 @@
     <div class="mx-auto mt-14 grid max-w-5xl items-stretch gap-5 lg:mt-16 lg:grid-cols-2">
 
       <!-- package 1: single product -->
-      <div id="level-1" data-level="1" class="reveal flex scroll-mt-28 flex-col rounded-[1.75rem] border border-forest/15 bg-linen p-8 lg:p-10">
+      <div id="level-1" data-level="1" class="reveal flex scroll-mt-28 flex-col rounded-[1.75rem] border border-forest/15 bg-cream p-8 lg:p-10">
         <div class="flex items-center justify-between">
-          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest/75">Package 01 · One product</span>
+          <span class="font-mono text-[11px] uppercase tracking-[0.18em] text-forest/60">Package 01 · One product</span>
           <span class="flex gap-1" aria-hidden="true">
             <span class="h-2.5 w-2.5 rounded-full bg-moss"></span>
             <span class="h-2.5 w-2.5 rounded-full border border-forest/25"></span>
           </span>
         </div>
-        <span class="match-tag mt-5 w-max items-center gap-2 rounded-full bg-bronze px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-cream"><span class="h-1.5 w-1.5 rounded-full bg-cream"></span>Your match</span>
+        <span class="match-tag mt-5 w-max items-center gap-2 rounded-full bg-goldlo px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-cream"><span class="h-1.5 w-1.5 rounded-full bg-cream"></span>Your match</span>
         <h3 class="mt-6 font-display text-3xl font-bold tracking-[-0.035em]">Single Product Build</h3>
         <p class="accent mt-1 text-2xl text-moss">One product, start to finish</p>
         <p class="mt-3 text-sm leading-relaxed text-forest/75">For creators who want their first digital product built and out the door. A clear scope and a clear finish line.</p>
@@ -875,14 +875,14 @@
         <ul class="mt-4 divide-y divide-forest/10 border-y border-forest/10 text-[15px] text-forest/85">
           <li class="flex gap-3 py-2"><span class="font-mono text-moss">+</span> Content audit &amp; audience signal map</li>
           <li class="flex gap-3 py-2"><span class="font-mono text-moss">+</span> Offer positioning, naming &amp; pricing</li>
-          <li class="flex gap-3 py-2"><span class="font-mono text-moss">+</span> One product built—guide, course, workbook or pack</li>
+          <li class="flex gap-3 py-2"><span class="font-mono text-moss">+</span> One product built - guide, course, workbook or pack</li>
           <li class="flex gap-3 py-2"><span class="font-mono text-moss">+</span> Sales page &amp; checkout setup</li>
           <li class="flex gap-3 py-2"><span class="font-mono text-moss">+</span> 7-day launch content plan &amp; DM scripts</li>
         </ul>
         <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener"
            class="group mt-auto inline-flex items-center justify-between pt-7 font-semibold text-forest">
           <span class="ulink">DM “PRODUCT” to start</span>
-          <span class="grid h-10 w-10 place-items-center rounded-full border border-forest/55 transition group-hover:border-moss group-hover:bg-moss group-hover:text-cream">
+          <span class="grid h-10 w-10 place-items-center rounded-full border border-forest/20 transition group-hover:border-moss group-hover:bg-moss group-hover:text-cream">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </span>
         </a>
@@ -929,20 +929,19 @@
     <!-- which package am I? -->
     <div id="quiz" class="reveal mx-auto mt-16 grid max-w-5xl scroll-mt-24 gap-10 rounded-[1.75rem] border border-forest/15 bg-sand p-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:p-12">
       <div>
-        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75">Not sure? · 3 taps</p>
+        <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/60">Not sure? · 3 taps</p>
         <h3 class="mt-5 font-display text-3xl font-bold leading-[1] tracking-[-0.04em] sm:text-4xl">
           Which package am <span class="accent text-[1.12em] text-goldlo">I?</span>
         </h3>
         <p class="mt-4 max-w-sm leading-relaxed text-forest/70">
-          Answer three quick questions and we’ll point you to the package that fits. Or just tell us your goal in the DMs—nothing more.
+          Answer three quick questions and we'll point you to the package that fits. Or just tell us your goal in the DMs - nothing more.
         </p>
       </div>
-      <div class="min-h-[18rem]" data-quiz-body></div>
-      <p class="sr-only" role="status" data-quiz-status></p>
+      <div class="min-h-[18rem]" aria-live="polite" data-quiz-body></div>
     </div>
     <noscript>
-      <p class="mt-14 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-forest/75">
-        Tell us your goal in the DMs and we’ll tell you which package it actually needs—nothing more.
+      <p class="mt-14 text-center font-mono text-[11px] uppercase tracking-[0.16em] text-forest/60">
+        Tell us your goal in the DMs and we'll tell you which package it actually needs - nothing more.
       </p>
     </noscript>
   </div>
@@ -958,14 +957,14 @@
         <div class="flex items-center gap-3">
           <span class="relative block h-5 w-10 overflow-hidden" aria-hidden="true"><span class="sun absolute inset-0 block"></span></span>
           <span class="font-display text-xl font-extrabold tracking-[-0.04em] text-cream">YGA</span>
-          <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-sage/75">Your Growth Agency</span>
+          <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-sage/55">Your Growth Agency</span>
         </div>
         <p class="mt-5 max-w-sm text-sage/70">Turning the content you already make into the product you keep <span class="accent text-lg text-gold">putting off.</span></p>
       </div>
 
       <div class="flex flex-wrap gap-x-16 gap-y-6 text-sm">
         <div>
-          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sage/75">Site</p>
+          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sage/50">Site</p>
           <a href="#process" class="block py-1.5 text-sage/85 transition hover:text-gold"><span class="ulink">How it works</span></a>
           <a href="#gap" class="block py-1.5 text-sage/85 transition hover:text-gold"><span class="ulink">The gap</span></a>
           <a href="#products" class="block py-1.5 text-sage/85 transition hover:text-gold"><span class="ulink">Creator products</span></a>
@@ -973,7 +972,7 @@
           <a href="#quiz" class="block py-1.5 text-sage/85 transition hover:text-gold"><span class="ulink">Which package am I?</span></a>
         </div>
         <div>
-          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sage/75">Elsewhere</p>
+          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sage/50">Elsewhere</p>
           <a href="https://instagram.com/yourgrowthagency" target="_blank" rel="noopener" class="inline-flex items-center gap-2 py-1.5 text-sage/85 transition hover:text-gold">
             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
             <span class="ulink">Instagram</span>
@@ -984,15 +983,15 @@
           </a>
         </div>
         <div>
-          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sage/75">Legal</p>
+          <p class="mb-1.5 font-mono text-[10px] uppercase tracking-[0.2em] text-sage/50">Legal</p>
           <!-- create privacy.html (and terms if you need them) before publishing -->
           <a href="privacy.html" class="block py-1.5 text-sage/85 transition hover:text-gold"><span class="ulink">Privacy policy</span></a>
         </div>
       </div>
     </div>
 
-    <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-sage/10 pt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-sage/75 sm:flex-row">
-      <p>© <span id="year">2026</span> YGA — Your Growth Agency. All rights reserved.</p>
+    <div class="mt-12 flex flex-col items-center justify-between gap-3 border-t border-sage/10 pt-6 font-mono text-[10px] uppercase tracking-[0.14em] text-sage/50 sm:flex-row">
+      <p>© <span id="year">2026</span> YGA - Your Growth Agency. All rights reserved.</p>
       <p class="ph">[Registered company name · Company ID · Address]</p>
     </div>
   </div>
@@ -1014,25 +1013,6 @@
     function setAttr(el, name, value) {
       if (value === null) { if (el.hasAttribute(name)) el.removeAttribute(name); }
       else if (el.getAttribute(name) !== value) el.setAttribute(name, value);
-    }
-
-    // pause / play every looping animation (WCAG 2.2.2); remembered per browser
-    var motionBtn = document.getElementById('motionBtn');
-    if (motionBtn) {
-      var motionIcon = motionBtn.querySelector('[data-motion-icon]');
-      var setMotion = function (paused) {
-        setAttr(document.documentElement, 'data-paused', paused ? '' : null);
-        motionBtn.setAttribute('aria-pressed', paused ? 'true' : 'false');
-        var label = paused ? 'Play animations' : 'Pause animations';
-        motionBtn.setAttribute('aria-label', label);
-        motionBtn.setAttribute('title', label);
-        if (motionIcon) motionIcon.setAttribute('d', paused ? 'M8 5v14l11-7z' : 'M7 5h3.5v14H7zM13.5 5H17v14h-3.5z');
-        try { localStorage.setItem('yga-motion', paused ? 'paused' : 'on'); } catch (err) {}
-      };
-      var stored = null;
-      try { stored = localStorage.getItem('yga-motion'); } catch (err) {}
-      if (stored === 'paused') setMotion(true);
-      motionBtn.addEventListener('click', function () { setMotion(motionBtn.getAttribute('aria-pressed') !== 'true'); });
     }
 
     // year
@@ -1072,23 +1052,14 @@
       }
       window.scrollTo({ top: Math.max(0, y), behavior: reduceMotion ? 'auto' : 'smooth' });
     }
-    // move keyboard focus to where the page scrolled, so the next Tab continues from there
-    function focusSection(id) {
-      var target = id === 'top' ? document.querySelector('h1') : document.getElementById(id);
-      if (!target) return;
-      var heading = /^H[1-4]$/.test(target.tagName) ? target : target.querySelector('h1, h2, h3') || target;
-      if (!heading.hasAttribute('tabindex')) heading.setAttribute('tabindex', '-1');
-      heading.focus({ preventScroll: true });
-    }
     document.addEventListener('click', function (e) {
       var a = e.target.closest && e.target.closest('a[href^="#"]');
       if (!a) return;
       var id = a.getAttribute('href').slice(1);
       if (!id || !(id === 'top' || document.getElementById(id))) return;
       e.preventDefault();
-      if (a.hasAttribute('data-pd-close')) { skipFocusReturn = true; closeProduct(); }
+      if (a.hasAttribute('data-pd-close')) closeProduct();
       scrollToSection(id);
-      focusSection(id);
     });
 
     // highlight the nav link of the section in view
@@ -1239,7 +1210,6 @@
       });
     } else {
       stages.forEach(function (s) { s.setAttribute('data-on', ''); });
-      if (demandViewport) demandViewport.setAttribute('tabindex', '0');
     }
     requestTick();
 
@@ -1248,31 +1218,29 @@
       guide: { name: 'Guides & eBooks', format: 'Everything you know, in the right order.', detail: 'The answers people keep asking you for, organized into one well-designed guide. We plan the chapters with you, write around your examples and advice, and lay it out as a PDF worth keeping.', includes: ['Downloadable PDF', 'Clean, readable layout', 'Chapters with exercises built in'] },
       course: { name: 'Video Courses', format: 'Your method, taught on camera.', detail: 'A short series of video lessons where you teach what you already know. We plan the modules with you, prepare the supporting material and set up the platform it lives on. You show up and teach.', includes: ['Video lessons in a clear order', 'Notes and worksheets alongside', 'A course page of its own'] },
       workbook: { name: 'Workbooks & Templates', format: 'Your advice, in a form people can fill in.', detail: 'Advice is easier to follow when there’s a page to write on. We turn your methods into worksheets, planners and templates, built around the questions your community already sends you.', includes: ['Worksheets and planners', 'Templates they can reuse', 'Plain instructions on each page'] },
-      resources: { name: 'Resource Packs', format: 'The tools you use, ready to download.', detail: 'Presets, templates, checklists\u2014the things you use every day and your followers keep asking about. We sort them, design them and package them in a format that suits your niche.', includes: ['One tidy, downloadable bundle', 'Sorted so it’s easy to use', 'Formats that fit your niche'] }
+      resources: { name: 'Resource Packs', format: 'The tools you use, ready to download.', detail: 'Presets, templates, checklists - the things you use every day and your followers keep asking about. We sort them, design them and package them in a format that suits your niche.', includes: ['One tidy, downloadable bundle', 'Sorted so it’s easy to use', 'Formats that fit your niche'] }
     };
     var track = document.getElementById('productTrack');
     var dialog = document.getElementById('productDialog');
     var lastCard = null;
-    var skipFocusReturn = false;
 
     document.querySelectorAll('[data-products]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         if (!track) return;
         var dir = btn.getAttribute('data-products') === 'next' ? 1 : -1;
-        // phones/tablets: the row scrolls sideways, so step one card (on desktop all four are visible)
-        var card = track.firstElementChild;
-        var step = card ? card.getBoundingClientRect().width + 16 : track.clientWidth * 0.8;
-        track.scrollBy({ left: dir * step, behavior: reduceMotion ? 'auto' : 'smooth' });
+        if (track.scrollWidth > track.clientWidth + 4) {
+          // phones/tablets: the row scrolls sideways, so step one card
+          var card = track.firstElementChild;
+          var step = card ? card.getBoundingClientRect().width + 16 : track.clientWidth * 0.8;
+          track.scrollBy({ left: dir * step, behavior: reduceMotion ? 'auto' : 'smooth' });
+        } else {
+          // desktop: rotate the order, like the original carousel
+          if (dir > 0) track.appendChild(track.firstElementChild);
+          else track.insertBefore(track.lastElementChild, track.firstElementChild);
+          if (!reduceMotion && track.animate) track.animate([{ opacity: 0.4, transform: 'translateX(' + dir * 14 + 'px)' }, { opacity: 1, transform: 'none' }], { duration: 380, easing: 'cubic-bezier(.22,.61,.36,1)' });
+        }
       });
     });
-
-    if (track) {
-      track.addEventListener('focusin', function (e) {
-        if (track.scrollWidth <= track.clientWidth + 4) return;
-        var item = e.target.closest('article');
-        if (item) item.scrollIntoView({ inline: 'start', block: 'nearest', behavior: reduceMotion ? 'auto' : 'smooth' });
-      });
-    }
 
     function closeProduct() { if (dialog && dialog.open) dialog.close(); }
     if (dialog && typeof dialog.showModal === 'function') {
@@ -1302,10 +1270,7 @@
       });
       dialog.querySelectorAll('button[data-pd-close]').forEach(function (b) { b.addEventListener('click', closeProduct); });
       dialog.addEventListener('click', function (e) { if (e.target === dialog) closeProduct(); });
-      dialog.addEventListener('close', function () {
-        if (lastCard && !skipFocusReturn) lastCard.focus({ preventScroll: true });
-        skipFocusReturn = false;
-      });
+      dialog.addEventListener('close', function () { if (lastCard) lastCard.focus({ preventScroll: true }); });
     }
 
     // ---------- "which package am I?" quiz ----------
@@ -1314,14 +1279,13 @@
       var questions = [
         { q: 'What do you want right now?', a: ['One product, out the door', 'A product line that keeps growing'] },
         { q: 'How do you picture working with us?', a: ['A focused project with a clear end', 'An ongoing partner, month after month'] },
-        { q: 'How much is your audience asking for?', a: ['One clear question, again and again', 'Lots—there’s more than one product in there'] }
+        { q: 'How much is your audience asking for?', a: ['One clear question, again and again', 'Lots - there’s more than one product in there'] }
       ];
       var levels = {
         1: { name: 'Single Product Build', tag: 'One product, start to finish', word: 'PRODUCT', why: 'You want one strong product built and launched, with a clear scope and a clear finish line.' },
         2: { name: 'Growth Partnership', tag: 'A product line, built together', word: 'PARTNER', why: 'You are thinking past the first launch. You want a partner who keeps building and selling with you over time.' }
       };
       var answers = [];
-      var quizStatus = document.querySelector('[data-quiz-status]');
       var arrow = '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
       var progress = function (step) {
@@ -1329,7 +1293,7 @@
         for (var s = 0; s < questions.length; s++) {
           html += '<span class="h-1 flex-1 rounded-full ' + (s < step ? 'bg-goldlo' : s === step ? 'bg-forest' : 'bg-forest/15') + '"></span>';
         }
-        return html + '</div><span class="font-mono text-[10px] uppercase tracking-[0.18em] text-forest/75">' +
+        return html + '</div><span class="font-mono text-[10px] uppercase tracking-[0.18em] text-forest/60">' +
           (step < questions.length ? 'Q' + (step + 1) + ' / ' + questions.length : 'Done') + '</span></div>';
       };
 
@@ -1341,43 +1305,41 @@
 
       var render = function (focus) {
         var step = answers.length;
-        var score = 0;
         if (step < questions.length) {
           var item = questions[step];
           var html = '<div class="animate-quiz-in motion-reduce:animate-none">' + progress(step) +
             '<p class="mt-7 font-display text-2xl font-semibold tracking-[-0.03em]">' + item.q + '</p><div class="mt-5 space-y-2.5">';
           item.a.forEach(function (label, idx) {
-            html += '<button type="button" data-answer="' + (idx + 1) + '" class="quiz-opt flex w-full items-center gap-4 rounded-2xl border border-forest/55 bg-linen px-4 py-3.5 text-left font-medium">' +
-              '<span aria-hidden="true" class="quiz-key grid h-8 w-8 shrink-0 place-items-center rounded-full border border-forest/55 font-mono text-xs transition">' + 'AB'.charAt(idx) + '</span>' +
+            html += '<button type="button" data-answer="' + (idx + 1) + '" class="quiz-opt flex w-full items-center gap-4 rounded-2xl border border-forest/15 bg-linen px-4 py-3.5 text-left font-medium">' +
+              '<span class="quiz-key grid h-8 w-8 shrink-0 place-items-center rounded-full border border-forest/20 font-mono text-xs transition">' + 'AB'.charAt(idx) + '</span>' +
               '<span>' + label + '</span></button>';
           });
-          html += '</div>' + (step > 0 ? '<button type="button" data-back class="ulink mt-5 font-mono text-[11px] uppercase tracking-[0.16em] text-forest/75">← Back</button>' : '') + '</div>';
+          html += '</div>' + (step > 0 ? '<button type="button" data-back class="ulink mt-5 font-mono text-[11px] uppercase tracking-[0.16em] text-forest/60">← Back</button>' : '') + '</div>';
           quizBody.innerHTML = html;
         } else {
           // two or more "B" answers point to the long-term partnership
-          score = answers.reduce(function (sum, a) { return sum + (a === 2 ? 1 : 0); }, 0);
+          var score = answers.reduce(function (sum, a) { return sum + (a === 2 ? 1 : 0); }, 0);
           var level = score >= 2 ? 2 : 1;
           var info = levels[level];
           quizBody.innerHTML = '<div class="animate-quiz-in motion-reduce:animate-none">' + progress(step) +
-            '<div class="mt-7 border-t-2 border-goldlo pt-6">' +
-              '<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-bronze">Your match · Package 0' + level + '</p>' +
-              '<h4 tabindex="-1" class="quiz-result mt-3 font-display text-3xl font-bold tracking-[-0.035em]">' + info.name + '</h4>' +
-              '<p class="accent text-2xl text-bronze">' + info.tag + '</p>' +
-              '<p class="mt-3 max-w-md leading-relaxed text-forest/80">' + info.why + '</p>' +
-              '<p class="mt-5 rounded-xl border border-forest/20 bg-linen px-4 py-3 text-sm text-forest/85">DM us <span class="font-mono font-semibold text-forest">' + info.word + '</span> and we\u2019ll skip straight to your package.</p>' +
-              '<div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">' +
-                '<a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-ink">DM \u201C' + info.word + '\u201D<span class="btn-dot">' + arrow + '</span></a>' +
-                '<button type="button" data-see="' + level + '" class="py-3 font-semibold text-forest"><span class="ulink">See the package</span></button>' +
-                '<button type="button" data-restart class="py-3 font-semibold text-forest/75"><span class="ulink">Start over</span></button>' +
+            '<div class="grain mesh-forest mt-7 overflow-hidden rounded-2xl p-7 text-cream">' +
+              '<div class="relative z-[2]">' +
+                '<p class="font-mono text-[10px] uppercase tracking-[0.2em] text-gold">Your match · Package 0' + level + '</p>' +
+                '<p class="mt-3 font-display text-3xl font-bold tracking-[-0.035em]">' + info.name + '</p>' +
+                '<p class="accent text-2xl text-goldhi">' + info.tag + '</p>' +
+                '<p class="mt-3 max-w-md leading-relaxed text-sage/90">' + info.why + '</p>' +
+                '<p class="mt-5 rounded-xl border border-sage/25 px-4 py-3 text-sm text-sage/90">DM us <span class="font-mono font-semibold text-gold">' + info.word + '</span> and we\'ll skip straight to your package.</p>' +
+                '<div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">' +
+                  '<a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener" class="btn btn-gold">DM “' + info.word + '”<span class="btn-dot">' + arrow + '</span></a>' +
+                  '<button type="button" data-see="' + level + '" class="py-3 font-semibold text-cream"><span class="ulink">See the package</span></button>' +
+                  '<button type="button" data-restart class="py-3 font-semibold text-sage/85"><span class="ulink">Start over</span></button>' +
+                '</div>' +
               '</div>' +
             '</div></div>';
           pick(level);
         }
         if (focus) {
-          if (quizStatus) quizStatus.textContent = step < questions.length
-            ? 'Question ' + (step + 1) + ' of ' + questions.length + ': ' + questions[step].q
-            : 'Your match: ' + levels[score >= 2 ? 2 : 1].name;
-          var first = step < questions.length ? quizBody.querySelector('[data-answer]') : quizBody.querySelector('.quiz-result');
+          var first = quizBody.querySelector('button');
           if (first) first.focus({ preventScroll: true });
         }
       };
@@ -1393,8 +1355,6 @@
           if (card) {
             var y = card.getBoundingClientRect().top + window.pageYOffset - (header ? header.offsetHeight : 0) - 56;
             window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
-            if (!card.hasAttribute('tabindex')) card.setAttribute('tabindex', '-1');
-            card.focus({ preventScroll: true });
           }
           return;
         }

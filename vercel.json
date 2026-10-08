@@ -1,6 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/yga_website_v5", "destination": "/", "permanent": false },
+    { "source": "/yga_website_v6", "destination": "/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
