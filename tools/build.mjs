@@ -27,5 +27,7 @@ ${scene ? `<script type="module">\n${scene}\n</script>` : ''}
 </body>
 </html>
 `;
-fs.writeFileSync(path.join(root, 'index.html'), html);
-console.log(`index.html ${(Buffer.byteLength(html) / 1024).toFixed(1)} KB (head ${head.length}, css ${css.length}, body ${body.length}, motion ${motion.length}, scene ${scene.length} chars)`);
+// The homepage is now the upgraded YGA site (tools/build-yga.mjs); this older build writes beside it.
+fs.mkdirSync(path.join(root, 'old-site'), { recursive: true });
+fs.writeFileSync(path.join(root, 'old-site/index.html'), html);
+console.log(`old-site/index.html ${(Buffer.byteLength(html) / 1024).toFixed(1)} KB (head ${head.length}, css ${css.length}, body ${body.length}, motion ${motion.length}, scene ${scene.length} chars)`);

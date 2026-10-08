@@ -52,4 +52,6 @@ insertOnce('</body>', `<script id="yga-motion">\n${js}\n</script>\n`, false);
 
 const out = path.join(root, 'yga/index.html');
 fs.writeFileSync(out, html);
+// The upgraded YGA site is the homepage; keep the root copy in sync.
+fs.writeFileSync(path.join(root, 'index.html'), html);
 console.log(`yga/index.html ${(Buffer.byteLength(html) / 1024).toFixed(0)} KB · patches: scene ${scenePatches.length}, motion ${motionPatches.length}, copy ${copyPatches.length}`);
