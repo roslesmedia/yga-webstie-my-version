@@ -3,7 +3,10 @@
   "cleanUrls": true,
   "redirects": [
     { "source": "/yga_website_v5", "destination": "/", "permanent": false },
-    { "source": "/yga_website_v6", "destination": "/", "permanent": false }
+    { "source": "/yga_website_v6", "destination": "/", "permanent": false },
+    { "source": "/yga_website_v7", "destination": "/", "permanent": false },
+    { "source": "/yga_website_v8", "destination": "/", "permanent": false },
+    { "source": "/yga_website_v9", "destination": "/", "permanent": false }
   ],
   "headers": [
     {
