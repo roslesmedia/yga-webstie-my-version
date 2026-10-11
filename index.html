@@ -167,7 +167,7 @@
   /* underline link */
   .ulink { background-image: linear-gradient(currentColor, currentColor); background-size: 0% 1px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .45s var(--ease-out-soft); }
   .ulink:hover, a:hover > .ulink, button:hover > .ulink { background-size: 100% 1px; }
-  .nav-link[aria-current] { @apply text-forest; }
+  .nav-link[aria-current] { @apply text-cream; }
   .nav-link[aria-current] .ulink { background-size: 100% 1px; }
   .mnav-link[aria-current] { @apply text-gold; }
 
@@ -236,31 +236,33 @@
 <div id="progressBar" style="transform:scaleX(0)" class="pointer-events-none fixed left-0 top-0 z-[60] h-[3px] w-full origin-left bg-[linear-gradient(90deg,#2c5443,#d6d9cf,#dfb578,#a9793d)]" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
-<header class="sticky top-0 z-50 border-b border-forest/20 bg-olive">
+<header class="sticky top-0 z-50 border-b border-cream/10 bg-forest">
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
     <div class="flex h-16 items-center justify-between gap-8 lg:h-[4.5rem]">
       <a href="#top" class="flex shrink-0 items-center" aria-label="Your Growth Agency — back to top">
-        <span aria-hidden="true" class="block h-11 w-[145px] bg-[image:var(--logo)] bg-contain bg-left bg-no-repeat lg:h-12 lg:w-[158px]"></span>
+        <span class="mesh-sage inline-flex rounded-xl px-3 py-1.5 shadow-[0_10px_24px_-14px_rgba(0,0,0,.7)]">
+          <span aria-hidden="true" class="block h-9 w-[119px] bg-[image:var(--logo)] bg-contain bg-left bg-no-repeat lg:h-10 lg:w-[132px]"></span>
+        </span>
       </a>
 
-      <nav aria-label="Main" class="hidden items-center gap-5 whitespace-nowrap text-[15px] font-medium text-forest lg:flex xl:gap-7">
-        <a href="#process" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">How it works</span><sup aria-hidden="true" class="font-mono text-[9px] text-forest/70">01</sup></a>
-        <a href="#gap" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">The gap</span><sup aria-hidden="true" class="font-mono text-[9px] text-forest/70">02</sup></a>
-        <a href="#products" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Products</span><sup aria-hidden="true" class="font-mono text-[9px] text-forest/70">03</sup></a>
-        <a href="#demand" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Demand</span><sup aria-hidden="true" class="font-mono text-[9px] text-forest/70">04</sup></a>
-        <a href="#pricing" class="nav-link flex items-start gap-1 hover:text-forest"><span class="ulink">Packages</span><sup aria-hidden="true" class="font-mono text-[9px] text-forest/70">05</sup></a>
+      <nav aria-label="Main" class="hidden items-center gap-5 whitespace-nowrap text-[15px] font-medium text-cream/85 lg:flex xl:gap-7">
+        <a href="#process" class="nav-link flex items-start gap-1 hover:text-cream"><span class="ulink">How it works</span><sup aria-hidden="true" class="font-mono text-[9px] text-gold/80">01</sup></a>
+        <a href="#gap" class="nav-link flex items-start gap-1 hover:text-cream"><span class="ulink">The gap</span><sup aria-hidden="true" class="font-mono text-[9px] text-gold/80">02</sup></a>
+        <a href="#products" class="nav-link flex items-start gap-1 hover:text-cream"><span class="ulink">Products</span><sup aria-hidden="true" class="font-mono text-[9px] text-gold/80">03</sup></a>
+        <a href="#demand" class="nav-link flex items-start gap-1 hover:text-cream"><span class="ulink">Demand</span><sup aria-hidden="true" class="font-mono text-[9px] text-gold/80">04</sup></a>
+        <a href="#pricing" class="nav-link flex items-start gap-1 hover:text-cream"><span class="ulink">Packages</span><sup aria-hidden="true" class="font-mono text-[9px] text-gold/80">05</sup></a>
       </nav>
 
       <div class="flex items-center gap-3">
         <a href="https://ig.me/m/yourgrowthagency" target="_blank" rel="noopener"
-           class="hidden items-center gap-2.5 whitespace-nowrap rounded-full bg-forest px-5 py-2.5 text-sm font-semibold text-cream transition hover:bg-gold hover:text-forest sm:inline-flex">
-          <span class="h-1.5 w-1.5 rounded-full bg-gold"></span>
+           class="hidden items-center gap-2.5 whitespace-nowrap rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-forest transition hover:bg-cream sm:inline-flex">
+          <span class="h-1.5 w-1.5 rounded-full bg-forest"></span>
           DM us “GROWTH”
         </a>
-        <button id="motionBtn" type="button" aria-pressed="false" aria-label="Pause animations" title="Pause animations" class="grid h-10 w-10 place-items-center rounded-full border border-forest/80 text-forest transition hover:bg-forest hover:text-cream motion-reduce:hidden">
+        <button id="motionBtn" type="button" aria-pressed="false" aria-label="Pause animations" title="Pause animations" class="grid h-10 w-10 place-items-center rounded-full border border-cream/60 text-cream transition hover:bg-cream hover:text-forest motion-reduce:hidden">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path data-motion-icon d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
         </button>
-        <button id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" class="grid h-10 w-10 place-items-center rounded-full border border-forest/80 text-forest lg:hidden">
+        <button id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" class="grid h-10 w-10 place-items-center rounded-full border border-cream/60 text-cream lg:hidden">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path data-menu-icon d="M4 9h16M4 15h10"/></svg>
         </button>
       </div>
@@ -268,7 +270,7 @@
   </div>
 
   <!-- mobile menu -->
-  <div id="mobileMenu" hidden class="border-t border-forest/10 bg-forest px-5 py-5 lg:hidden">
+  <div id="mobileMenu" hidden class="border-t border-cream/10 bg-forest px-5 py-5 lg:hidden">
     <nav aria-label="Mobile" class="flex flex-col text-cream">
       <a href="#process" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">How it works <span aria-hidden="true" class="font-mono text-xs text-sage/60">01</span></a>
       <a href="#gap" class="mnav-link flex items-baseline justify-between border-b border-sage/15 py-3.5 text-2xl font-semibold tracking-tight transition hover:text-gold">The gap <span aria-hidden="true" class="font-mono text-xs text-sage/60">02</span></a>
