@@ -89,7 +89,8 @@
   button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
   ::selection { background: var(--color-gold); color: var(--color-forest); }
   :focus-visible { outline: 2px solid var(--color-goldlo); outline-offset: 4px; }
-  dialog:focus-visible { outline: none; }
+  dialog:not([data-legal]):focus-visible { outline: none; }
+  dialog[data-legal]:focus-visible { outline: 2px solid var(--color-goldlo); outline-offset: -6px; }
   details > summary { list-style: none; }
   details > summary::-webkit-details-marker { display: none; }
 }
@@ -960,7 +961,7 @@
     <p class="reveal mt-8 max-w-3xl text-sm leading-relaxed text-forest/75">
       <strong class="font-semibold text-forest">No hidden fees.</strong> The scope, price and payment terms of every package are confirmed in writing before any work starts.
       With Package 03, ad spend is paid directly to the ad platforms and is never marked up. We can’t guarantee sales or income: results depend on your audience, your offer and the market.
-      Product examples on this site are illustrative. See the <a href="#terms" class="font-semibold text-forest"><span class="ulink">terms</span></a>.
+      Product examples on this site are illustrative. See the <a href="#terms" class="font-semibold text-forest underline decoration-1 underline-offset-2 hover:decoration-2">terms</a>.
     </p>
 
     <!-- which package am I? -->
@@ -1038,7 +1039,7 @@
 </footer>
 
 <dialog id="privacy" aria-labelledby="privacy-title" data-legal class="m-auto max-h-[calc(100dvh-2rem)] w-[min(46rem,calc(100vw-2rem))] overflow-auto rounded-[1.75rem] bg-linen p-0 text-forest shadow-[0_40px_90px_-30px_rgba(3,15,11,.7)] backdrop:bg-forestdeep/75">
-  <div class="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-forest/10 bg-linen/95 px-6 py-5 sm:px-10">
+  <div class="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-forest/10 bg-linen/95 px-6 py-5 sm:px-10 [@media(max-height:32rem)]:static">
     <div>
       <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75">YGA — Your Growth Agency</p>
       <h2 id="privacy-title" class="mt-2 font-display text-3xl font-bold tracking-[-0.035em]">Privacy policy</h2>
@@ -1100,7 +1101,7 @@
   </div>
 </dialog>
 <dialog id="terms" aria-labelledby="terms-title" data-legal class="m-auto max-h-[calc(100dvh-2rem)] w-[min(46rem,calc(100vw-2rem))] overflow-auto rounded-[1.75rem] bg-linen p-0 text-forest shadow-[0_40px_90px_-30px_rgba(3,15,11,.7)] backdrop:bg-forestdeep/75">
-  <div class="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-forest/10 bg-linen/95 px-6 py-5 sm:px-10">
+  <div class="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-forest/10 bg-linen/95 px-6 py-5 sm:px-10 [@media(max-height:32rem)]:static">
     <div>
       <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75">YGA — Your Growth Agency</p>
       <h2 id="terms-title" class="mt-2 font-display text-3xl font-bold tracking-[-0.035em]">Terms of service</h2>
@@ -1160,7 +1161,7 @@
   </div>
 </dialog>
 <dialog id="legal-notice" aria-labelledby="legal-notice-title" data-legal class="m-auto max-h-[calc(100dvh-2rem)] w-[min(46rem,calc(100vw-2rem))] overflow-auto rounded-[1.75rem] bg-linen p-0 text-forest shadow-[0_40px_90px_-30px_rgba(3,15,11,.7)] backdrop:bg-forestdeep/75">
-  <div class="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-forest/10 bg-linen/95 px-6 py-5 sm:px-10">
+  <div class="sticky top-0 z-10 flex items-start justify-between gap-6 border-b border-forest/10 bg-linen/95 px-6 py-5 sm:px-10 [@media(max-height:32rem)]:static">
     <div>
       <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-forest/75">YGA — Your Growth Agency</p>
       <h2 id="legal-notice-title" class="mt-2 font-display text-3xl font-bold tracking-[-0.035em]">Legal notice</h2>
@@ -1269,6 +1270,8 @@
       document.querySelectorAll('dialog[open]').forEach(function (o) { o.close(); });
       d.showModal();
       d.scrollTop = 0;
+      var closeBtn = d.querySelector('[data-legal-close]');
+      if (closeBtn) closeBtn.focus();
       if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
       return true;
     };
